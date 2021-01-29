@@ -1,0 +1,967 @@
+2021-01-28 16:34:47.086  INFO 17720 --- [main] com.edu_netcracker.cmp.Application       : Starting Application on DESKTOP-723P2OI with PID 17720 (C:\Users\meltik\IdeaProjects\edu-cmp\server\target\classes started by meltik in C:\Users\meltik\IdeaProjects\edu-cmp)
+2021-01-28 16:34:47.112 DEBUG 17720 --- [main] com.edu_netcracker.cmp.Application       : Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
+2021-01-28 16:34:47.114  INFO 17720 --- [main] com.edu_netcracker.cmp.Application       : No active profile set, falling back to default profiles: default
+2021-01-28 16:34:49.711  INFO 17720 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-01-28 16:34:49.712  INFO 17720 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.38]
+2021-01-28 16:34:49.882  INFO 17720 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-01-28 16:34:50.183  INFO 17720 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-28 16:34:50.391  INFO 17720 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-28 16:34:50.485  INFO 17720 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-28 16:34:50.642  INFO 17720 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.21.Final
+2021-01-28 16:34:51.115  INFO 17720 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-01-28 16:34:51.419  INFO 17720 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2021-01-28 16:34:52.570  INFO 17720 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-28 16:34:53.027  INFO 17720 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-01-28 16:34:53.034  INFO 17720 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-01-28 16:34:53.067  INFO 17720 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2021-01-28 16:34:53.131 ERROR 17720 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'contactJpa': FactoryBean threw exception on object creation; nested exception is java.lang.IllegalArgumentException: Not a managed type: interface com.edu_netcracker.cmp.entities.jpa.ContactJpa
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:176) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.getObjectFromFactoryBean(FactoryBeanRegistrySupport.java:101) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getObjectForBeanInstance(AbstractBeanFactory.java:1828) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.getObjectForBeanInstance(AbstractAutowireCapableBeanFactory.java:1265) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:624) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:612) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.data.repository.config.DeferredRepositoryInitializationListener.onApplicationEvent(DeferredRepositoryInitializationListener.java:51) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.config.DeferredRepositoryInitializationListener.onApplicationEvent(DeferredRepositoryInitializationListener.java:36) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:404) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:361) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:898) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:554) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:758) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:750) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1237) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at com.edu_netcracker.cmp.Application.main(Application.java:11) ~[classes/:na]
+Caused by: java.lang.IllegalArgumentException: Not a managed type: interface com.edu_netcracker.cmp.entities.jpa.ContactJpa
+	at org.hibernate.metamodel.internal.MetamodelImpl.managedType(MetamodelImpl.java:582) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.metamodel.internal.MetamodelImpl.managedType(MetamodelImpl.java:85) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.springframework.data.jpa.repository.support.JpaMetamodelEntityInformation.<init>(JpaMetamodelEntityInformation.java:75) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaEntityInformationSupport.getEntityInformation(JpaEntityInformationSupport.java:66) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getEntityInformation(JpaRepositoryFactory.java:229) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getTargetRepository(JpaRepositoryFactory.java:179) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getTargetRepository(JpaRepositoryFactory.java:162) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getTargetRepository(JpaRepositoryFactory.java:72) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport.getRepository(RepositoryFactorySupport.java:309) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.lambda$afterPropertiesSet$5(RepositoryFactoryBeanSupport.java:297) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.util.Lazy.getNullable(Lazy.java:212) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.util.Lazy.get(Lazy.java:94) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.getObject(RepositoryFactoryBeanSupport.java:244) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.getObject(RepositoryFactoryBeanSupport.java:57) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:169) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	... 24 common frames omitted
+
+2021-01-28 16:36:39.939  INFO 3388 --- [main] com.edu_netcracker.cmp.Application       : Starting Application on DESKTOP-723P2OI with PID 3388 (C:\Users\meltik\IdeaProjects\edu-cmp\server\target\classes started by meltik in C:\Users\meltik\IdeaProjects\edu-cmp)
+2021-01-28 16:36:39.944 DEBUG 3388 --- [main] com.edu_netcracker.cmp.Application       : Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
+2021-01-28 16:36:39.945  INFO 3388 --- [main] com.edu_netcracker.cmp.Application       : No active profile set, falling back to default profiles: default
+2021-01-28 16:36:41.986  INFO 3388 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-01-28 16:36:41.986  INFO 3388 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.38]
+2021-01-28 16:36:42.116  INFO 3388 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-01-28 16:36:42.414  INFO 3388 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-28 16:36:42.584  INFO 3388 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-28 16:36:42.685  INFO 3388 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-28 16:36:42.821  INFO 3388 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.21.Final
+2021-01-28 16:36:43.094  INFO 3388 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-01-28 16:36:43.436  INFO 3388 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2021-01-28 16:36:44.675  INFO 3388 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-28 16:36:44.846  INFO 3388 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-01-28 16:36:44.860  INFO 3388 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-01-28 16:36:44.898  INFO 3388 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2021-01-28 16:36:44.955 ERROR 3388 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'contactJpa': FactoryBean threw exception on object creation; nested exception is java.lang.IllegalArgumentException: Not a managed type: interface com.edu_netcracker.cmp.entities.jpa.ContactJpa
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:176) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.getObjectFromFactoryBean(FactoryBeanRegistrySupport.java:101) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getObjectForBeanInstance(AbstractBeanFactory.java:1828) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.getObjectForBeanInstance(AbstractAutowireCapableBeanFactory.java:1265) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:624) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:612) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.data.repository.config.DeferredRepositoryInitializationListener.onApplicationEvent(DeferredRepositoryInitializationListener.java:51) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.config.DeferredRepositoryInitializationListener.onApplicationEvent(DeferredRepositoryInitializationListener.java:36) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:404) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:361) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:898) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:554) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:758) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:750) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1237) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at com.edu_netcracker.cmp.Application.main(Application.java:11) ~[classes/:na]
+Caused by: java.lang.IllegalArgumentException: Not a managed type: interface com.edu_netcracker.cmp.entities.jpa.ContactJpa
+	at org.hibernate.metamodel.internal.MetamodelImpl.managedType(MetamodelImpl.java:582) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.metamodel.internal.MetamodelImpl.managedType(MetamodelImpl.java:85) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.springframework.data.jpa.repository.support.JpaMetamodelEntityInformation.<init>(JpaMetamodelEntityInformation.java:75) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaEntityInformationSupport.getEntityInformation(JpaEntityInformationSupport.java:66) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getEntityInformation(JpaRepositoryFactory.java:229) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getTargetRepository(JpaRepositoryFactory.java:179) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getTargetRepository(JpaRepositoryFactory.java:162) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getTargetRepository(JpaRepositoryFactory.java:72) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport.getRepository(RepositoryFactorySupport.java:309) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.lambda$afterPropertiesSet$5(RepositoryFactoryBeanSupport.java:297) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.util.Lazy.getNullable(Lazy.java:212) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.util.Lazy.get(Lazy.java:94) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.getObject(RepositoryFactoryBeanSupport.java:244) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.getObject(RepositoryFactoryBeanSupport.java:57) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:169) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	... 24 common frames omitted
+
+2021-01-28 16:43:07.016  INFO 16160 --- [main] com.edu_netcracker.cmp.Application       : Starting Application on DESKTOP-723P2OI with PID 16160 (C:\Users\meltik\IdeaProjects\edu-cmp\server\target\classes started by meltik in C:\Users\meltik\IdeaProjects\edu-cmp)
+2021-01-28 16:43:07.027 DEBUG 16160 --- [main] com.edu_netcracker.cmp.Application       : Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
+2021-01-28 16:43:07.027  INFO 16160 --- [main] com.edu_netcracker.cmp.Application       : No active profile set, falling back to default profiles: default
+2021-01-28 16:43:08.929  INFO 16160 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-01-28 16:43:08.930  INFO 16160 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.38]
+2021-01-28 16:43:09.071  INFO 16160 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-01-28 16:43:09.298  INFO 16160 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-28 16:43:09.460  INFO 16160 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-28 16:43:09.534  INFO 16160 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-28 16:43:09.649  INFO 16160 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.21.Final
+2021-01-28 16:43:09.929  INFO 16160 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-01-28 16:43:10.208  INFO 16160 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2021-01-28 16:43:11.173  INFO 16160 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-01-28 16:43:11.182  INFO 16160 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-01-28 16:43:11.208  INFO 16160 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2021-01-28 16:43:11.271 ERROR 16160 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'contactJpa' defined in com.edu_netcracker.cmp.entities.jpa.ContactJpa defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaMappingContext' while setting bean property 'mappingContext'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is org.hibernate.AnnotationException: Unknown mappedBy in: com.edu_netcracker.cmp.entities.Contacts.students_fk, referenced property unknown: com.edu_netcracker.cmp.entities.Students.contacts
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:342) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:113) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1697) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1442) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:624) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:612) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.data.repository.config.DeferredRepositoryInitializationListener.onApplicationEvent(DeferredRepositoryInitializationListener.java:51) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.config.DeferredRepositoryInitializationListener.onApplicationEvent(DeferredRepositoryInitializationListener.java:36) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:404) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:361) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:898) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:554) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:758) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:750) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1237) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at com.edu_netcracker.cmp.Application.main(Application.java:11) ~[classes/:na]
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is org.hibernate.AnnotationException: Unknown mappedBy in: com.edu_netcracker.cmp.entities.Contacts.students_fk, referenced property unknown: com.edu_netcracker.cmp.entities.Students.contacts
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1794) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:594) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:330) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	... 28 common frames omitted
+Caused by: org.hibernate.AnnotationException: Unknown mappedBy in: com.edu_netcracker.cmp.entities.Contacts.students_fk, referenced property unknown: com.edu_netcracker.cmp.entities.Students.contacts
+	at org.hibernate.cfg.OneToOneSecondPass.doSecondPass(OneToOneSecondPass.java:169) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processSecondPasses(InFlightMetadataCollectorImpl.java:1693) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processSecondPasses(InFlightMetadataCollectorImpl.java:1661) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:286) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1224) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1255) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58) ~[spring-orm-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:391) ~[spring-orm-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:832) ~[na:na]
+
+2021-01-28 16:44:13.877  INFO 16184 --- [main] com.edu_netcracker.cmp.Application       : Starting Application on DESKTOP-723P2OI with PID 16184 (C:\Users\meltik\IdeaProjects\edu-cmp\server\target\classes started by meltik in C:\Users\meltik\IdeaProjects\edu-cmp)
+2021-01-28 16:44:13.881 DEBUG 16184 --- [main] com.edu_netcracker.cmp.Application       : Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
+2021-01-28 16:44:13.882  INFO 16184 --- [main] com.edu_netcracker.cmp.Application       : No active profile set, falling back to default profiles: default
+2021-01-28 16:44:15.817  INFO 16184 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-01-28 16:44:15.818  INFO 16184 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.38]
+2021-01-28 16:44:15.941  INFO 16184 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-01-28 16:44:16.163  INFO 16184 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-28 16:44:16.291  INFO 16184 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-28 16:44:16.364  INFO 16184 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-28 16:44:16.492  INFO 16184 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.21.Final
+2021-01-28 16:44:16.816  INFO 16184 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-01-28 16:44:17.098  INFO 16184 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2021-01-28 16:44:18.309  INFO 16184 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-28 16:44:18.454  INFO 16184 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-01-28 16:44:18.465  INFO 16184 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-01-28 16:44:18.490  INFO 16184 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2021-01-28 16:44:18.550 ERROR 16184 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'contactJpa': FactoryBean threw exception on object creation; nested exception is java.lang.IllegalArgumentException: Not a managed type: interface com.edu_netcracker.cmp.entities.jpa.ContactJpa
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:176) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.getObjectFromFactoryBean(FactoryBeanRegistrySupport.java:101) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getObjectForBeanInstance(AbstractBeanFactory.java:1828) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.getObjectForBeanInstance(AbstractAutowireCapableBeanFactory.java:1265) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:624) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:612) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.data.repository.config.DeferredRepositoryInitializationListener.onApplicationEvent(DeferredRepositoryInitializationListener.java:51) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.config.DeferredRepositoryInitializationListener.onApplicationEvent(DeferredRepositoryInitializationListener.java:36) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:404) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:361) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:898) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:554) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:758) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:750) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1237) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at com.edu_netcracker.cmp.Application.main(Application.java:11) ~[classes/:na]
+Caused by: java.lang.IllegalArgumentException: Not a managed type: interface com.edu_netcracker.cmp.entities.jpa.ContactJpa
+	at org.hibernate.metamodel.internal.MetamodelImpl.managedType(MetamodelImpl.java:582) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.metamodel.internal.MetamodelImpl.managedType(MetamodelImpl.java:85) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.springframework.data.jpa.repository.support.JpaMetamodelEntityInformation.<init>(JpaMetamodelEntityInformation.java:75) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaEntityInformationSupport.getEntityInformation(JpaEntityInformationSupport.java:66) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getEntityInformation(JpaRepositoryFactory.java:229) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getTargetRepository(JpaRepositoryFactory.java:179) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getTargetRepository(JpaRepositoryFactory.java:162) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getTargetRepository(JpaRepositoryFactory.java:72) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport.getRepository(RepositoryFactorySupport.java:309) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.lambda$afterPropertiesSet$5(RepositoryFactoryBeanSupport.java:297) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.util.Lazy.getNullable(Lazy.java:212) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.util.Lazy.get(Lazy.java:94) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.getObject(RepositoryFactoryBeanSupport.java:244) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.getObject(RepositoryFactoryBeanSupport.java:57) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:169) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	... 24 common frames omitted
+
+2021-01-28 16:45:55.599  INFO 3980 --- [main] com.edu_netcracker.cmp.Application       : Starting Application on DESKTOP-723P2OI with PID 3980 (C:\Users\meltik\IdeaProjects\edu-cmp\server\target\classes started by meltik in C:\Users\meltik\IdeaProjects\edu-cmp)
+2021-01-28 16:45:55.603 DEBUG 3980 --- [main] com.edu_netcracker.cmp.Application       : Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
+2021-01-28 16:45:55.604  INFO 3980 --- [main] com.edu_netcracker.cmp.Application       : No active profile set, falling back to default profiles: default
+2021-01-28 16:45:57.506  INFO 3980 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-01-28 16:45:57.508  INFO 3980 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.38]
+2021-01-28 16:45:57.686  INFO 3980 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-01-28 16:45:57.932  INFO 3980 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-28 16:45:58.077  INFO 3980 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-28 16:45:58.140  INFO 3980 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-28 16:45:58.240  INFO 3980 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.21.Final
+2021-01-28 16:45:58.523  INFO 3980 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-01-28 16:45:58.823  INFO 3980 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2021-01-28 16:45:59.890  INFO 3980 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-28 16:46:00.063  INFO 3980 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-01-28 16:46:00.071  INFO 3980 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-01-28 16:46:00.102  INFO 3980 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2021-01-28 16:46:00.158 ERROR 3980 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'contactJpa': FactoryBean threw exception on object creation; nested exception is java.lang.IllegalArgumentException: Not a managed type: interface com.edu_netcracker.cmp.entities.jpa.ContactJpa
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:176) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.getObjectFromFactoryBean(FactoryBeanRegistrySupport.java:101) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getObjectForBeanInstance(AbstractBeanFactory.java:1828) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.getObjectForBeanInstance(AbstractAutowireCapableBeanFactory.java:1265) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:624) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:612) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.data.repository.config.DeferredRepositoryInitializationListener.onApplicationEvent(DeferredRepositoryInitializationListener.java:51) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.config.DeferredRepositoryInitializationListener.onApplicationEvent(DeferredRepositoryInitializationListener.java:36) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:404) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:361) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:898) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:554) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:758) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:750) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1237) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at com.edu_netcracker.cmp.Application.main(Application.java:11) ~[classes/:na]
+Caused by: java.lang.IllegalArgumentException: Not a managed type: interface com.edu_netcracker.cmp.entities.jpa.ContactJpa
+	at org.hibernate.metamodel.internal.MetamodelImpl.managedType(MetamodelImpl.java:582) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.metamodel.internal.MetamodelImpl.managedType(MetamodelImpl.java:85) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.springframework.data.jpa.repository.support.JpaMetamodelEntityInformation.<init>(JpaMetamodelEntityInformation.java:75) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaEntityInformationSupport.getEntityInformation(JpaEntityInformationSupport.java:66) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getEntityInformation(JpaRepositoryFactory.java:229) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getTargetRepository(JpaRepositoryFactory.java:179) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getTargetRepository(JpaRepositoryFactory.java:162) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getTargetRepository(JpaRepositoryFactory.java:72) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport.getRepository(RepositoryFactorySupport.java:309) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.lambda$afterPropertiesSet$5(RepositoryFactoryBeanSupport.java:297) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.util.Lazy.getNullable(Lazy.java:212) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.util.Lazy.get(Lazy.java:94) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.getObject(RepositoryFactoryBeanSupport.java:244) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.getObject(RepositoryFactoryBeanSupport.java:57) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:169) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	... 24 common frames omitted
+
+2021-01-28 16:47:23.797  INFO 3172 --- [main] com.edu_netcracker.cmp.Application       : Starting Application on DESKTOP-723P2OI with PID 3172 (C:\Users\meltik\IdeaProjects\edu-cmp\server\target\classes started by meltik in C:\Users\meltik\IdeaProjects\edu-cmp)
+2021-01-28 16:47:23.801 DEBUG 3172 --- [main] com.edu_netcracker.cmp.Application       : Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
+2021-01-28 16:47:23.801  INFO 3172 --- [main] com.edu_netcracker.cmp.Application       : No active profile set, falling back to default profiles: default
+2021-01-28 16:47:25.699  INFO 3172 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-01-28 16:47:25.700  INFO 3172 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.38]
+2021-01-28 16:47:25.820  INFO 3172 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-01-28 16:47:26.106  INFO 3172 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-28 16:47:26.188  INFO 3172 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.21.Final
+2021-01-28 16:47:26.386  INFO 3172 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-01-28 16:47:26.559  INFO 3172 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-28 16:47:26.771  INFO 3172 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-28 16:47:26.836  INFO 3172 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2021-01-28 16:47:27.920  WARN 3172 --- [task-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-01-28 16:47:27.921  WARN 3172 --- [task-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : таблица "contacts" не существует, пропускается
+2021-01-28 16:47:27.923  WARN 3172 --- [task-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-01-28 16:47:27.923  WARN 3172 --- [task-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : таблица "students" не существует, пропускается
+2021-01-28 16:47:28.037  INFO 3172 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-28 16:47:28.169  INFO 3172 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-01-28 16:47:28.176  INFO 3172 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-01-28 16:47:28.197  INFO 3172 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2021-01-28 16:47:28.268 ERROR 3172 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'contactJpa': FactoryBean threw exception on object creation; nested exception is java.lang.IllegalArgumentException: Not a managed type: interface com.edu_netcracker.cmp.entities.jpa.ContactJpa
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:176) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.getObjectFromFactoryBean(FactoryBeanRegistrySupport.java:101) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getObjectForBeanInstance(AbstractBeanFactory.java:1828) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.getObjectForBeanInstance(AbstractAutowireCapableBeanFactory.java:1265) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:624) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:612) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.data.repository.config.DeferredRepositoryInitializationListener.onApplicationEvent(DeferredRepositoryInitializationListener.java:51) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.config.DeferredRepositoryInitializationListener.onApplicationEvent(DeferredRepositoryInitializationListener.java:36) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:404) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:361) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:898) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:554) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:758) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:750) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1237) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at com.edu_netcracker.cmp.Application.main(Application.java:11) ~[classes/:na]
+Caused by: java.lang.IllegalArgumentException: Not a managed type: interface com.edu_netcracker.cmp.entities.jpa.ContactJpa
+	at org.hibernate.metamodel.internal.MetamodelImpl.managedType(MetamodelImpl.java:582) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.metamodel.internal.MetamodelImpl.managedType(MetamodelImpl.java:85) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.springframework.data.jpa.repository.support.JpaMetamodelEntityInformation.<init>(JpaMetamodelEntityInformation.java:75) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaEntityInformationSupport.getEntityInformation(JpaEntityInformationSupport.java:66) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getEntityInformation(JpaRepositoryFactory.java:229) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getTargetRepository(JpaRepositoryFactory.java:179) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getTargetRepository(JpaRepositoryFactory.java:162) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getTargetRepository(JpaRepositoryFactory.java:72) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport.getRepository(RepositoryFactorySupport.java:309) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.lambda$afterPropertiesSet$5(RepositoryFactoryBeanSupport.java:297) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.util.Lazy.getNullable(Lazy.java:212) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.util.Lazy.get(Lazy.java:94) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.getObject(RepositoryFactoryBeanSupport.java:244) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.getObject(RepositoryFactoryBeanSupport.java:57) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:169) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	... 24 common frames omitted
+
+2021-01-28 16:47:59.895  INFO 1976 --- [main] com.edu_netcracker.cmp.Application       : Starting Application on DESKTOP-723P2OI with PID 1976 (C:\Users\meltik\IdeaProjects\edu-cmp\server\target\classes started by meltik in C:\Users\meltik\IdeaProjects\edu-cmp)
+2021-01-28 16:47:59.900 DEBUG 1976 --- [main] com.edu_netcracker.cmp.Application       : Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
+2021-01-28 16:47:59.901  INFO 1976 --- [main] com.edu_netcracker.cmp.Application       : No active profile set, falling back to default profiles: default
+2021-01-28 16:48:03.441  INFO 1976 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-01-28 16:48:03.442  INFO 1976 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.38]
+2021-01-28 16:48:03.828  INFO 1976 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-01-28 16:48:04.549  INFO 1976 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-28 16:48:04.713  INFO 1976 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.21.Final
+2021-01-28 16:48:05.212  INFO 1976 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-01-28 16:48:05.462  INFO 1976 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-28 16:48:05.688  INFO 1976 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-28 16:48:05.774  INFO 1976 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2021-01-28 16:48:07.040  INFO 1976 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-28 16:48:07.283  INFO 1976 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-01-28 16:48:07.291  INFO 1976 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-01-28 16:48:07.317  INFO 1976 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2021-01-28 16:48:07.379 ERROR 1976 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'contactJpa': FactoryBean threw exception on object creation; nested exception is java.lang.IllegalArgumentException: Not a managed type: interface com.edu_netcracker.cmp.entities.jpa.ContactJpa
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:176) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.getObjectFromFactoryBean(FactoryBeanRegistrySupport.java:101) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getObjectForBeanInstance(AbstractBeanFactory.java:1828) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.getObjectForBeanInstance(AbstractAutowireCapableBeanFactory.java:1265) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:624) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:612) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.data.repository.config.DeferredRepositoryInitializationListener.onApplicationEvent(DeferredRepositoryInitializationListener.java:51) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.config.DeferredRepositoryInitializationListener.onApplicationEvent(DeferredRepositoryInitializationListener.java:36) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:404) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:361) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:898) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:554) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:758) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:750) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1237) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at com.edu_netcracker.cmp.Application.main(Application.java:11) ~[classes/:na]
+Caused by: java.lang.IllegalArgumentException: Not a managed type: interface com.edu_netcracker.cmp.entities.jpa.ContactJpa
+	at org.hibernate.metamodel.internal.MetamodelImpl.managedType(MetamodelImpl.java:582) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.metamodel.internal.MetamodelImpl.managedType(MetamodelImpl.java:85) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.springframework.data.jpa.repository.support.JpaMetamodelEntityInformation.<init>(JpaMetamodelEntityInformation.java:75) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaEntityInformationSupport.getEntityInformation(JpaEntityInformationSupport.java:66) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getEntityInformation(JpaRepositoryFactory.java:229) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getTargetRepository(JpaRepositoryFactory.java:179) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getTargetRepository(JpaRepositoryFactory.java:162) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getTargetRepository(JpaRepositoryFactory.java:72) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport.getRepository(RepositoryFactorySupport.java:309) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.lambda$afterPropertiesSet$5(RepositoryFactoryBeanSupport.java:297) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.util.Lazy.getNullable(Lazy.java:212) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.util.Lazy.get(Lazy.java:94) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.getObject(RepositoryFactoryBeanSupport.java:244) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.getObject(RepositoryFactoryBeanSupport.java:57) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:169) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	... 24 common frames omitted
+
+2021-01-28 16:52:03.428  INFO 17064 --- [main] com.edu_netcracker.cmp.Application       : Starting Application on DESKTOP-723P2OI with PID 17064 (C:\Users\meltik\IdeaProjects\edu-cmp\server\target\classes started by meltik in C:\Users\meltik\IdeaProjects\edu-cmp)
+2021-01-28 16:52:03.432 DEBUG 17064 --- [main] com.edu_netcracker.cmp.Application       : Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
+2021-01-28 16:52:03.433  INFO 17064 --- [main] com.edu_netcracker.cmp.Application       : No active profile set, falling back to default profiles: default
+2021-01-28 16:52:05.429  INFO 17064 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-01-28 16:52:05.430  INFO 17064 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.38]
+2021-01-28 16:52:05.577  INFO 17064 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-01-28 16:52:05.887  INFO 17064 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-28 16:52:05.976  INFO 17064 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.21.Final
+2021-01-28 16:52:06.225  INFO 17064 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-01-28 16:52:06.392  INFO 17064 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-28 16:52:06.592  INFO 17064 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-28 16:52:06.644  INFO 17064 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2021-01-28 16:52:07.811  INFO 17064 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-28 16:52:07.960  INFO 17064 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-01-28 16:52:07.971  INFO 17064 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-01-28 16:52:07.996  INFO 17064 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2021-01-28 16:52:08.057 ERROR 17064 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'contactJpa': FactoryBean threw exception on object creation; nested exception is java.lang.IllegalArgumentException: Not a managed type: interface com.edu_netcracker.cmp.entities.jpa.ContactJpa
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:176) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.getObjectFromFactoryBean(FactoryBeanRegistrySupport.java:101) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getObjectForBeanInstance(AbstractBeanFactory.java:1828) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.getObjectForBeanInstance(AbstractAutowireCapableBeanFactory.java:1265) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:624) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:612) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.data.repository.config.DeferredRepositoryInitializationListener.onApplicationEvent(DeferredRepositoryInitializationListener.java:51) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.config.DeferredRepositoryInitializationListener.onApplicationEvent(DeferredRepositoryInitializationListener.java:36) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:404) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:361) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:898) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:554) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:758) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:750) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1237) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at com.edu_netcracker.cmp.Application.main(Application.java:11) ~[classes/:na]
+Caused by: java.lang.IllegalArgumentException: Not a managed type: interface com.edu_netcracker.cmp.entities.jpa.ContactJpa
+	at org.hibernate.metamodel.internal.MetamodelImpl.managedType(MetamodelImpl.java:582) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.metamodel.internal.MetamodelImpl.managedType(MetamodelImpl.java:85) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.springframework.data.jpa.repository.support.JpaMetamodelEntityInformation.<init>(JpaMetamodelEntityInformation.java:75) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaEntityInformationSupport.getEntityInformation(JpaEntityInformationSupport.java:66) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getEntityInformation(JpaRepositoryFactory.java:229) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getTargetRepository(JpaRepositoryFactory.java:179) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getTargetRepository(JpaRepositoryFactory.java:162) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactory.getTargetRepository(JpaRepositoryFactory.java:72) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport.getRepository(RepositoryFactorySupport.java:309) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.lambda$afterPropertiesSet$5(RepositoryFactoryBeanSupport.java:297) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.util.Lazy.getNullable(Lazy.java:212) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.util.Lazy.get(Lazy.java:94) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.getObject(RepositoryFactoryBeanSupport.java:244) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.getObject(RepositoryFactoryBeanSupport.java:57) ~[spring-data-commons-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:169) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	... 24 common frames omitted
+
+2021-01-28 16:52:49.785  INFO 15496 --- [main] com.edu_netcracker.cmp.Application       : Starting Application on DESKTOP-723P2OI with PID 15496 (C:\Users\meltik\IdeaProjects\edu-cmp\server\target\classes started by meltik in C:\Users\meltik\IdeaProjects\edu-cmp)
+2021-01-28 16:52:49.788 DEBUG 15496 --- [main] com.edu_netcracker.cmp.Application       : Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
+2021-01-28 16:52:49.788  INFO 15496 --- [main] com.edu_netcracker.cmp.Application       : No active profile set, falling back to default profiles: default
+2021-01-28 16:52:51.735  INFO 15496 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-01-28 16:52:51.736  INFO 15496 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.38]
+2021-01-28 16:52:51.871  INFO 15496 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-01-28 16:52:52.174  INFO 15496 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-28 16:52:52.258  INFO 15496 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.21.Final
+2021-01-28 16:52:52.484  INFO 15496 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-01-28 16:52:52.671  INFO 15496 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-28 16:52:52.872  INFO 15496 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-28 16:52:52.917  INFO 15496 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2021-01-28 16:52:54.158  INFO 15496 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-28 16:52:54.507  INFO 15496 --- [main] com.edu_netcracker.cmp.Application       : Started Application in 5.183 seconds (JVM running for 5.717)
+2021-01-28 16:57:41.391  INFO 16788 --- [main] com.edu_netcracker.cmp.Application       : Starting Application on DESKTOP-723P2OI with PID 16788 (C:\Users\meltik\IdeaProjects\edu-cmp\server\target\classes started by meltik in C:\Users\meltik\IdeaProjects\edu-cmp)
+2021-01-28 16:57:41.394 DEBUG 16788 --- [main] com.edu_netcracker.cmp.Application       : Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
+2021-01-28 16:57:41.396  INFO 16788 --- [main] com.edu_netcracker.cmp.Application       : No active profile set, falling back to default profiles: default
+2021-01-28 16:57:43.347  INFO 16788 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-01-28 16:57:43.348  INFO 16788 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.38]
+2021-01-28 16:57:43.505  INFO 16788 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-01-28 16:57:43.840  INFO 16788 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-28 16:57:43.945  INFO 16788 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.21.Final
+2021-01-28 16:57:44.196  INFO 16788 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-01-28 16:57:44.397  INFO 16788 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-28 16:57:44.594  INFO 16788 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-28 16:57:44.643  INFO 16788 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2021-01-28 16:57:45.633  WARN 16788 --- [task-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-01-28 16:57:45.634  WARN 16788 --- [task-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : отношение "students" не существует, пропускается
+2021-01-28 16:57:45.636  WARN 16788 --- [task-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-01-28 16:57:45.636  WARN 16788 --- [task-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : таблица "contacts" не существует, пропускается
+2021-01-28 16:57:45.638  WARN 16788 --- [task-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-01-28 16:57:45.638  WARN 16788 --- [task-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : таблица "students" не существует, пропускается
+2021-01-28 16:57:45.640  WARN 16788 --- [task-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-01-28 16:57:45.640  WARN 16788 --- [task-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : последовательность "hibernate_sequence" не существует, пропускается
+2021-01-28 16:57:45.688  INFO 16788 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-28 16:57:46.097  INFO 16788 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-01-28 16:57:46.105  INFO 16788 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-01-28 16:57:46.108  INFO 16788 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2021-01-28 16:57:46.140 ERROR 16788 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'fill_db' defined in class path resource [com/edu_netcracker/cmp/configs/DataBaseFill.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [void]: Factory method 'fill_db' threw exception; nested exception is org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.edu_netcracker.cmp.entities.Students.contact_fk -> com.edu_netcracker.cmp.entities.Contacts; nested exception is java.lang.IllegalStateException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.edu_netcracker.cmp.entities.Students.contact_fk -> com.edu_netcracker.cmp.entities.Contacts
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:655) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:483) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1336) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1176) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:556) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:897) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:879) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:551) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:758) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:750) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1237) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at com.edu_netcracker.cmp.Application.main(Application.java:11) ~[classes/:na]
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [void]: Factory method 'fill_db' threw exception; nested exception is org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.edu_netcracker.cmp.entities.Students.contact_fk -> com.edu_netcracker.cmp.entities.Contacts; nested exception is java.lang.IllegalStateException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.edu_netcracker.cmp.entities.Students.contact_fk -> com.edu_netcracker.cmp.entities.Contacts
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:185) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:650) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	... 20 common frames omitted
+Caused by: org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.edu_netcracker.cmp.entities.Students.contact_fk -> com.edu_netcracker.cmp.entities.Contacts; nested exception is java.lang.IllegalStateException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.edu_netcracker.cmp.entities.Students.contact_fk -> com.edu_netcracker.cmp.entities.Contacts
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:371) ~[spring-orm-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:257) ~[spring-orm-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:538) ~[spring-orm-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:743) ~[spring-tx-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:711) ~[spring-tx-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:633) ~[spring-tx-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:386) ~[spring-tx-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:118) ~[spring-tx-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:139) ~[spring-tx-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:178) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:95) ~[spring-aop-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:212) ~[spring-aop-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at com.sun.proxy.$Proxy82.save(Unknown Source) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:344) ~[spring-aop-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:205) ~[spring-aop-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at com.sun.proxy.$Proxy66.save(Unknown Source) ~[na:na]
+	at com.edu_netcracker.cmp.configs.DataBaseFill.fill_db(DataBaseFill.java:34) ~[classes/:na]
+	at com.edu_netcracker.cmp.configs.DataBaseFill$$EnhancerBySpringCGLIB$$1fb2bf.CGLIB$fill_db$0(<generated>) ~[classes/:na]
+	at com.edu_netcracker.cmp.configs.DataBaseFill$$EnhancerBySpringCGLIB$$1fb2bf$$FastClassBySpringCGLIB$$435b51.invoke(<generated>) ~[classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:244) ~[spring-core-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at com.edu_netcracker.cmp.configs.DataBaseFill$$EnhancerBySpringCGLIB$$1fb2bf.fill_db(<generated>) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564) ~[na:na]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	... 21 common frames omitted
+Caused by: java.lang.IllegalStateException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.edu_netcracker.cmp.entities.Students.contact_fk -> com.edu_netcracker.cmp.entities.Contacts
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:151) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:181) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:188) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1367) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:454) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:3213) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:2381) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:447) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:183) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.access$300(JdbcResourceLocalTransactionCoordinatorImpl.java:40) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:281) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:101) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:534) ~[spring-orm-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	... 53 common frames omitted
+Caused by: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.edu_netcracker.cmp.entities.Students.contact_fk -> com.edu_netcracker.cmp.entities.Contacts
+	at org.hibernate.engine.spi.CascadingActions$8.noCascade(CascadingActions.java:379) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.engine.internal.Cascade.cascade(Cascade.java:167) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.event.internal.AbstractFlushingEventListener.cascadeOnFlush(AbstractFlushingEventListener.java:158) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.event.internal.AbstractFlushingEventListener.prepareEntityFlushes(AbstractFlushingEventListener.java:148) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.event.internal.AbstractFlushingEventListener.flushEverythingToExecutions(AbstractFlushingEventListener.java:81) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:39) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:102) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1363) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	... 62 common frames omitted
+
+2021-01-28 16:58:35.906  INFO 20632 --- [main] com.edu_netcracker.cmp.Application       : Starting Application on DESKTOP-723P2OI with PID 20632 (C:\Users\meltik\IdeaProjects\edu-cmp\server\target\classes started by meltik in C:\Users\meltik\IdeaProjects\edu-cmp)
+2021-01-28 16:58:35.909 DEBUG 20632 --- [main] com.edu_netcracker.cmp.Application       : Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
+2021-01-28 16:58:35.909  INFO 20632 --- [main] com.edu_netcracker.cmp.Application       : No active profile set, falling back to default profiles: default
+2021-01-28 16:58:37.495  INFO 20632 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-01-28 16:58:37.495  INFO 20632 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.38]
+2021-01-28 16:58:37.635  INFO 20632 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-01-28 16:58:37.994  INFO 20632 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-28 16:58:38.088  INFO 20632 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.21.Final
+2021-01-28 16:58:38.359  INFO 20632 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-01-28 16:58:38.542  INFO 20632 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-28 16:58:38.670  INFO 20632 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-28 16:58:38.701  INFO 20632 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2021-01-28 16:58:39.519  INFO 20632 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-28 16:58:39.798  INFO 20632 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-01-28 16:58:39.807  INFO 20632 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-01-28 16:58:39.810  INFO 20632 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2021-01-28 16:58:39.830 ERROR 20632 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'fill_db' defined in class path resource [com/edu_netcracker/cmp/configs/DataBaseFill.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [void]: Factory method 'fill_db' threw exception; nested exception is org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.edu_netcracker.cmp.entities.Contacts.students_fk -> com.edu_netcracker.cmp.entities.Students; nested exception is java.lang.IllegalStateException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.edu_netcracker.cmp.entities.Contacts.students_fk -> com.edu_netcracker.cmp.entities.Students
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:655) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:483) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1336) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1176) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:556) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:897) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:879) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:551) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:758) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:750) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1237) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at com.edu_netcracker.cmp.Application.main(Application.java:11) ~[classes/:na]
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [void]: Factory method 'fill_db' threw exception; nested exception is org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.edu_netcracker.cmp.entities.Contacts.students_fk -> com.edu_netcracker.cmp.entities.Students; nested exception is java.lang.IllegalStateException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.edu_netcracker.cmp.entities.Contacts.students_fk -> com.edu_netcracker.cmp.entities.Students
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:185) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:650) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	... 20 common frames omitted
+Caused by: org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.edu_netcracker.cmp.entities.Contacts.students_fk -> com.edu_netcracker.cmp.entities.Students; nested exception is java.lang.IllegalStateException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.edu_netcracker.cmp.entities.Contacts.students_fk -> com.edu_netcracker.cmp.entities.Students
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:371) ~[spring-orm-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:257) ~[spring-orm-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:538) ~[spring-orm-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:743) ~[spring-tx-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:711) ~[spring-tx-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:633) ~[spring-tx-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:386) ~[spring-tx-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:118) ~[spring-tx-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:139) ~[spring-tx-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:178) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:95) ~[spring-aop-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:212) ~[spring-aop-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at com.sun.proxy.$Proxy82.save(Unknown Source) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:344) ~[spring-aop-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:205) ~[spring-aop-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at com.sun.proxy.$Proxy65.save(Unknown Source) ~[na:na]
+	at com.edu_netcracker.cmp.configs.DataBaseFill.fill_db(DataBaseFill.java:34) ~[classes/:na]
+	at com.edu_netcracker.cmp.configs.DataBaseFill$$EnhancerBySpringCGLIB$$1fb2bf.CGLIB$fill_db$0(<generated>) ~[classes/:na]
+	at com.edu_netcracker.cmp.configs.DataBaseFill$$EnhancerBySpringCGLIB$$1fb2bf$$FastClassBySpringCGLIB$$435b51.invoke(<generated>) ~[classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:244) ~[spring-core-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at com.edu_netcracker.cmp.configs.DataBaseFill$$EnhancerBySpringCGLIB$$1fb2bf.fill_db(<generated>) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564) ~[na:na]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	... 21 common frames omitted
+Caused by: java.lang.IllegalStateException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.edu_netcracker.cmp.entities.Contacts.students_fk -> com.edu_netcracker.cmp.entities.Students
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:151) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:181) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:188) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1367) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:454) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:3213) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:2381) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:447) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:183) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.access$300(JdbcResourceLocalTransactionCoordinatorImpl.java:40) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:281) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:101) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:534) ~[spring-orm-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	... 53 common frames omitted
+Caused by: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.edu_netcracker.cmp.entities.Contacts.students_fk -> com.edu_netcracker.cmp.entities.Students
+	at org.hibernate.engine.spi.CascadingActions$8.noCascade(CascadingActions.java:379) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.engine.internal.Cascade.cascade(Cascade.java:167) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.event.internal.AbstractFlushingEventListener.cascadeOnFlush(AbstractFlushingEventListener.java:158) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.event.internal.AbstractFlushingEventListener.prepareEntityFlushes(AbstractFlushingEventListener.java:148) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.event.internal.AbstractFlushingEventListener.flushEverythingToExecutions(AbstractFlushingEventListener.java:81) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:39) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:102) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1363) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	... 62 common frames omitted
+
+2021-01-28 17:00:24.905  INFO 20936 --- [main] com.edu_netcracker.cmp.Application       : Starting Application on DESKTOP-723P2OI with PID 20936 (C:\Users\meltik\IdeaProjects\edu-cmp\server\target\classes started by meltik in C:\Users\meltik\IdeaProjects\edu-cmp)
+2021-01-28 17:00:24.911 DEBUG 20936 --- [main] com.edu_netcracker.cmp.Application       : Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
+2021-01-28 17:00:24.912  INFO 20936 --- [main] com.edu_netcracker.cmp.Application       : No active profile set, falling back to default profiles: default
+2021-01-28 17:00:26.549  INFO 20936 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-01-28 17:00:26.550  INFO 20936 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.38]
+2021-01-28 17:00:26.686  INFO 20936 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-01-28 17:00:26.930  INFO 20936 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-28 17:00:27.012  INFO 20936 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.21.Final
+2021-01-28 17:00:27.212  INFO 20936 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-01-28 17:00:27.357  INFO 20936 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-28 17:00:27.495  INFO 20936 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-28 17:00:27.530  INFO 20936 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2021-01-28 17:00:28.358  INFO 20936 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-28 17:00:28.641  INFO 20936 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-01-28 17:00:28.651  INFO 20936 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-01-28 17:00:28.654  INFO 20936 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2021-01-28 17:00:28.675 ERROR 20936 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'fill_db' defined in class path resource [com/edu_netcracker/cmp/configs/DataBaseFill.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [void]: Factory method 'fill_db' threw exception; nested exception is org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.edu_netcracker.cmp.entities.Contacts.students_fk -> com.edu_netcracker.cmp.entities.Students; nested exception is java.lang.IllegalStateException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.edu_netcracker.cmp.entities.Contacts.students_fk -> com.edu_netcracker.cmp.entities.Students
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:655) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:483) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1336) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1176) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:556) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:897) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:879) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:551) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:758) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:750) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1237) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) ~[spring-boot-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at com.edu_netcracker.cmp.Application.main(Application.java:11) ~[classes/:na]
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [void]: Factory method 'fill_db' threw exception; nested exception is org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.edu_netcracker.cmp.entities.Contacts.students_fk -> com.edu_netcracker.cmp.entities.Students; nested exception is java.lang.IllegalStateException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.edu_netcracker.cmp.entities.Contacts.students_fk -> com.edu_netcracker.cmp.entities.Students
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:185) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:650) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	... 20 common frames omitted
+Caused by: org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.edu_netcracker.cmp.entities.Contacts.students_fk -> com.edu_netcracker.cmp.entities.Students; nested exception is java.lang.IllegalStateException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.edu_netcracker.cmp.entities.Contacts.students_fk -> com.edu_netcracker.cmp.entities.Students
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:371) ~[spring-orm-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:257) ~[spring-orm-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:538) ~[spring-orm-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:743) ~[spring-tx-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:711) ~[spring-tx-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:633) ~[spring-tx-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:386) ~[spring-tx-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:118) ~[spring-tx-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:139) ~[spring-tx-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:178) ~[spring-data-jpa-2.3.4.RELEASE.jar:2.3.4.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:95) ~[spring-aop-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:212) ~[spring-aop-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at com.sun.proxy.$Proxy82.save(Unknown Source) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:344) ~[spring-aop-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:205) ~[spring-aop-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at com.sun.proxy.$Proxy65.save(Unknown Source) ~[na:na]
+	at com.edu_netcracker.cmp.configs.DataBaseFill.fill_db(DataBaseFill.java:34) ~[classes/:na]
+	at com.edu_netcracker.cmp.configs.DataBaseFill$$EnhancerBySpringCGLIB$$1fb2bf.CGLIB$fill_db$0(<generated>) ~[classes/:na]
+	at com.edu_netcracker.cmp.configs.DataBaseFill$$EnhancerBySpringCGLIB$$1fb2bf$$FastClassBySpringCGLIB$$435b51.invoke(<generated>) ~[classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:244) ~[spring-core-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331) ~[spring-context-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	at com.edu_netcracker.cmp.configs.DataBaseFill$$EnhancerBySpringCGLIB$$1fb2bf.fill_db(<generated>) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564) ~[na:na]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154) ~[spring-beans-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	... 21 common frames omitted
+Caused by: java.lang.IllegalStateException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.edu_netcracker.cmp.entities.Contacts.students_fk -> com.edu_netcracker.cmp.entities.Students
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:151) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:181) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:188) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1367) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:454) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:3213) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:2381) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:447) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:183) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.access$300(JdbcResourceLocalTransactionCoordinatorImpl.java:40) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:281) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:101) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:534) ~[spring-orm-5.2.9.RELEASE.jar:5.2.9.RELEASE]
+	... 53 common frames omitted
+Caused by: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : com.edu_netcracker.cmp.entities.Contacts.students_fk -> com.edu_netcracker.cmp.entities.Students
+	at org.hibernate.engine.spi.CascadingActions$8.noCascade(CascadingActions.java:379) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.engine.internal.Cascade.cascade(Cascade.java:167) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.event.internal.AbstractFlushingEventListener.cascadeOnFlush(AbstractFlushingEventListener.java:158) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.event.internal.AbstractFlushingEventListener.prepareEntityFlushes(AbstractFlushingEventListener.java:148) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.event.internal.AbstractFlushingEventListener.flushEverythingToExecutions(AbstractFlushingEventListener.java:81) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:39) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:102) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1363) ~[hibernate-core-5.4.21.Final.jar:5.4.21.Final]
+	... 62 common frames omitted
+
+2021-01-28 17:03:25.076  INFO 7068 --- [main] com.edu_netcracker.cmp.Application       : Starting Application on DESKTOP-723P2OI with PID 7068 (C:\Users\meltik\IdeaProjects\edu-cmp\server\target\classes started by meltik in C:\Users\meltik\IdeaProjects\edu-cmp)
+2021-01-28 17:03:25.080 DEBUG 7068 --- [main] com.edu_netcracker.cmp.Application       : Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
+2021-01-28 17:03:25.081  INFO 7068 --- [main] com.edu_netcracker.cmp.Application       : No active profile set, falling back to default profiles: default
+2021-01-28 17:03:27.066  INFO 7068 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-01-28 17:03:27.067  INFO 7068 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.38]
+2021-01-28 17:03:27.312  INFO 7068 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-01-28 17:03:27.723  INFO 7068 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-28 17:03:27.857  INFO 7068 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.21.Final
+2021-01-28 17:03:28.124  INFO 7068 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-01-28 17:03:28.299  INFO 7068 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-28 17:03:28.516  INFO 7068 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-28 17:03:28.575  INFO 7068 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2021-01-28 17:03:29.493  WARN 7068 --- [task-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-01-28 17:03:29.494  WARN 7068 --- [task-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : ограничение "fk4womd932o75i6fmil4fu8r9ri" в таблице "students" не существует, пропускается
+2021-01-28 17:03:29.503  WARN 7068 --- [task-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2021-01-28 17:03:29.503  WARN 7068 --- [task-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : удаление распространяется на объект ограничение fkcgdep5dehnvt3snispklfdwhu в отношении таблица students
+2021-01-28 17:03:29.533  INFO 7068 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-28 17:03:31.095  INFO 7068 --- [main] com.edu_netcracker.cmp.Application       : Started Application in 6.654 seconds (JVM running for 7.241)
+2021-01-28 17:14:40.272  INFO 2572 --- [main] com.edu_netcracker.cmp.Application       : Starting Application on DESKTOP-723P2OI with PID 2572 (C:\Users\meltik\IdeaProjects\edu-cmp\server\target\classes started by meltik in C:\Users\meltik\IdeaProjects\edu-cmp)
+2021-01-28 17:14:40.277 DEBUG 2572 --- [main] com.edu_netcracker.cmp.Application       : Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
+2021-01-28 17:14:40.278  INFO 2572 --- [main] com.edu_netcracker.cmp.Application       : No active profile set, falling back to default profiles: default
+2021-01-28 17:14:42.399  INFO 2572 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-01-28 17:14:42.399  INFO 2572 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.38]
+2021-01-28 17:14:42.581  INFO 2572 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-01-28 17:14:42.926  INFO 2572 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-28 17:14:43.020  INFO 2572 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.21.Final
+2021-01-28 17:14:43.252  INFO 2572 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-01-28 17:14:43.449  INFO 2572 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-28 17:14:43.815  INFO 2572 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-28 17:14:43.882  INFO 2572 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2021-01-28 17:14:45.078  INFO 2572 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-28 17:14:46.517  INFO 2572 --- [main] com.edu_netcracker.cmp.Application       : Started Application in 6.852 seconds (JVM running for 7.548)
+2021-01-28 17:26:08.606  INFO 15724 --- [main] com.edu_netcracker.cmp.Application       : Starting Application on DESKTOP-723P2OI with PID 15724 (C:\Users\meltik\IdeaProjects\edu-cmp\server\target\classes started by meltik in C:\Users\meltik\IdeaProjects\edu-cmp)
+2021-01-28 17:26:08.610 DEBUG 15724 --- [main] com.edu_netcracker.cmp.Application       : Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
+2021-01-28 17:26:08.610  INFO 15724 --- [main] com.edu_netcracker.cmp.Application       : No active profile set, falling back to default profiles: default
+2021-01-28 17:26:10.256  INFO 15724 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-01-28 17:26:10.256  INFO 15724 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.38]
+2021-01-28 17:26:10.370  INFO 15724 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-01-28 17:26:10.613  INFO 15724 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-28 17:26:10.687  INFO 15724 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.21.Final
+2021-01-28 17:26:10.855  INFO 15724 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-01-28 17:26:11.008  INFO 15724 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-28 17:26:11.163  INFO 15724 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-28 17:26:11.197  INFO 15724 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2021-01-28 17:26:12.099  INFO 15724 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-28 17:26:13.332  INFO 15724 --- [main] com.edu_netcracker.cmp.Application       : Started Application in 5.179 seconds (JVM running for 5.743)
+2021-01-28 17:26:45.045  INFO 1584 --- [main] com.edu_netcracker.cmp.Application       : Starting Application on DESKTOP-723P2OI with PID 1584 (C:\Users\meltik\IdeaProjects\edu-cmp\server\target\classes started by meltik in C:\Users\meltik\IdeaProjects\edu-cmp)
+2021-01-28 17:26:45.050 DEBUG 1584 --- [main] com.edu_netcracker.cmp.Application       : Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
+2021-01-28 17:26:45.051  INFO 1584 --- [main] com.edu_netcracker.cmp.Application       : No active profile set, falling back to default profiles: default
+2021-01-28 17:26:46.693  INFO 1584 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-01-28 17:26:46.694  INFO 1584 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.38]
+2021-01-28 17:26:46.839  INFO 1584 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-01-28 17:26:47.090  INFO 1584 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-28 17:26:47.153  INFO 1584 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.21.Final
+2021-01-28 17:26:47.350  INFO 1584 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-01-28 17:26:47.516  INFO 1584 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-28 17:26:47.685  INFO 1584 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-28 17:26:47.733  INFO 1584 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2021-01-28 17:26:48.602  INFO 1584 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-28 17:26:49.877  INFO 1584 --- [main] com.edu_netcracker.cmp.Application       : Started Application in 5.284 seconds (JVM running for 5.793)
+2021-01-28 17:27:08.162  INFO 1584 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-01-28 19:34:32.496  WARN 1584 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h53m44s691ms752µs300ns).
+2021-01-28 19:35:19.072  INFO 1584 --- [NetcrackerNotificationBot Telegram Connection] o.t.t.u.DefaultBotSession                : Read timed out
+
+java.net.SocketTimeoutException: Read timed out
+	at java.base/sun.nio.ch.NioSocketImpl.timedRead(NioSocketImpl.java:283) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.implRead(NioSocketImpl.java:309) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.read(NioSocketImpl.java:350) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl$1.read(NioSocketImpl.java:803) ~[na:na]
+	at java.base/java.net.Socket$SocketInputStream.read(Socket.java:982) ~[na:na]
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:469) ~[na:na]
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:463) ~[na:na]
+	at java.base/sun.security.ssl.SSLSocketInputRecord.bytesInCompletePacket(SSLSocketInputRecord.java:70) ~[na:na]
+	at java.base/sun.security.ssl.SSLSocketImpl.readApplicationRecord(SSLSocketImpl.java:1421) ~[na:na]
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:1033) ~[na:na]
+	at org.apache.http.impl.io.SessionInputBufferImpl.streamRead(SessionInputBufferImpl.java:137) ~[httpcore-4.4.13.jar:4.4.13]
+	at org.apache.http.impl.io.SessionInputBufferImpl.fillBuffer(SessionInputBufferImpl.java:153) ~[httpcore-4.4.13.jar:4.4.13]
+	at org.apache.http.impl.io.SessionInputBufferImpl.readLine(SessionInputBufferImpl.java:280) ~[httpcore-4.4.13.jar:4.4.13]
+	at org.apache.http.impl.conn.DefaultHttpResponseParser.parseHead(DefaultHttpResponseParser.java:138) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.conn.DefaultHttpResponseParser.parseHead(DefaultHttpResponseParser.java:56) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.io.AbstractMessageParser.parse(AbstractMessageParser.java:259) ~[httpcore-4.4.13.jar:4.4.13]
+	at org.apache.http.impl.DefaultBHttpClientConnection.receiveResponseHeader(DefaultBHttpClientConnection.java:163) ~[httpcore-4.4.13.jar:4.4.13]
+	at org.apache.http.impl.conn.CPoolProxy.receiveResponseHeader(CPoolProxy.java:157) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.protocol.HttpRequestExecutor.doReceiveResponse(HttpRequestExecutor.java:273) ~[httpcore-4.4.13.jar:4.4.13]
+	at org.apache.http.protocol.HttpRequestExecutor.execute(HttpRequestExecutor.java:125) ~[httpcore-4.4.13.jar:4.4.13]
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:272) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:186) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:89) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:110) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:185) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:83) ~[httpclient-4.5.13.jar:4.5.13]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.getUpdatesFromServer(DefaultBotSession.java:253) ~[telegrambots-5.0.1.1.jar:na]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$ReaderThread.run(DefaultBotSession.java:192) ~[telegrambots-5.0.1.1.jar:na]
+
+2021-01-28 21:09:31.970  INFO 20544 --- [main] com.edu_netcracker.cmp.Application       : Starting Application on DESKTOP-723P2OI with PID 20544 (C:\Users\meltik\IdeaProjects\edu-cmp\server\target\classes started by meltik in C:\Users\meltik\IdeaProjects\edu-cmp)
+2021-01-28 21:09:31.973 DEBUG 20544 --- [main] com.edu_netcracker.cmp.Application       : Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
+2021-01-28 21:09:31.973  INFO 20544 --- [main] com.edu_netcracker.cmp.Application       : No active profile set, falling back to default profiles: default
+2021-01-28 21:09:36.541  INFO 20512 --- [main] com.edu_netcracker.cmp.Application       : Starting Application on DESKTOP-723P2OI with PID 20512 (C:\Users\meltik\IdeaProjects\edu-cmp\server\target\classes started by meltik in C:\Users\meltik\IdeaProjects\edu-cmp)
+2021-01-28 21:09:36.547 DEBUG 20512 --- [main] com.edu_netcracker.cmp.Application       : Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
+2021-01-28 21:09:36.548  INFO 20512 --- [main] com.edu_netcracker.cmp.Application       : No active profile set, falling back to default profiles: default
+2021-01-28 21:09:38.173  INFO 20512 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-01-28 21:09:38.173  INFO 20512 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.38]
+2021-01-28 21:09:38.305  INFO 20512 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-01-28 21:09:38.579  INFO 20512 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-28 21:09:38.651  INFO 20512 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.21.Final
+2021-01-28 21:09:38.867  INFO 20512 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-01-28 21:09:39.030  INFO 20512 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-28 21:09:39.178  INFO 20512 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-28 21:09:39.214  INFO 20512 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2021-01-28 21:09:40.097  INFO 20512 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-28 21:09:41.248  INFO 20512 --- [main] com.edu_netcracker.cmp.Application       : Started Application in 5.123 seconds (JVM running for 5.643)
+2021-01-28 21:10:26.597  INFO 17872 --- [main] com.edu_netcracker.cmp.Application       : Starting Application on DESKTOP-723P2OI with PID 17872 (C:\Users\meltik\IdeaProjects\edu-cmp\server\target\classes started by meltik in C:\Users\meltik\IdeaProjects\edu-cmp)
+2021-01-28 21:10:26.602 DEBUG 17872 --- [main] com.edu_netcracker.cmp.Application       : Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
+2021-01-28 21:10:26.604  INFO 17872 --- [main] com.edu_netcracker.cmp.Application       : No active profile set, falling back to default profiles: default
