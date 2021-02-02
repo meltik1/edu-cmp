@@ -3,50 +3,28 @@ package com.edu_netcracker.cmp.notificationEngine.emailImpl;
 import com.edu_netcracker.cmp.notificationEngine.NotificationService;
 import com.edu_netcracker.cmp.configs.MailConfig;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import java.util.Properties;
 
 @Service
 @Slf4j
 public class EmailNotificationServiceImpl implements NotificationService {
 
-    private final MailConfig mailConfig;
-
-    public EmailNotificationServiceImpl(MailConfig mailConfig) {
-        this.mailConfig = mailConfig;
-    }
-
-    public JavaMailSender getJavaMailSender() {
-
-        System.out.println(this.mailConfig.getPassword());
-
-        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost(this.mailConfig.getHost());
-        mailSender.setPort(this.mailConfig.getPort());
-        mailSender.setUsername(this.mailConfig.getUsername());
-        mailSender.setPassword(this.mailConfig.getPassword());
-
-        Properties props = mailSender.getJavaMailProperties();
-        props.put("mail.transport.protocol", "smtp");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.debug", "true");
-
-        return mailSender;
-    }
+    @Autowired
+    private MailConfig mailConfig;
 
     public MimeMessage createMimeMessage(JavaMailSender mailSender, String msg) throws MessagingException {
 
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
 
-        messageHelper.setFrom("testFrom@test.com");
+        messageHelper.setFrom(mailConfig.getFrom());
         messageHelper.setTo("testTo@test.com");
         messageHelper.setSubject(msg);
 
@@ -61,7 +39,7 @@ public class EmailNotificationServiceImpl implements NotificationService {
 
         SimpleMailMessage simpleMessage = new SimpleMailMessage();
 
-        simpleMessage.setFrom("testFrom@test.com");
+        simpleMessage.setFrom(mailConfig.getFrom());
         simpleMessage.setTo("testTo@test.com");
         simpleMessage.setSubject("Hello");
         simpleMessage.setText(msg);
@@ -72,7 +50,7 @@ public class EmailNotificationServiceImpl implements NotificationService {
 
     public void send(Long id, String msg) {
 
-        JavaMailSender mailSender = getJavaMailSender();
+        JavaMailSender mailSender = mailConfig.javaMailSender();
 
         try {
             MimeMessage mimeMessage = createMimeMessage(mailSender, msg);

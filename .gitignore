@@ -6,7 +6,11 @@
 # SERVER
 target
 *.class
+*.log
+rest-examples
 
+# SRC
+test
 
 # CLIENT
 
