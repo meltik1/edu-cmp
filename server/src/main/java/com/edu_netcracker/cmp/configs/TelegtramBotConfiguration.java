@@ -13,12 +13,14 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 @Slf4j
 public class TelegtramBotConfiguration {
     @Bean
-    public void config() {
+    public TelegramBotsApi config() {
+        TelegramBotsApi botsApi = null;
         try {
-            TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
+            botsApi = new TelegramBotsApi(DefaultBotSession.class);
             botsApi.registerBot(new NotificationBot());
         } catch (TelegramApiException e) {
             log.error(e.getMessage());
         }
+        return botsApi;
     }
 }
