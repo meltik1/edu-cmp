@@ -21,7 +21,7 @@ public class NotificationEngineControllers  {
 
     @RequestMapping(value = "send")
     public void sendMessage() {
-        notificationService.send("Владимир П. - Молодец!");
+        notificationService.send(3L, "Э");
     }
 
     // Here will be excel parser

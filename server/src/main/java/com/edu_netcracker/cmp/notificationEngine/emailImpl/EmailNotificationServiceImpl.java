@@ -70,7 +70,7 @@ public class EmailNotificationServiceImpl implements NotificationService {
     }
 
 
-    public void send(String msg) {
+    public void send(Long id, String msg) {
 
         JavaMailSender mailSender = getJavaMailSender();
 

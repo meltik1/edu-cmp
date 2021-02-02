@@ -25,8 +25,5 @@ public class Students {
     private String LastName;
     private String middleName;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(referencedColumnName = "id")
-    private Contacts contact_fk;
 
 }
