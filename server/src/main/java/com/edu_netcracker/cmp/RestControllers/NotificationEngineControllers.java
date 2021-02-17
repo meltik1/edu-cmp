@@ -1,8 +1,10 @@
 package com.edu_netcracker.cmp.RestControllers;
 
 import com.edu_netcracker.cmp.notificationEngine.NotificationService;
-import com.edu_netcracker.cmp.notificationEngine.telegramImpl.NotificationBot;
+import com.edu_netcracker.cmp.notificationEngine.parserImpl.FileHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +17,9 @@ public class NotificationEngineControllers  {
     @Autowired
     private NotificationService notificationService;
 
+    @Autowired
+    private FileHandler fileHandler;
+
     public NotificationEngineControllers(NotificationService notificationService) {
         this.notificationService = notificationService;
     }
@@ -24,9 +29,9 @@ public class NotificationEngineControllers  {
         notificationService.send(3L, "Э");
     }
 
-    // Here will be excel parser
-    @RequestMapping(value = "import-excel", method = RequestMethod.POST)
-    public void excelImport(@RequestParam MultipartFile file) {
-
+    @RequestMapping(value = "send-file", method = RequestMethod.POST)
+    public ResponseEntity<?> excelImport(@RequestParam MultipartFile file) {
+        this.fileHandler.handle(file);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
