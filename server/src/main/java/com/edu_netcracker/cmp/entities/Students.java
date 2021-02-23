@@ -19,11 +19,11 @@ public class Students {
     @Column(name = "id")
     private Long id;
 
-    @Column(nullable = false)
-    private String firstName;
-    @Column(nullable = false)
-    private String LastName;
-    private String middleName;
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "id")
+    private Session session;
 
+    private String email;
+    private String tg_nick_name;
 
 }
