@@ -133,12 +133,12 @@ export default function App() {
 
                     <div className="steps-action" style={{ padding: '20px 50px 0' }}>
 
-                        {current < steps.length - 1 && (
+                        {current < steps.length && (
                             <Button type="primary" onClick={() => next()}>
                                 <Link to={links[current + 1]}> Далее </Link>
                             </Button>
                         )}
-                        {current === steps.length - 1 && (
+                        {current === steps.length && (
                             <Button type="primary">
                                 Готово
                             </Button>

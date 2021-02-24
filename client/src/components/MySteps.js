@@ -1,6 +1,6 @@
 import {Steps} from "antd";
 
-export default function MySteps(current) {
+export default function MySteps({current}) {
 
     const { Step } = Steps;
 

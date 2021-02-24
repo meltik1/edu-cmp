@@ -1,7 +1,7 @@
-import React from "react";
-import {Button, Input, Popover, Table, Tag} from "antd";
-import {PlusOutlined} from '@ant-design/icons';
-import {Content} from "antd/es/layout/layout";
+import React, { useState } from "react";
+import { Button, Input, Modal, Popover, Table, Tag } from "antd";
+import { PlusOutlined } from '@ant-design/icons';
+import { Content } from "antd/es/layout/layout";
 
 export default function GetSessions() {
     const dataSource = [
@@ -58,21 +58,33 @@ export default function GetSessions() {
 
     ]
 
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+
+    const handleOk = () => {
+        setIsModalVisible(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
+
     return (
         <Content style={{ padding: '40px 50px 0' }}>
             <div >
-                <Popover content={<div><Input addonAfter={<a>Далее</a>} placeholder="Basic usage" /></div>}
-                         title="Title"
-                         trigger="click"
-                         placement="right">
-                    <Button style={{ marginBottom: 20 }}
-                            type="primary"
-                            shape="round"
-                        // onClick={() => }
-                            icon={<PlusOutlined />}>
-                        Новая сессия
-                    </Button>
-                </Popover>
+                <Button style={{ marginBottom: 20 }}
+                        type="primary"
+                        shape="round"
+                        onClick={showModal}
+                        icon={<PlusOutlined />}>
+                    Новая сессия
+                </Button>
+                <Modal title="Новая сессия" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                    <Input placeholder={"Название"} />
+                </Modal>
                 <div>
                     <Table dataSource={dataSource} columns={columns} />
                 </div>
