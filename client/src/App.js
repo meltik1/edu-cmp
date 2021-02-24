@@ -15,13 +15,15 @@ import {
 } from "antd";
 import 'antd/dist/antd.css';
 
-import PickFile from "./PickFile";
-import Mapping from "./Mapping";
-import Template from "./Template";
-import Validation from "./Validation";
-import Report from "./Report";
+import GetSessions from "./components/Sessions";
+import PickFile from "./components/PickFile";
+import Mapping from "./components/Mapping";
+import Template from "./components/Template";
+import Validation from "./components/Validation";
+import Report from "./components/Report";
 import "./App.css";
-import logo from "./logo_dark_removebg.png";
+import logo from "./img/logo_dark_removebg.png";
+import MySteps from "./components/MySteps";
 
 const {Header, Content, Footer} = Layout;
 
@@ -57,7 +59,7 @@ export default function App() {
         },
     ];
 
-    const links = ["/pick-file", "/mapping", "/template", "/validation", "/report"]
+    const links = ["/", "/pick-file", "/mapping", "/template", "/validation", "/report"]
 
     const [current, setCurrent] = React.useState(0);
 
@@ -78,36 +80,56 @@ export default function App() {
                         {/*<div className="logo" />*/}
                     </Header>
 
-                    <Steps current={current} style={{ padding: '50px 80px 0' }}>
-                        {steps.map(item => (
-                            <Step title={item.title} description={item.description} />
-                        ))}
-                    </Steps>
+                    <Switch>
+                        <Route exact path="/">
+                            <GetSessions />
+                        </Route>
+                        <Route path="/pick-file">
+                            <PickFile />
+                        </Route>
+                        <Route path="/mapping">
+                            <Mapping />
+                        </Route>
+                        <Route path="/template">
+                            <Template />
+                        </Route>
+                        <Route path="/validation">
+                            <Validation />
+                        </Route>
+                        <Route path="/report">
+                            <Report />
+                        </Route>
+                    </Switch>
 
-                    <Content style={{ padding: '40px 50px 0' }}>
-                        <div className="site-layout-content">
-                            <Switch>
-                                <Route path="/pick-file">
-                                    <PickFile />
-                                </Route>
-                                <Route path="/mapping">
-                                    <Mapping />
-                                </Route>
-                                <Route path="/template">
-                                    <Template />
-                                </Route>
-                                <Route path="/validation">
-                                    <Validation />
-                                </Route>
-                                <Route path="/report">
-                                    <Report />
-                                </Route>
-                                <Route path="/">
-                                    <Redirect to="/pick-file" />
-                                </Route>
-                            </Switch>
-                        </div>
-                    </Content>
+                    {/*<MySteps current = {current}/>*/}
+
+                    {/*<Content style={{ padding: '40px 50px 0' }}>*/}
+                    {/*    <div className="site-layout-content">*/}
+                    {/*        <Switch>*/}
+                    {/*            <Route path="/pick-file">*/}
+                    {/*                <PickFile />*/}
+                    {/*            </Route>*/}
+                    {/*            <Route path="/mapping">*/}
+                    {/*                <Mapping />*/}
+                    {/*            </Route>*/}
+                    {/*            <Route path="/template">*/}
+                    {/*                <Template />*/}
+                    {/*            </Route>*/}
+                    {/*            <Route path="/validation">*/}
+                    {/*                <Validation />*/}
+                    {/*            </Route>*/}
+                    {/*            <Route path="/report">*/}
+                    {/*                <Report />*/}
+                    {/*            </Route>*/}
+                    {/*            <Route path="/">*/}
+                    {/*                <GetSessions />*/}
+                    {/*            </Route>*/}
+                    {/*            /!*<Route path="/">*!/*/}
+                    {/*            /!*    <Redirect to="/pick-file" />*!/*/}
+                    {/*            /!*</Route>*!/*/}
+                    {/*        </Switch>*/}
+                    {/*    </div>*/}
+                    {/*</Content>*/}
 
                     <div className="steps-action" style={{ padding: '20px 50px 0' }}>
 
