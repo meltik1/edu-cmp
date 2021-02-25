@@ -13,6 +13,7 @@ public class Session {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue
     private Long id;
 
     @Enumerated(EnumType.ORDINAL)

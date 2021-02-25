@@ -34,8 +34,12 @@ public class NotificationBot extends TelegramLongPollingBot {
     TgUsersInfoJPA tgUsersInfoJPA;
 
 
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     //@Value("bot.token")
-    private String token = "1531954543:AAHgZt4bem3JygKOQ69JSD-oM51odOA2POg";
+    private String token;
     @Override
     public String getBotToken() {
         return token;
@@ -71,7 +75,7 @@ public class NotificationBot extends TelegramLongPollingBot {
         for (StudentsToAttributes studentsToAttributes : studentsToAttributesList) {
             log.info("Sending msg to student with id {{}}" , id);
             message.setChatId(studentsToAttributes.getChar_value());
-            message.setText("Hello, " + studentsToAttributes.getStudent().getFirstName());
+            message.setText("Hello, ");
             try {
                 execute(message); // Call method to send the message
             } catch (TelegramApiException e) {

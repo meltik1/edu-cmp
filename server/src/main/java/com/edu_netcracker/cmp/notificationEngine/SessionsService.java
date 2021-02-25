@@ -11,6 +11,8 @@ import java.util.Map;
 
 public interface SessionsService {
 
+     List<Session> getAllSessions();
+
      Session createSession();
 
      Session getSession(Long id);
@@ -19,7 +21,7 @@ public interface SessionsService {
 
      void parseFile(Long id, MultipartFile file);
 
-     List<StudentsToAttributes> getStudents(Long id);
+     List<StudentsToAttributes> getStudentsAttributes(Long id);
 
      String getReport(Long id);
 

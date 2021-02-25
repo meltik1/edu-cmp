@@ -29,8 +29,7 @@ public class DataBaseFill {
         attributes2.setAttribute_name("email");
 
         Students students = new Students();
-        students.setFirstName("Nikita");
-        students.setLastName("Zuev");
+
 
         StudentsToAttributes studentsToAttributes = new StudentsToAttributes();
         studentsToAttributes.setStudent(students);
