@@ -5,12 +5,10 @@ import {
     Switch,
     Route,
     Link,
-    Redirect
 } from "react-router-dom";
 
 import {
     Layout,
-    Steps,
     Button
 } from "antd";
 import 'antd/dist/antd.css';
@@ -23,11 +21,8 @@ import Validation from "./components/Validation";
 import Report from "./components/Report";
 import "./App.css";
 import logo from "./img/logo_dark_removebg.png";
-import MySteps from "./components/MySteps";
 
-const {Header, Content, Footer} = Layout;
-
-const { Step } = Steps;
+const {Header, Footer} = Layout;
 
 export default function App() {
 
@@ -100,36 +95,6 @@ export default function App() {
                             <Report />
                         </Route>
                     </Switch>
-
-                    {/*<MySteps current = {current}/>*/}
-
-                    {/*<Content style={{ padding: '40px 50px 0' }}>*/}
-                    {/*    <div className="site-layout-content">*/}
-                    {/*        <Switch>*/}
-                    {/*            <Route path="/pick-file">*/}
-                    {/*                <PickFile />*/}
-                    {/*            </Route>*/}
-                    {/*            <Route path="/mapping">*/}
-                    {/*                <Mapping />*/}
-                    {/*            </Route>*/}
-                    {/*            <Route path="/template">*/}
-                    {/*                <Template />*/}
-                    {/*            </Route>*/}
-                    {/*            <Route path="/validation">*/}
-                    {/*                <Validation />*/}
-                    {/*            </Route>*/}
-                    {/*            <Route path="/report">*/}
-                    {/*                <Report />*/}
-                    {/*            </Route>*/}
-                    {/*            <Route path="/">*/}
-                    {/*                <GetSessions />*/}
-                    {/*            </Route>*/}
-                    {/*            /!*<Route path="/">*!/*/}
-                    {/*            /!*    <Redirect to="/pick-file" />*!/*/}
-                    {/*            /!*</Route>*!/*/}
-                    {/*        </Switch>*/}
-                    {/*    </div>*/}
-                    {/*</Content>*/}
 
                     <div className="steps-action" style={{ padding: '20px 50px 0' }}>
 

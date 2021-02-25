@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Input, Modal, Popover, Table, Tag } from "antd";
+import { Button, Input, Modal, Table, Tag } from "antd";
 import { PlusOutlined } from '@ant-design/icons';
 import { Content } from "antd/es/layout/layout";
 
