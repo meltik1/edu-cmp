@@ -22,6 +22,7 @@
         <spring-boot.version>2.3.4.RELEASE</spring-boot.version>
         <postgresql.version>42.2.18</postgresql.version>
         <lombok.version>1.18.12</lombok.version>
+        <tgbot.version>5.0.1</tgbot.version>
     </properties>
 
     <dependencies>
@@ -63,12 +64,12 @@
         <dependency>
             <groupId>org.telegram</groupId>
             <artifactId>telegrambots</artifactId>
-            <version>LATEST</version>
+            <version>${tgbot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.telegram</groupId>
             <artifactId>telegrambotsextensions</artifactId>
-            <version>LATEST</version>
+            <version>${tgbot.version}</version>
         </dependency>
 
         <!-- Apache POI -->
