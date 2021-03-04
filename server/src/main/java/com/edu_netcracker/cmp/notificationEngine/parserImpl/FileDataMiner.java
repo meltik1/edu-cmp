@@ -1,8 +1,9 @@
 package com.edu_netcracker.cmp.notificationEngine.parserImpl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,15 +25,16 @@ public abstract class FileDataMiner {
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
-    private final int HEADER = 0;
+    private final int FIRST_ROW = 0;
 
     private List<RawFileData> rawFileData;
-    private String        json;
-    private String        jsonWithMappedAttributes;
+    private String            json;
+    private String            jsonWithMappedAttributes;
 
 
     public void mine(MultipartFile file) throws IOException {
         this.rawFileData = parseData(file);
+        removeHeader();
         listToJson(rawFileData);
     }
 
@@ -45,46 +47,26 @@ public abstract class FileDataMiner {
         }
     }
 
-    public void handleMappedAttributes(MultipartFile multipartFile) throws IOException, NullPointerException {
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode mappedAttributes = mapper.readTree(multipartFile.getInputStream());
-            List<RawFileData> selectedRawFileData = new ArrayList<>();
-            mapHeaders(mappedAttributes);
-            selectedRawFileData.add(this.rawFileData.get(HEADER));
-            addSelectedStudents(selectedRawFileData, mappedAttributes);
-            this.jsonWithMappedAttributes = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(selectedRawFileData);
-        } catch (IOException e) {
-            log.error("Couldn't parse mapped attributes", e);
-            throw e;
-        }
-    }
-
-    private void mapHeaders(JsonNode mappedAttributes) {
-        for (Iterator<Map.Entry<String, JsonNode>> it = mappedAttributes.fields(); it.hasNext();) {
-            Map.Entry<String, JsonNode> curField = it.next();
-            if (curField.getKey().matches("\\d+")) {
-                int index = Integer.parseInt(curField.getKey());
-                this.rawFileData.get(HEADER).getRawFileData().replace(index, curField.getValue().textValue());
+    private void removeHeader() {
+        Map<Integer, String> firstRow = this.rawFileData.get(FIRST_ROW).getRawFileData();
+        for (String value : firstRow.values()) {
+            if (value.contains("@")) {
+                return;
             }
         }
+        this.rawFileData.remove(FIRST_ROW);
     }
 
-    private void addSelectedStudents(List<RawFileData> selectedRawFileData, JsonNode mappedAttributes) {
-        int amountOfIntervals = mappedAttributes.get("Range").size();
-        for (int i = 0; i < amountOfIntervals; i++) {
-            int from = mappedAttributes.get("Range").get(i).get("from").asInt();
-            int to = mappedAttributes.get("Range").get(i).get("to").asInt();
-            if (checkRange(from, to)) {
-                for (int j = from; j <= to; j++) {
-                    selectedRawFileData.add(this.rawFileData.get(j));
-                }
+    public String applyMappedAttributes(Map<String, String> attributes) {
+        ArrayNode arrayNode = MAPPER.createArrayNode();
+        for (RawFileData curRawFileData : rawFileData) {
+            ObjectNode objectNode = MAPPER.createObjectNode();
+            for (String key : attributes.keySet()) {
+                objectNode.put(attributes.get(key), curRawFileData.getRawFileData().get(Integer.valueOf(key)));
             }
+            arrayNode.add(objectNode);
         }
-    }
-
-    private boolean checkRange(int from, int to) {
-        return from > 0 && from <= to && to < this.rawFileData.size();
+        return arrayNode.toPrettyString();
     }
 
     public abstract List<RawFileData> parseData(MultipartFile file) throws IOException;
