@@ -1,8 +1,7 @@
 package com.edu_netcracker.cmp.configs;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 
 @Configuration
 public class AppConfig {

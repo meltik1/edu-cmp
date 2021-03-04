@@ -1,7 +1,7 @@
 package com.edu_netcracker.cmp.notificationEngine.parserImpl.dataMinerImpl;
 
 import com.edu_netcracker.cmp.notificationEngine.parserImpl.FileDataMiner;
-import com.edu_netcracker.cmp.notificationEngine.parserImpl.Student;
+import com.edu_netcracker.cmp.notificationEngine.parserImpl.RawFileData;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -17,22 +17,23 @@ import java.util.*;
 @Component
 @Slf4j
 public class XLSXDataMiner extends FileDataMiner {
-    public List<Student> parseData(MultipartFile multipartFile) {
-        List<Student> students = new ArrayList<>();
+    public List<RawFileData> parseData(MultipartFile multipartFile) throws IOException {
+        List<RawFileData> rawFileData = new ArrayList<>();
         try {
             XSSFWorkbook  workbook = new XSSFWorkbook(multipartFile.getInputStream());
             XSSFSheet     sheet    = workbook.getSheetAt(0);
             DataFormatter df       = new DataFormatter();
             for (Row row : sheet) {
-                Student student = new Student();
+                RawFileData curRow = new RawFileData();
                 for (Cell cell : row) {
-                    student.addStudentAttributes(cell.getColumnIndex(), df.formatCellValue(cell));
+                    curRow.addStudentAttributes(cell.getColumnIndex(), df.formatCellValue(cell));
                 }
-                students.add(student);
+                rawFileData.add(curRow);
             }
         } catch (IOException e) {
-            log.info(e.toString());
+            log.error("Couldn't parse the EXCEL file", e);
+            throw e;
         }
-        return students;
+        return rawFileData;
     }
 }

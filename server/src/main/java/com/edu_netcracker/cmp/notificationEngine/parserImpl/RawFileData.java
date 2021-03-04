@@ -10,13 +10,13 @@ import java.util.Map;
 @Component
 @Getter
 @Setter
-public class Student {
-    private Map<Integer, String> student;
+public class RawFileData {
+    private Map<Integer, String> rawFileData;
 
     public void addStudentAttributes(int attribute, String value) {
-        if (student == null) {
-            student = new HashMap<>();
+        if (rawFileData == null) {
+            rawFileData = new HashMap<>();
         }
-        student.put(attribute, value);
+        rawFileData.put(attribute, value);
     }
 }
