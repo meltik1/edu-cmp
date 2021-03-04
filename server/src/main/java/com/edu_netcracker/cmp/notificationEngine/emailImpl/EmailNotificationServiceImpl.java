@@ -35,19 +35,6 @@ public class EmailNotificationServiceImpl implements NotificationService {
         return mimeMessage;
     }
 
-    public SimpleMailMessage createSimpleMessage (JavaMailSender mailSender, String msg) {
-
-        SimpleMailMessage simpleMessage = new SimpleMailMessage();
-
-        simpleMessage.setFrom(mailConfig.getFrom());
-        simpleMessage.setTo("testTo@test.com");
-        simpleMessage.setSubject("Hello");
-        simpleMessage.setText(msg);
-
-        return simpleMessage;
-    }
-
-
     public void send(Long id, String msg) {
 
         JavaMailSender mailSender = mailConfig.javaMailSender();

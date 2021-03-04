@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 public class NotificationEngineControllers  {
@@ -33,15 +32,6 @@ public class NotificationEngineControllers  {
     @RequestMapping(value = "send-file", method = RequestMethod.POST)
     public ResponseEntity<?> excelImport(@RequestParam MultipartFile file) {
         String response = this.fileHandler.handle(file);
-        if (response == null || response.equals("")) {
-            return new ResponseEntity<>("Could not handle file", HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "send-excel-mapping", method = RequestMethod.POST)
-    public ResponseEntity<?> jsonImport(@RequestParam MultipartFile file) {
-        String response = fileHandler.jsonHandler(file);
         if (response == null || response.equals("")) {
             return new ResponseEntity<>("Could not handle file", HttpStatus.BAD_REQUEST);
         }

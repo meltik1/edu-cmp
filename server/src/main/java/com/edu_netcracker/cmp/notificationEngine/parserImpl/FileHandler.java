@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Component
@@ -35,16 +37,18 @@ public class FileHandler {
         return "";
     }
 
-    public String jsonHandler(MultipartFile multipartFile) {
-        try {
-            this.fileDataMiner.handleMappedAttributes(multipartFile);
-            return this.getFileDataMiner().getJsonWithMappedAttributes();
-        } catch (IOException e) {
-            log.error("Couldn't parse mapped attributes", e);
-        } catch (NullPointerException e) {
-            log.error("No file loaded to initialize mapped attributes", e);
+    public List<RawFileData> getRawFileData() throws NullPointerException {
+        if (this.getFileDataMiner() == null) {
+            throw new NullPointerException("FileDataMiner not initialized");
         }
-        return "";
+        return this.getFileDataMiner().getRawFileData();
+    }
+
+    public String sendAttributes(Map<String, String> attributes) throws NullPointerException {
+        if (this.getFileDataMiner() == null) {
+            throw new NullPointerException("FileDataMiner not initialized");
+        }
+        return this.getFileDataMiner().applyMappedAttributes(attributes);
     }
 
     private void initializeFileDataMiner(MultipartFile multipartFile) throws IOException, NullPointerException {
