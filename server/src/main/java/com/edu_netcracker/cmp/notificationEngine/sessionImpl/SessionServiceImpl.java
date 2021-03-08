@@ -108,7 +108,7 @@ public class SessionServiceImpl implements SessionsService {
             JsonNode node = it.next();
             String telegramName = node.findValue(tgColumn).asText();
             String email = node.findValue(emailColumn).asText();
-
+            iTemplate.applyParams(params);
             Map<String, String> contacts = new HashMap<>();
             contacts.put("telegram", telegramName);
             contacts.put("email", email);
@@ -189,7 +189,6 @@ public class SessionServiceImpl implements SessionsService {
     @Override
     public String getValidationTemplate(Long id) {
         Session session = sessionJPA.getOne(id);
-
-        return null;
+        return session.getTemplate();
     }
 }

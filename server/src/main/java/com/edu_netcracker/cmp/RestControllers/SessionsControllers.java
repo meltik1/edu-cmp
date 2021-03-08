@@ -70,8 +70,8 @@ public class SessionsControllers {
     }
 
     @RequestMapping(value = "{id}/validation", method = RequestMethod.GET)
-    public void validation(@PathVariable String id) {
-
+    public String validation(@PathVariable String id) {
+        return sessionsService.getValidationTemplate(Long.parseLong(id));
     }
 
     @RequestMapping(value = "{id}/send", method = RequestMethod.GET)
