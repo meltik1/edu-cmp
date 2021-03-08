@@ -9,6 +9,10 @@ import java.util.List;
 public interface STAJPA extends JpaRepository<StudentsToAttributes, Long> {
 
     @Query("SELECT st from StudentsToAttributes st join st.attributes a join st.student s " +
-            "WHERE st.student.id = ?1 and a.attribute_name = ?2 and st.char_value is not null")
+            "WHERE st.student.id = ?1 and a.attributeName = ?2 and st.charValue is not null")
     List<StudentsToAttributes> findStudentAttributeValue(Long studentId, String attribute_name);
+
+    @Query("SELECT st FROM StudentsToAttributes st join st.student s " +
+            "WHERE s.session.id = ?1")
+    List<StudentsToAttributes> findStudentsToAttributesBySessionId(Long sessionId);
 }

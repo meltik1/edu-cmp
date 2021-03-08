@@ -6,16 +6,12 @@ import com.edu_netcracker.cmp.entities.jpa.STAJPA;
 import com.edu_netcracker.cmp.entities.jpa.StudentsJpa;
 import com.edu_netcracker.cmp.entities.jpa.TgUsersInfoJPA;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.List;
@@ -69,20 +65,18 @@ public class NotificationBot extends TelegramLongPollingBot {
         }
     }
 
-    public  void send(Long id, String mess) {
+    public  void send(String id, String mess) {
         SendMessage message = new SendMessage();
-        List<StudentsToAttributes> studentsToAttributesList = stajpa.findStudentAttributeValue(id, "tg_chat_id");
-        for (StudentsToAttributes studentsToAttributes : studentsToAttributesList) {
-            log.info("Sending msg to student with id {{}}" , id);
-            message.setChatId(studentsToAttributes.getChar_value());
-            message.setText("Hello, ");
+
+        message.setChatId(id);
+        message.setText(mess);
             try {
                 execute(message); // Call method to send the message
             } catch (TelegramApiException e) {
                 e.printStackTrace();
             }
-        }
     }
+
 
 
     @Override

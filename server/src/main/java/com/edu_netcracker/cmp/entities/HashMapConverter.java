@@ -5,18 +5,20 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.AttributeConverter;
 import java.io.IOException;
 import java.util.Map;
 
 @Slf4j
-public class HashMapConverter implements AttributeConverter<Map<String, Object>, String> {
+@Component
+public class HashMapConverter implements AttributeConverter<Map<String, String>, String> {
     @Autowired
     ObjectMapper mapper;
 
     @Override
-    public String convertToDatabaseColumn(Map<String, Object> columnMappingMap) {
+    public String convertToDatabaseColumn(Map<String, String> columnMappingMap) {
         String columnMappingJson = null;
         try {
             columnMappingJson = mapper.writeValueAsString(columnMappingMap);
@@ -28,12 +30,13 @@ public class HashMapConverter implements AttributeConverter<Map<String, Object>,
     }
 
     @Override
-    public Map<String, Object> convertToEntityAttribute(String columnMappingJson) {
-        Map<String, Object> columnMappingMap = null;
+    public Map<String, String> convertToEntityAttribute(String columnMappingJson)  {
+        Map<String, String> columnMappingMap;
         try {
             columnMappingMap = mapper.readValue(columnMappingJson, Map.class);
         } catch (final IOException e) {
             log.error("JSON reading error", e);
+            throw new RuntimeException(e);
         }
 
         return columnMappingMap;

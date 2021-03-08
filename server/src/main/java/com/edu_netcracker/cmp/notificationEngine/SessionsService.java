@@ -1,8 +1,10 @@
 package com.edu_netcracker.cmp.notificationEngine;
 
+import com.edu_netcracker.cmp.entities.DTO.StudentsAttributesDTO;
 import com.edu_netcracker.cmp.entities.Session;
 import com.edu_netcracker.cmp.entities.Students;
 import com.edu_netcracker.cmp.entities.StudentsToAttributes;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -13,7 +15,7 @@ public interface SessionsService {
 
      List<Session> getAllSessions();
 
-     Session createSession();
+     Session createSession(String name);
 
      Session getSession(Long id);
 
@@ -21,13 +23,20 @@ public interface SessionsService {
 
      void parseFile(Long id, MultipartFile file);
 
-     List<StudentsToAttributes> getStudentsAttributes(Long id);
+     String getStudentsAttributes(Long id);
+
+
+     void sendMessages(Long id) throws JsonProcessingException;
 
      String getReport(Long id);
 
-     void saveMapping(Map<String, String> map);
+     void saveMapping(Long sessionID, String json) throws JsonProcessingException;
 
      String getValidationTemplate(Long id);
+
+     void saveTemplate(Long id, String template);
+
+     String getTemplate(Long id);
 
 
 }

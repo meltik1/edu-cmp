@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class Students {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -24,6 +24,6 @@ public class Students {
     private Session session;
 
     private String email;
-    private String tg_nick_name;
+    private String tgNickName;
 
 }

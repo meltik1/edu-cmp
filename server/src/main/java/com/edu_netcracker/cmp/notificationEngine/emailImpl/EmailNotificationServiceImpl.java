@@ -1,5 +1,7 @@
 package com.edu_netcracker.cmp.notificationEngine.emailImpl;
 
+import com.edu_netcracker.cmp.notificationEngine.ITemplate;
+import com.edu_netcracker.cmp.notificationEngine.IUserMessageInfo;
 import com.edu_netcracker.cmp.notificationEngine.NotificationService;
 import com.edu_netcracker.cmp.configs.MailConfig;
 import lombok.extern.slf4j.Slf4j;
@@ -35,12 +37,12 @@ public class EmailNotificationServiceImpl implements NotificationService {
         return mimeMessage;
     }
 
-    public void send(Long id, String msg) {
+    public void send(IUserMessageInfo userMessageInfo, ITemplate template) {
 
         JavaMailSender mailSender = mailConfig.javaMailSender();
 
         try {
-            MimeMessage mimeMessage = createMimeMessage(mailSender, msg);
+            MimeMessage mimeMessage = createMimeMessage(mailSender, template.getTemplate());
             mailSender.send(mimeMessage);
         } catch (MessagingException e) {
             log.info(e.toString());

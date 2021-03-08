@@ -24,14 +24,16 @@ public class StudentsToAttributes {
 
     @ManyToOne
     @MapsId("attributeId")
-    @JoinColumn(name = "attribute_id")
+    @JoinColumn(name = "attribute_name")
     Attributes attributes;
 
-    private Integer int_value;
+    @Column(name = "int_value")
+    private Integer intValue;
 
 
+    @Column(name = "char_value")
+    private String charValue;
 
-    private String char_value;
-
-    private Date date_value;
+    @Column(name = "date_value")
+    private Date dateValue;
 }

@@ -1,5 +1,6 @@
 package com.edu_netcracker.cmp.RestControllers;
 
+import com.edu_netcracker.cmp.entities.HashMapConverter;
 import com.edu_netcracker.cmp.notificationEngine.NotificationService;
 import com.edu_netcracker.cmp.notificationEngine.parserImpl.FileHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 public class NotificationEngineControllers  {
 
+
+
     @Autowired
     private NotificationService notificationService;
 
@@ -24,9 +27,11 @@ public class NotificationEngineControllers  {
         this.notificationService = notificationService;
     }
 
+
+
     @RequestMapping(value = "send")
     public void sendMessage() {
-        notificationService.send(3L, "Э");
+        //notificationService.send(3L, "Э");
     }
 
     @RequestMapping(value = "send-file", method = RequestMethod.POST)

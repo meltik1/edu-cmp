@@ -34,7 +34,7 @@ public abstract class FileDataMiner {
 
     public void mine(MultipartFile file) throws IOException {
         this.rawFileData = parseData(file);
-        removeHeader();
+        //removeHeader();
         listToJson(rawFileData);
     }
 

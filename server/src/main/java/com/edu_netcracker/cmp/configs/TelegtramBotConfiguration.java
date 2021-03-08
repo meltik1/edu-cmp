@@ -21,16 +21,17 @@ public class TelegtramBotConfiguration {
     private String token;
 
     @Autowired
-    NotificationBot notificationBot;
+    private NotificationBot notificationBot;
     @Bean
     public TelegramBotsApi config() {
-        TelegramBotsApi botsApi = null;
+        TelegramBotsApi botsApi;
         try {
             botsApi = new TelegramBotsApi(DefaultBotSession.class);
             notificationBot.setToken(token);
             botsApi.registerBot(notificationBot);
         } catch (TelegramApiException e) {
             log.error(e.getMessage());
+            throw new RuntimeException(e);
         }
         return botsApi;
     }

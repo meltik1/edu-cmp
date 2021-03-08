@@ -13,5 +13,5 @@ public class TGUsersInfo {
     @Id
     Long chatId;
 
-    String UserName;
+    String userName;
 }
