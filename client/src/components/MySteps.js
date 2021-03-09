@@ -34,8 +34,11 @@ export default function MySteps({current}) {
 
     return (
         <Steps current={current} style={{ padding: '50px 80px 0' }}>
-            {steps.map(item => (
-                <Step title={item.title} description={item.description} />
+            {steps.map((item) => (
+                <Step
+                    key={item.title}
+                    title={item.title}
+                    description={item.description} />
             ))}
         </Steps>
     )

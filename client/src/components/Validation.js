@@ -1,7 +1,7 @@
 import React from "react";
 import MySteps from "./MySteps";
-import {Content} from "antd/es/layout/layout";
-import {Card, Row, Col, Divider} from "antd";
+import { Content } from "antd/es/layout/layout";
+import { Card, Row, Col, Divider } from "antd";
 
 const theme = 'Обучение в Учебном Центре Netсracker 2020'
 const text = 'Поздравляем, вы приняты в Учебный Центр компании Netcracker\n' +
@@ -24,20 +24,20 @@ const text = 'Поздравляем, вы приняты в Учебный Це
 export default function Validation() {
     return (
         <div>
-            <MySteps current = {3}/>
+            <MySteps current = {3} />
             <Content style={{ padding: '40px 50px 0' }}>
                 <div className="site-layout-content">
                     <Row gutter={16}>
                         <Col span={12}>
                             <Card title={"Email"} >
-                                <p>{theme}</p>
+                                <p> {theme} </p>
                                 <Divider />
                                 <div>{text}</div>
                             </Card>
                         </Col>
                         <Col span={12}>
-                            <Card title={"Telegram"} >
-                                <p>{text}</p>
+                            <Card title={"Telegram"}>
+                                <p> {text} </p>
                             </Card>
                         </Col>
                     </Row>

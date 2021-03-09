@@ -15,7 +15,7 @@ export default function PickFile() {
 
     return (
         <div>
-            <MySteps current = {0}/>
+            <MySteps current = {0} />
             <Content style={{ padding: '40px 50px 0' }}>
                 <div className="site-layout-content">
                 <Dragger {...props}>
