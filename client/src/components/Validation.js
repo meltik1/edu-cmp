@@ -1,7 +1,8 @@
 import React from "react";
 import MySteps from "./MySteps";
 import { Content } from "antd/es/layout/layout";
-import { Card, Row, Col, Divider } from "antd";
+import { Divider } from "antd";
+import './Validation.css';
 
 const theme = 'Обучение в Учебном Центре Netсracker 2020'
 const text = 'Поздравляем, вы приняты в Учебный Центр компании Netcracker\n' +
@@ -26,22 +27,10 @@ export default function Validation() {
         <div>
             <MySteps current = {3} />
             <Content style={{ padding: '40px 50px 0' }}>
-                <div className="site-layout-content">
-                    <Row gutter={16}>
-                        <Col span={12}>
-                            <Card title={"Email"} >
-                                <p> {theme} </p>
-                                <Divider />
-                                <div>{text}</div>
-                            </Card>
-                        </Col>
-                        <Col span={12}>
-                            <Card title={"Telegram"}>
-                                <p> {text} </p>
-                            </Card>
-                        </Col>
-                    </Row>
-
+                <div className={"site-layout-content"}>
+                    <p><b> {theme} </b></p>
+                    <Divider />
+                    <div className={"text"}>{text}</div>
                 </div>
             </Content>
         </div>
