@@ -14,9 +14,9 @@
 |Valiev Anvar|BA|Student|
 |Deev Petr|BA Lead|petr.deev@netcracker.com|
 |Govorov Ivan|BA Lead|ivan.govorov@netcracker.com|
-|Bolotskikh Alexey|DEV|Student(away)|
+|Bolotskikh Alexey|DEV|Student (away)|
 |Siniakov Anatoly|DEV|Student|
-|Sukhikh Ekaterina|DEV|Student(away)|
+|Sukhikh Ekaterina|DEV|Student (away)|
 |Vovchenko Roman|DEV|Student|
 |Zuev Nikita|DEV|Student|
 |Chernenkova Elena|DEV Lead|elena.chernenkova@netcracker.com|
