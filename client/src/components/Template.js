@@ -13,7 +13,7 @@ export default function Template() {
             <Content style={{ padding: '40px 50px 0' }}>
                 <div className="site-layout-content">
                     <Input placeholder={'Тема'} style={{ marginBottom: '12px' }} />
-                    <TextArea placeholder={'Текст сообщения'} rows={6} />
+                    <TextArea placeholder={'Текст сообщения'} rows={14} />
                 </div>
             </Content>
         </div>

@@ -20,7 +20,7 @@ import Template from "./components/Template";
 import Validation from "./components/Validation";
 import Report from "./components/Report";
 import "./App.css";
-import logo from "./img/logo_dark_removebg.png";
+import logo from "./img/logo_dark_removebg_try.png";
 
 const {Header, Footer} = Layout;
 

@@ -1,5 +1,11 @@
 .site-layout-content {
-    min-height: 280px;
+    min-height: calc(100vh - 64px - 268px);
+    padding: 24px;
+    background: #ffffff;
+}
+
+.site-layout-content-sessions {
+    min-height: calc(100vh - 64px - 164px);
     padding: 24px;
     background: #ffffff;
 }

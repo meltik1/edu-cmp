@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Input, Modal, Table, Tag } from "antd";
 import { PlusOutlined } from '@ant-design/icons';
 import { Content } from "antd/es/layout/layout";
+import "../App.css"
 
 export default function GetSessions() {
     const dataSource = [
@@ -74,7 +75,7 @@ export default function GetSessions() {
 
     return (
         <Content style={{ padding: '40px 50px 0' }}>
-            <div >
+            <div className={"site-layout-content-sessions"}>
                 <Button style={{ marginBottom: 20 }}
                         type="primary"
                         shape="round"
