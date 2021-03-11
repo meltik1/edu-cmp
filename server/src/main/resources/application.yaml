@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: 300800
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+logging:
+  file:
+    name: logs.log
+  level:
+    com.edu_netcracker: ERROR
+---
+spring:
+  profiles: prod
+  datasource:
+    url: jdbc:postgresql://localhost:5432/edu_notification_engine
+    username: postgres
+    password: postgres
+server:
+  port: 8888
