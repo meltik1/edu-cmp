@@ -14,7 +14,6 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 @Configuration
 @Slf4j
-@PropertySource("classpath:tg.properties")
 public class TelegtramBotConfiguration {
 
     @Value("${bot.token}")

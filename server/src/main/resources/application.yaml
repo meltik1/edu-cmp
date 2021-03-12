@@ -12,6 +12,24 @@ logging:
     name: logs.log
   level:
     com.edu_netcracker: ERROR
+
+
+
+bot:
+  token: 1531954543:AAHgZt4bem3JygKOQ69JSD-oM51odOA2POg
+
+mail:
+  protocol: smtp
+  smtp:
+    auth: true
+    starttls.enable: true
+    debug: true
+    starttls.required: true
+  from: testFrom@gmail.com
+  host: smtp.mailtrap.io
+  port: 2525
+  username: username
+  password: password
 ---
 spring:
   profiles: prod

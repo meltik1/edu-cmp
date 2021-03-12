@@ -19,7 +19,6 @@ import java.util.List;
 
 @Slf4j
 @Component
-@PropertySource("classpath:tg.properties")
 public class NotificationBot extends TelegramLongPollingBot {
 
     @Autowired
