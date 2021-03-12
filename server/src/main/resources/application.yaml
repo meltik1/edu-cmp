@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
-    password: 300800
+    password: postgres
   jpa:
     hibernate:
       ddl-auto: create
@@ -11,9 +11,10 @@ logging:
   file:
     name: logs.log
   level:
-    com.edu_netcracker: ERROR
+    com.edu_netcracker: TRACE
 
-
+security:
+  trusted-application-code: 95c9e20e-831c-11eb-8dcd-0242ac130003
 
 bot:
   token: 1531954543:AAHgZt4bem3JygKOQ69JSD-oM51odOA2POg
