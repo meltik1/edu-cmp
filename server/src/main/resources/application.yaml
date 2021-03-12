@@ -37,6 +37,6 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/edu_notification_engine
     username: postgres
-    password: postgres
+    password: ${POSTGRES_DATABASE_PASSWORD}
 server:
   port: 8888
