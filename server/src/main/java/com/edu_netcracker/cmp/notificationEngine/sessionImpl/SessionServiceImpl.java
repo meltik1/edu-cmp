@@ -99,14 +99,15 @@ public class SessionServiceImpl implements SessionsService {
 
         String students = session.getStudentsJSON();
         Map<String, String> params = session.getColumnMappingMap();
-        JsonNode root = mapper.readTree(students);
+        String s = handler.sendAttributes(params);
 
-        String tgColumn = params.get("Telegram");
-        String emailColumn = params.get("Email");
+        JsonNode root = mapper.readTree(s);
 
+
+        // Каждая итерация цикла - новый студент
         for (Iterator<JsonNode> it = root.elements(); it.hasNext(); ) {
             JsonNode node = it.next();
-            String telegramName = node.findValue(tgColumn).asText();
+            /*String telegramName = node.findValue(tgColumn).asText();
             String email = node.findValue(emailColumn).asText();
             iTemplate.applyParams(params);
             Map<String, String> contacts = new HashMap<>();
@@ -116,7 +117,7 @@ public class SessionServiceImpl implements SessionsService {
             if (telegramName != null) {
                 notificationService = new NotificationServiceTG();
                 notificationService.send(iUserMessageInfo, iTemplate);
-            }
+            }*/
         }
 
     }
@@ -174,7 +175,7 @@ public class SessionServiceImpl implements SessionsService {
         HashMap<String, String> columnsMapping = new HashMap<>();
         for (Iterator<Map.Entry<String, JsonNode>> it = columnsMappingJson.fields(); it.hasNext(); ) {
             Map.Entry<String, JsonNode> node = it.next();
-            columnsMapping.put(node.getValue().textValue(), node.getKey() );
+            columnsMapping.put( node.getKey(), node.getValue().textValue() );
         }
 
         JsonNode rangeJson = root.at("/range");

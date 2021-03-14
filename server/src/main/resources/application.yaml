@@ -40,3 +40,4 @@ spring:
     password: ${POSTGRES_DATABASE_PASSWORD}
 server:
   port: 8888
+
