@@ -112,11 +112,11 @@
             <version>4.1.2</version>
         </dependency>
 
-        <!-- json -->
+
         <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20201115</version>
+            <groupId>com.github.spullara.mustache.java</groupId>
+            <artifactId>compiler</artifactId>
+            <version>0.9.7</version>
         </dependency>
 
     </dependencies>
