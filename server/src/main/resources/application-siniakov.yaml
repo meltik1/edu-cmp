@@ -1,0 +1,24 @@
+---
+spring:
+  profiles: siniakov
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+server:
+  port: 8080
+bot:
+  token: 1531954543:AAHgZt4bem3JygKOQ69JSD-oM51odOA2POg
+
+mail:
+  protocol: smtp
+  smtp:
+    auth: true
+    starttls.enable: true
+    debug: true
+    starttls.required: true
+  from: testFrom@gmail.com
+  host: smtp.mailtrap.io
+  port: 2525
+  username: 2200b34d528607
+  password: 8d9bf595d67abb
