@@ -40,3 +40,5 @@ spring:
     password: ${POSTGRES_DATABASE_PASSWORD}
 server:
   port: 8888
+bot:
+  token: 1553238646:AAE81yqhXVq_9XjYVEmkEay75U7Ej1ULd-U
