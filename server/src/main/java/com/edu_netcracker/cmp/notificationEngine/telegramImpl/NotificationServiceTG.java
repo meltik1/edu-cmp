@@ -24,16 +24,24 @@ public class NotificationServiceTG implements NotificationService {
     @Autowired
     TgUsersInfoJPA tgUsersInfoJPA;
 
+
+    private final String name = "Telegram";
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
     @Override
     public void send(IUserMessageInfo userMessageInfo, ITemplate template) {
         Map<String, String> contactInfo = userMessageInfo.getMapOfContactId();
         String message = template.getTemplate();
-        String userName = contactInfo.get("telegram");
+        String userName = contactInfo.get("Telegram");
         if (userName.contains("@")) {
             userName = userName.replace("@", "");
         }
-        TGUsersInfo usersInfo = tgUsersInfoJPA.findByUserName(userName);
+        Long userId = tgUsersInfoJPA.findByUserName(userName);
 
-        bot.send(usersInfo.getUserName(), "Hello");
+        bot.send(userId.toString(), template.getTemplate());
     }
 }

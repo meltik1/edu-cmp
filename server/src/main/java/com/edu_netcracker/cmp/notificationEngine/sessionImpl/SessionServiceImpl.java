@@ -44,6 +44,9 @@ public class SessionServiceImpl implements SessionsService {
     STAJPA stajpa;
 
     @Autowired
+    List<NotificationService> notificationServicesRealisation;
+
+    @Autowired
     FileHandler handler;
 
     @Override
@@ -99,25 +102,39 @@ public class SessionServiceImpl implements SessionsService {
 
         String students = session.getStudentsJSON();
         Map<String, String> params = session.getColumnMappingMap();
+
+        // заменить в handler JSON
+
         String s = handler.sendAttributes(params);
 
         JsonNode root = mapper.readTree(s);
 
 
+
+
         // Каждая итерация цикла - новый студент
         for (Iterator<JsonNode> it = root.elements(); it.hasNext(); ) {
             JsonNode node = it.next();
-            /*String telegramName = node.findValue(tgColumn).asText();
-            String email = node.findValue(emailColumn).asText();
+            String telegramName = node.findValue("Telegram").asText();
+            String email = node.findValue("Email").asText();
             iTemplate.applyParams(params);
             Map<String, String> contacts = new HashMap<>();
-            contacts.put("telegram", telegramName);
-            contacts.put("email", email);
+            contacts.put("Telegram", telegramName);
+            contacts.put("Email", email);
             iUserMessageInfo.setMapOfContactId(contacts);
-            if (telegramName != null) {
-                notificationService = new NotificationServiceTG();
-                notificationService.send(iUserMessageInfo, iTemplate);
-            }*/
+
+            for (NotificationService service: notificationServicesRealisation) {
+                    if (service.getName().equals("Telegram")) {
+                        if (telegramName != null) {
+                            service.send(iUserMessageInfo, iTemplate);
+                        }
+                    }
+                   /* else if (service.getName().equals("Email")) {
+                        if (email != null) {
+                            service.send(iUserMessageInfo, iTemplate);
+                        }
+                    }*/
+            }
         }
 
     }

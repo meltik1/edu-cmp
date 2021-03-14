@@ -60,8 +60,8 @@ public class SessionsControllers {
     }
 
     @RequestMapping(value = "{id}/get-template", method = RequestMethod.GET)
-    public void getTemplate(@PathVariable String id) {
-        sessionsService.getTemplate(Long.parseLong(id));
+    public String getTemplate(@PathVariable String id) {
+        return sessionsService.getTemplate(Long.parseLong(id));
     }
 
     @RequestMapping(value = "{id}/save-template", method = RequestMethod.POST)

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface TgUsersInfoJPA extends JpaRepository<TGUsersInfo, Long> {
-        @Query("SELECT tg  FROM TGUsersInfo tg " +
+        @Query("SELECT tg.chatId  FROM TGUsersInfo tg " +
             "WHERE tg.userName = ?1")
-    TGUsersInfo findByUserName(String userName);
+    Long findByUserName(String userName);
 }

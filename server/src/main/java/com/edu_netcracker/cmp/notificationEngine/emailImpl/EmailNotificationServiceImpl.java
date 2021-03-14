@@ -21,6 +21,8 @@ public class EmailNotificationServiceImpl implements NotificationService {
     @Autowired
     private MailConfig mailConfig;
 
+    private String name = "Email";
+
     public MimeMessage createMimeMessage(JavaMailSender mailSender, String msg) throws MessagingException {
 
         MimeMessage mimeMessage = mailSender.createMimeMessage();
@@ -35,6 +37,11 @@ public class EmailNotificationServiceImpl implements NotificationService {
         mimeMessage.setContent(htmlMsg, "text/html");
 
         return mimeMessage;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
     public void send(IUserMessageInfo userMessageInfo, ITemplate template) {
