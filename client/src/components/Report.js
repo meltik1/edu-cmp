@@ -47,8 +47,10 @@ export default function Report() {
         },
         {
             key: '2',
-            number: '1',
-            name: 'Aaron Aldenburg',
+            // number: '1',
+            // name: 'Aaron Aldenburg',
+            number: '',
+            name: '',
             channel: 'tg: @aa',
             status: 'Ошибка'
         },
@@ -68,8 +70,10 @@ export default function Report() {
         },
         {
             key: '5',
-            number: '3',
-            name: 'Carl Clopp',
+            // number: '3',
+            // name: 'Carl Clopp',
+            number: '',
+            name: '',
             channel: 'telegram: @cc',
             status: 'Ошибка'
         },
@@ -97,6 +101,7 @@ export default function Report() {
                     <Table
                         columns={columns}
                         dataSource={data}
+                        size="small"
                     />
                 </div>
             </Content>
