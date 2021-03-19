@@ -10,6 +10,7 @@ import javax.servlet.*;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.HttpMethod;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -40,8 +41,9 @@ public class ProdSecurityFilter extends HttpFilter {
         }
 
         // Validate header
-        String authorization = ((HttpServletRequest) request).getHeader("Authorization");
-        if (!Objects.equals(authorization, trustedApplication)){
+        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+        String authorization = httpServletRequest.getHeader("Authorization");
+        if (HttpMethod.OPTIONS.equalsIgnoreCase(httpServletRequest.getMethod()) || !Objects.equals(authorization, trustedApplication)){
             HttpServletResponse resp = (HttpServletResponse) response;
             resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
         }

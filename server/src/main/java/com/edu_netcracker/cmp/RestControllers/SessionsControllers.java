@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping(value = "sessions")
 public class SessionsControllers {
 
