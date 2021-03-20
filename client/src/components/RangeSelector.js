@@ -33,7 +33,6 @@ export default class RangeSelector extends React.Component {
                 }
             }
             for (let i = 0; i < this.state.ranges.length; i++) {
-                debugger;
                 if (values.rangeBegin === this.state.ranges[i].begin.toString() &&
                     values.rangeEnd === this.state.ranges[i].end.toString()) {
                     alert("Диапазон уже добавлен");
