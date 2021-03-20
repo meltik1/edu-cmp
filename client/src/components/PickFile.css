@@ -1,0 +1,7 @@
+.dragger {
+    min-height: calc(100vh - 64px - 268px - 50px);
+}
+
+.ant-upload-drag-icon {
+    padding-top: calc((100vh - 64px - 268px - 50px)/2 - 70px);
+}
