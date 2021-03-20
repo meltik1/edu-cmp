@@ -30,27 +30,22 @@ export default function App() {
         {
             title: "Выбор файла",
             description: "Загузка таблицы",
-            // content: 'First-content',
         },
         {
             title: "Маппинг",
             description: "Выбор получателей",
-            // content: 'Second-content',
         },
         {
             title: "Шаблон",
             description: "Набор сообщения",
-            // content: 'Last-content',
         },
         {
             title: "Валидация",
             description: "Проверка",
-            // content: 'Last-content',
         },
         {
             title: "Отчёт",
             description: "Результат",
-            // content: 'Last-content',
         },
     ];
 
@@ -72,7 +67,6 @@ export default function App() {
                 <Layout className="layout">
                     <Header>
                         <div className={"logo"}><img src={logo} height={50} alt={""} /></div>
-                        {/*<div className="logo" />*/}
                     </Header>
 
                     <Switch>

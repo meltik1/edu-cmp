@@ -1,92 +1,132 @@
 import React from "react";
-import {Button, InputNumber, List, Space} from "antd";
+import { Button, Form, Input, List, Space } from "antd";
+import { MinusCircleOutlined } from "@ant-design/icons";
 
 export default class RangeSelector extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
-            begin: 0,
-            end: 0,
-            storage: [],
-        };
-
-        this.handleChangeBegin = this.handleChangeBegin.bind(this);
-        this.handleChangeEnd = this.handleChangeEnd.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+            ranges: [
+                // {id: 1, begin: 1, end: 2},
+                // {id: 2, begin: 4, end: 5},
+            ],
+        }
     }
 
-    // handleChange(event) {
-    //     let target = event.target;
-    //     let beginInput = target.begin;
-    //     let endInput = target.end;
-    //     let storageValue = this.storage;
-    //     this.setState({
-    //         begin: beginInput,
-    //         end: endInput,
-    //         storage: storageValue,
-    //     })
-    // }
+    newId = () => {
+        let maxId = 0;
+        for (let i = 0; i < this.state.ranges.length; i++) {
+            if (maxId < this.state.ranges[i].id) {
+                maxId = this.state.ranges[i].id;
+            }
+        }
+        return maxId + 1;
+    }
 
-    handleChangeBegin(event) {
-        let endValue = this.end;
-        let storageValue = this.storage;
-        this.setState({
-            begin: event.target,
-            end: this.end,
-            storage: this.storage,
+    onFinish = (values) => {
+        this.setState(state => {
+            if (isNaN(values.rangeBegin) || isNaN(values.rangeEnd)) {
+                alert("Введите число");
+                return {
+                    ranges: state.ranges
+                }
+            }
+            for (let i = 0; i < this.state.ranges.length; i++) {
+                debugger;
+                if (values.rangeBegin === this.state.ranges[i].begin.toString() &&
+                    values.rangeEnd === this.state.ranges[i].end.toString()) {
+                    alert("Диапазон уже добавлен");
+                    return {
+                        ranges: state.ranges
+                    };
+                }
+            }
+            const newRanges = state.ranges.concat({
+                id: this.newId(),
+                begin: values.rangeBegin,
+                end: values.rangeEnd
+            })
+            return {
+                ranges: newRanges
+            };
         });
-    }
+    };
 
-    handleChangeEnd(event) {
-        let beginValue = this.begin;
-        let storageValue = this.storage;
-        this.setState({
-            begin: beginValue,
-            end: event.target,
-            storage: storageValue,
-        })
-    }
+    onFinishFailed = (errorInfo) => {
+        console.log(errorInfo);
+    };
 
-    handleSubmit(event) {
-        alert('Диапазон: ' + this.state.begin + ' - ' + this.state.end);
+    handleDelete = (id) => {
+        this.setState(state => {
+            const newRanges = state.ranges.filter(item => item.id !== id)
+            return {
+                ranges: newRanges
+            };
+        });
     }
 
     render() {
         return (
             <div>
-                <Space size={150}>
-                    <Space direction="vertical" size={20}>
-                        <Space size={20}>
-                            <div>
-                                <p>Начало диапазона</p>
-                                <InputNumber
-                                    className={"input-box"}
-                                    defaultValue={0}
-                                    value={this.state.begin}
-                                    onChange={this.handleChangeBegin}
-                                />
-                            </div>
-                            <div>
-                                <p>Конец диапазона</p>
-                                <InputNumber
-                                    className={"input-box"}
-                                    defaultValue={1}
-                                    value={this.state.end}
-                                    onChange={this.handleChangeEnd}
-                                />
-                            </div>
-                        </Space>
-                        <Button type={"primary"} onClick={() => this.handleSubmit()}>Добавить</Button>
-                    </Space>
-                    {/*<div>*/}
-                    {/*    <p>Добавленные диапазоны</p>*/}
-                    {/*    <List*/}
-                    {/*        bordered*/}
-                    {/*        size="small"*/}
-                    {/*        dataSource={rangesSelected}*/}
-                    {/*        renderItem={item => <List.Item>{item.begin.toString() + ' - ' + item.end.toString()}</List.Item>}*/}
-                    {/*    />*/}
-                    {/*</div>*/}
+
+                <Space size={150} align={"Form"}>
+                    <div>
+                        <p>Новый диапазон:</p>
+                        <Form
+                            initialValues={{begin: 1, end: 1}}
+                            onFinish={this.onFinish}
+                            onFinishFailed={this.onFinishFailed}
+                        >
+                            <Form.Item
+                                label={"Начало"}
+                                name={"rangeBegin"}
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Введите начало диапазона",
+                                    }
+                                ]}
+                            >
+                                <Input />
+                            </Form.Item>
+
+                            <Form.Item
+                                label={"Конец"}
+                                name={"rangeEnd"}
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Введите конец диапазона",
+                                    }
+                                ]}
+                            >
+                                <Input />
+                            </Form.Item>
+
+                            <Form.Item>
+                                <Button type={"primary"} htmlType={"submit"}>
+                                    Добавить
+                                </Button>
+                            </Form.Item>
+                        </Form>
+                    </div>
+
+                    <div>
+                        <p>Добавленные диапазоны</p>
+                        <List
+                            bordered
+                            size="small"
+                            dataSource={this.state.ranges}
+                            renderItem={item => (
+                                <List.Item actions={[
+                                    <MinusCircleOutlined onClick={() => {this.handleDelete(item.id)}} />
+                                ]}>
+                                    {item.begin.toString() + ' - ' + item.end.toString()}
+                                </List.Item>
+                            )}
+                        />
+                    </div>
                 </Space>
             </div>
         )

@@ -1,7 +1,7 @@
 import React from "react";
 import MySteps from "./MySteps";
 import { Content } from "antd/es/layout/layout";
-import { Button, Table, InputNumber, Space, List } from "antd";
+import { Table } from "antd";
 import "./Mapping.css";
 import RangeSelector from "./RangeSelector";
 
@@ -78,70 +78,18 @@ export default function Mapping() {
         },
     ];
 
-    const selectedRanges = [
-        {
-            begin: 0,
-            end: 2,
-        },
-        {
-            begin: 4,
-            end: 5,
-        },
-    ]
-
-    const rowSelection = {
-        onChange: (selectedRowKeys, selectedRows) => {
-            console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-        },
-        getCheckboxProps: (record) => ({
-            name: record.name,
-        }),
-    };
-
     return (
         <div>
             <MySteps current = {1} />
             <Content style={{ padding: '40px 50px 0' }}>
                 <div className="site-layout-content">
                     <Table
-                        rowSelection={{
-                            type: "checkbox",
-                            ...rowSelection,
-                        }}
                         columns={columns}
                         dataSource={data}
                         size={"small"}
                     />
-                    {/*<div>*/}
-                    {/*    <Space size={150}>*/}
-                    {/*        <Space direction="vertical" size={20}>*/}
-                    {/*            <Space size={20}>*/}
-                    {/*                <div>*/}
-                    {/*                    <p>Начало диапазона</p>*/}
-                    {/*                    <InputNumber className={"input-box"} defaultValue={0}/>*/}
-                    {/*                </div>*/}
-                    {/*                <div>*/}
-                    {/*                    <p>Конец диапазона</p>*/}
-                    {/*                    <InputNumber className={"input-box"} defaultValue={1}/>*/}
-                    {/*                </div>*/}
-                    {/*            </Space>*/}
-                    {/*            <Button type={"primary"}>Добавить</Button>*/}
-                    {/*        </Space>*/}
-                    {/*        <div>*/}
-                    {/*            <p>Добавленные диапазоны</p>*/}
-                    {/*            <List*/}
-                    {/*                bordered*/}
-                    {/*                size="small"*/}
-                    {/*                dataSource={selectedRanges}*/}
-                    {/*                renderItem={item => <List.Item>{item.begin.toString() + ' - ' + item.end.toString()}</List.Item>}*/}
-                    {/*            />*/}
-                    {/*        </div>*/}
-                    {/*    </Space>*/}
-                    {/*</div>*/}
-                    <RangeSelector begin={1} end={2} storage={[{begin: 0, end: 1}, {begin: 3, end: 4}]}>
-                    </RangeSelector>
+                    <RangeSelector />
                 </div>
-
             </Content>
         </div>
     )
