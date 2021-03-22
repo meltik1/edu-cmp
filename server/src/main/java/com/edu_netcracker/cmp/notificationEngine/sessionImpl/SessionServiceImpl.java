@@ -15,9 +15,11 @@ import com.edu_netcracker.cmp.notificationEngine.parserImpl.FileHandler;
 import com.edu_netcracker.cmp.notificationEngine.telegramImpl.NotificationServiceTG;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +29,10 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.*;
 
 @Component
+@Slf4j
 public class SessionServiceImpl implements SessionsService {
+
+    private final ObjectMapper mapper = new ObjectMapper();
 
     NotificationService notificationService;
 
@@ -96,7 +101,6 @@ public class SessionServiceImpl implements SessionsService {
     @Override
     public void sendMessages(Long id) throws JsonProcessingException {
         Session session = sessionJPA.getOne(id);
-        ObjectMapper mapper = new ObjectMapper();
 
         iTemplate.setTemplate(session.getTemplate());
 
@@ -117,26 +121,27 @@ public class SessionServiceImpl implements SessionsService {
             JsonNode node = it.next();
             String telegramName = node.findValue("Telegram").asText();
             String email = node.findValue("Email").asText();
-            iTemplate.applyParams(params);
+            Map<String, String> mappedAttributes = mapper.convertValue(node, new TypeReference<Map<String, String>>() {
+            });
+            iTemplate.applyParams(mappedAttributes);
+            this.saveTemplate(id, iTemplate.getTemplate());
             Map<String, String> contacts = new HashMap<>();
             contacts.put("Telegram", telegramName);
             contacts.put("Email", email);
             iUserMessageInfo.setMapOfContactId(contacts);
 
-            for (NotificationService service: notificationServicesRealisation) {
-                    if (service.getName().equals("Telegram")) {
-                        if (telegramName != null) {
-                            service.send(iUserMessageInfo, iTemplate);
-                        }
+            for (NotificationService service : notificationServicesRealisation) {
+                if (service.getName().equals("Telegram")) {
+                    if (telegramName != null) {
+                        service.send(iUserMessageInfo, iTemplate);
                     }
-                   /* else if (service.getName().equals("Email")) {
-                        if (email != null) {
-                            service.send(iUserMessageInfo, iTemplate);
-                        }
-                    }*/
+                } else if (service.getName().equals("Email")) {
+                    if (email != null) {
+                        service.send(iUserMessageInfo, iTemplate);
+                    }
+                }
             }
         }
-
     }
 
     @Override
@@ -207,6 +212,17 @@ public class SessionServiceImpl implements SessionsService {
     @Override
     public String getValidationTemplate(Long id) {
         Session session = sessionJPA.getOne(id);
+        try {
+            Map<String, String> params = session.getColumnMappingMap();
+            String s = handler.sendAttributes(params);
+            JsonNode root = mapper.readTree(s);
+            Map<String, String> firstStudent = mapper.convertValue(root.get(0), new TypeReference<Map<String, String>>(){});
+            iTemplate.setTemplate(session.getTemplate());
+            iTemplate.applyParams(firstStudent);
+            this.saveTemplate(id, iTemplate.getTemplate());
+        } catch (JsonProcessingException e) {
+            log.warn("Unable to parse json file");
+        }
         return session.getTemplate();
     }
 }
