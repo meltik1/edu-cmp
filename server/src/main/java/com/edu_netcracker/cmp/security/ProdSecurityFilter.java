@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.Objects;
 
 //TODO: implement security
-@Component
 @Order(1)
 @Slf4j
 @Profile("prod")
