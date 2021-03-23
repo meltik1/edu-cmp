@@ -1,5 +1,7 @@
 package com.edu_netcracker.cmp.notificationEngine.emailImpl;
 
+import com.edu_netcracker.cmp.notificationEngine.ITemplate;
+import com.edu_netcracker.cmp.notificationEngine.IUserMessageInfo;
 import com.edu_netcracker.cmp.notificationEngine.NotificationService;
 import com.edu_netcracker.cmp.configs.MailConfig;
 import lombok.extern.slf4j.Slf4j;
@@ -19,28 +21,33 @@ public class EmailNotificationServiceImpl implements NotificationService {
     @Autowired
     private MailConfig mailConfig;
 
-    public MimeMessage createMimeMessage(JavaMailSender mailSender, String msg) throws MessagingException {
+    @Autowired
+    private JavaMailSender mailSender;
+
+    private String name = "Email";
+
+    public MimeMessage createMimeMessage(String msg, String to) throws MessagingException {
 
         MimeMessage mimeMessage = mailSender.createMimeMessage();
-        MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
+        MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 
         messageHelper.setFrom(mailConfig.getFrom());
-        messageHelper.setTo("testTo@test.com");
+        messageHelper.setTo(to);
         messageHelper.setSubject(msg);
-
-        String htmlMsg = "<h3>" + msg + "</h3>";
-
-        mimeMessage.setContent(htmlMsg, "text/html");
+        messageHelper.setText(msg);
 
         return mimeMessage;
     }
 
-    public void send(Long id, String msg) {
+    @Override
+    public String getName() {
+        return name;
+    }
 
-        JavaMailSender mailSender = mailConfig.javaMailSender();
-
+    public void send(IUserMessageInfo userMessageInfo, ITemplate template) {
         try {
-            MimeMessage mimeMessage = createMimeMessage(mailSender, msg);
+            MimeMessage mimeMessage = createMimeMessage(template.getTemplate(),
+                                                        userMessageInfo.getMapOfContactId().get("Email"));
             mailSender.send(mimeMessage);
         } catch (MessagingException e) {
             log.info(e.toString());

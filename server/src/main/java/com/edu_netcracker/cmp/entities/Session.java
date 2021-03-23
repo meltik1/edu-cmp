@@ -13,17 +13,22 @@ public class Session {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Enumerated(EnumType.ORDINAL)
     private SessionStatus status;
 
-    private String columnMappingJson;
 
-    @Transient
-    @Convert(converter = HashMapConverter.class)
+    private String name;
+
+
+    @ElementCollection
     private Map<String, String> columnMappingMap;
 
+    @Column(length=100000)
+    private String studentsJSON;
+
+    private String rangeJSON;
     private String template;
 }

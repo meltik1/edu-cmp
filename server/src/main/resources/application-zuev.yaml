@@ -1,0 +1,11 @@
+---
+spring:
+  profiles: zuev
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: 300800
+server:
+  port: 8887
+bot:
+  token: 1531954543:AAHgZt4bem3JygKOQ69JSD-oM51odOA2POg

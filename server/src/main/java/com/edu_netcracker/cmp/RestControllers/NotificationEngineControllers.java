@@ -1,18 +1,19 @@
 package com.edu_netcracker.cmp.RestControllers;
 
+import com.edu_netcracker.cmp.entities.HashMapConverter;
 import com.edu_netcracker.cmp.notificationEngine.NotificationService;
 import com.edu_netcracker.cmp.notificationEngine.parserImpl.FileHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class NotificationEngineControllers  {
+
+
 
     @Autowired
     private NotificationService notificationService;
@@ -24,9 +25,11 @@ public class NotificationEngineControllers  {
         this.notificationService = notificationService;
     }
 
+
+
     @RequestMapping(value = "send")
     public void sendMessage() {
-        notificationService.send(3L, "Э");
+        //notificationService.send(3L, "Э");
     }
 
     @RequestMapping(value = "send-file", method = RequestMethod.POST)
