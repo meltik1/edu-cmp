@@ -21,20 +21,20 @@ public class EmailNotificationServiceImpl implements NotificationService {
     @Autowired
     private MailConfig mailConfig;
 
+    @Autowired
+    private JavaMailSender mailSender;
+
     private String name = "Email";
 
-    public MimeMessage createMimeMessage(JavaMailSender mailSender, String msg) throws MessagingException {
+    public MimeMessage createMimeMessage(String msg, String to) throws MessagingException {
 
         MimeMessage mimeMessage = mailSender.createMimeMessage();
-        MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
+        MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 
         messageHelper.setFrom(mailConfig.getFrom());
-        messageHelper.setTo("testTo@test.com");
+        messageHelper.setTo(to);
         messageHelper.setSubject(msg);
-
-        String htmlMsg = "<h3>" + msg + "</h3>";
-
-        mimeMessage.setContent(htmlMsg, "text/html");
+        messageHelper.setText(msg);
 
         return mimeMessage;
     }
@@ -45,11 +45,9 @@ public class EmailNotificationServiceImpl implements NotificationService {
     }
 
     public void send(IUserMessageInfo userMessageInfo, ITemplate template) {
-
-        JavaMailSender mailSender = mailConfig.javaMailSender();
-
         try {
-            MimeMessage mimeMessage = createMimeMessage(mailSender, template.getTemplate());
+            MimeMessage mimeMessage = createMimeMessage(template.getTemplate(),
+                                                        userMessageInfo.getMapOfContactId().get("Email"));
             mailSender.send(mimeMessage);
         } catch (MessagingException e) {
             log.info(e.toString());

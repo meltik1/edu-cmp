@@ -26,7 +26,9 @@ public class Session {
     @ElementCollection
     private Map<String, String> columnMappingMap;
 
+    @Column(length=100000)
     private String studentsJSON;
+
     private String rangeJSON;
     private String template;
 }

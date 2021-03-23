@@ -20,7 +20,7 @@ public class TemplateRealisation implements ITemplate {
 
     @Override
     public String getTemplate() {
-        return template;
+        return this.template;
     }
 
     @Override
@@ -28,7 +28,7 @@ public class TemplateRealisation implements ITemplate {
         StringWriter stringWriter = new StringWriter();
         Mustache mustache = MF.compile(new StringReader(template), "template");
         mustache.execute(stringWriter, params);
-        this.template = stringWriter.toString();
+        this.setTemplate(stringWriter.toString());
     }
 
     @Override
