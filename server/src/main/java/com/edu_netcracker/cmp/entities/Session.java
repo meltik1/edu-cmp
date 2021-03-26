@@ -1,5 +1,6 @@
 package com.edu_netcracker.cmp.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,6 +29,9 @@ public class Session {
 
     @Column(length=100000)
     private String studentsJSON;
+
+    @Column(length = 100000)
+    private String reportJSON;
 
     private String rangeJSON;
     private String template;

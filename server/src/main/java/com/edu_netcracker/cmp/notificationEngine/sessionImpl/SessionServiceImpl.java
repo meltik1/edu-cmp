@@ -73,7 +73,7 @@ public class SessionServiceImpl implements SessionsService {
 
     @Override
     public Session getSession(Long id) {
-        Session session = sessionJPA.getOne(id);
+        Session session = sessionJPA.findById(id).get();
         return session;
     }
 
@@ -98,6 +98,8 @@ public class SessionServiceImpl implements SessionsService {
         return session.getStudentsJSON();
     }
 
+
+
     @Override
     public void sendMessages(Long id) throws JsonProcessingException {
         Session session = sessionJPA.getOne(id);
@@ -107,22 +109,26 @@ public class SessionServiceImpl implements SessionsService {
         String students = session.getStudentsJSON();
         Map<String, String> params = session.getColumnMappingMap();
 
-        // заменить в handler JSON
+
 
         String s = handler.sendAttributes(params);
 
         JsonNode root = mapper.readTree(s);
-
-
-
-
+        
+        List<Map<String, String>> reportsOfAllStudents = new ArrayList<>();
         // Каждая итерация цикла - новый студент
         for (Iterator<JsonNode> it = root.elements(); it.hasNext(); ) {
             JsonNode node = it.next();
+
+
             String telegramName = node.findValue("Telegram").asText();
             String email = node.findValue("Email").asText();
             Map<String, String> mappedAttributes = mapper.convertValue(node, new TypeReference<Map<String, String>>() {
             });
+            Map<String, String> studentIReport = new HashMap<>(mappedAttributes);
+
+
+
             iTemplate.applyParams(mappedAttributes);
             this.saveTemplate(id, iTemplate.getTemplate());
             Map<String, String> contacts = new HashMap<>();
@@ -133,27 +139,59 @@ public class SessionServiceImpl implements SessionsService {
             for (NotificationService service : notificationServicesRealisation) {
                 if (service.getName().equals("Telegram")) {
                     if (telegramName != null) {
-                        service.send(iUserMessageInfo, iTemplate);
+                        try {
+                            service.send(iUserMessageInfo, iTemplate);
+                            studentIReport.put("Telegram status", "ok");
+                        }
+                        catch (NullPointerException exception) {
+                            studentIReport.put("Telegram status", "Пользователь не зарегистрирован в боте");
+                        }
+
+                    }
+                    else {
+                        studentIReport.put("Telegram status", "Пользователь не указал свой ник ");
                     }
                 } else if (service.getName().equals("Email")) {
                     if (email != null) {
-                        service.send(iUserMessageInfo, iTemplate);
+                            service.send(iUserMessageInfo, iTemplate);
+                            studentIReport.put("Email status", "ok");
+                    }
+                    else  {
+                        studentIReport.put("Email status", "Пользоватеь не указал Email");
                     }
                 }
             }
+            reportsOfAllStudents.add(studentIReport);
         }
+        session.setReportJSON(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(reportsOfAllStudents));
+        sessionJPA.saveAndFlush(session);
     }
 
     @Override
     public String getReport(Long id) {
         Session session = sessionJPA.getOne(id);
-        session.setStatus(SessionStatus.REPORT);
-        return "Ok";
+        String report =  session.getReportJSON();
+        if (report != null) {
+            session.setStatus(SessionStatus.REPORT);
+        }
+        return report;
     }
 
     @Override
     public String getTemplate(Long id) {
         return sessionJPA.getOne(id).getTemplate();
+    }
+
+    @Override
+    public String getMappedAttributes(Long id) {
+        Map<String, String> params = sessionJPA.findById(id).get().getColumnMappingMap();
+
+        try {
+            return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(params);
+        } catch (JsonProcessingException e) {
+            log.error("{} invaild json form in session with id {} ", e.getMessage(), id);
+            throw new IllegalStateException("Invalid JSON Form", e);
+        }
     }
 
     @Override

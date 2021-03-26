@@ -26,9 +26,12 @@ public interface SessionsService {
      String getStudentsAttributes(Long id);
 
 
+     String getMappedAttributes(Long id);
+
      void sendMessages(Long id) throws JsonProcessingException;
 
      String getReport(Long id);
+
 
      void saveMapping(Long sessionID, String json) throws JsonProcessingException;
 
