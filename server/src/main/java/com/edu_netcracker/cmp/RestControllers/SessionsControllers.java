@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -24,7 +23,7 @@ public class SessionsControllers {
         return sessionsService.getAllSessions();
     }
 
-    @RequestMapping(value = "create")
+    @RequestMapping(value = "create", method = RequestMethod.POST)
     public Session createSessions(@RequestParam String name) {
         return sessionsService.createSession(name);
     }
@@ -80,8 +79,13 @@ public class SessionsControllers {
         sessionsService.sendMessages(Long.parseLong(id));
     }
 
-    @RequestMapping(value = "{id}/report", method = RequestMethod.GET)
-    public void report(@PathVariable String id) {
+    @RequestMapping(value = "{id}/attributes", method = RequestMethod.GET)
+    public String getAttributes(@PathVariable String id) {
+        return sessionsService.getMappedAttributes(Long.parseLong(id));
+    }
 
+    @RequestMapping(value = "{id}/report", method = RequestMethod.GET)
+    public String report(@PathVariable String id) {
+        return sessionsService.getReport(Long.parseLong(id));
     }
 }
