@@ -3,7 +3,8 @@ import { Button, Input, Modal, Table, Tag } from "antd";
 import { PlusOutlined } from '@ant-design/icons';
 import { Content } from "antd/es/layout/layout";
 import "../App.css";
-// import axios from "axios";
+import "../ServerApi.js"
+import { backend } from "../ServerApi";
 
 export default function GetSessions() {
     const dataSource = [
@@ -74,17 +75,12 @@ export default function GetSessions() {
         setIsModalVisible(false);
     };
 
-    // const callServer = async () => {
-    //     const resp = await axios.get(
-    //         "http://84.201.139.62:8888/sessions",
-    //         {
-    //             headers: {
-    //                 "Authorization": "95c9e20e-831c-11eb-8dcd-0242ac130003"
-    //             }
-    //         }
-    //     )
-    //     console.log(resp);
-    // }
+    const callServer = async () => {
+        const resp = await backend.get(
+            "sessions",
+        )
+        console.log(resp.data);
+    }
 
     return (
         <Content style={{ padding: '40px 50px 0' }}>
@@ -103,7 +99,7 @@ export default function GetSessions() {
                     <Table dataSource={dataSource} columns={columns} />
                 </div>
             </div>
-            {/*<Button onClick={() => callServer()}>Test</Button>*/}
+            <Button onClick={() => callServer()}>Test</Button>
         </Content>
     );
 }
