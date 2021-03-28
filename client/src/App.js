@@ -55,9 +55,10 @@ export default function App() {
 
     const next = () => {
         setCurrent(current + 1);
+
     };
 
-    const prev = () => {
+    const prev = ( ) => {
         setCurrent(current - 1);
     };
 

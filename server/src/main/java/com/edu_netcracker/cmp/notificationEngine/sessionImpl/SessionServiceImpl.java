@@ -1,5 +1,6 @@
 package com.edu_netcracker.cmp.notificationEngine.sessionImpl;
 
+import com.edu_netcracker.cmp.entities.Attributes;
 import com.edu_netcracker.cmp.entities.DTO.StudentsAttributesDTO;
 import com.edu_netcracker.cmp.entities.Session;
 import com.edu_netcracker.cmp.entities.SessionStatus;
@@ -138,7 +139,7 @@ public class SessionServiceImpl implements SessionsService {
 
             for (NotificationService service : notificationServicesRealisation) {
                 if (service.getName().equals("Telegram")) {
-                    if (telegramName != null) {
+                    if (telegramName != null && !(telegramName.equals(""))) {
                         try {
                             service.send(iUserMessageInfo, iTemplate);
                             studentIReport.put("Telegram status", "ok");
@@ -152,7 +153,8 @@ public class SessionServiceImpl implements SessionsService {
                         studentIReport.put("Telegram status", "Пользователь не указал свой ник ");
                     }
                 } else if (service.getName().equals("Email")) {
-                    if (email != null) {
+
+                    if (email != null && !(email.equals(""))) {
                             service.send(iUserMessageInfo, iTemplate);
                             studentIReport.put("Email status", "ok");
                     }
@@ -183,15 +185,12 @@ public class SessionServiceImpl implements SessionsService {
     }
 
     @Override
-    public String getMappedAttributes(Long id) {
+    public List<String> getMappedAttributes(Long id) {
         Map<String, String> params = sessionJPA.findById(id).get().getColumnMappingMap();
+        List<String> paramsList = new ArrayList<>(params.values());
 
-        try {
-            return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(params);
-        } catch (JsonProcessingException e) {
-            log.error("{} invaild json form in session with id {} ", e.getMessage(), id);
-            throw new IllegalStateException("Invalid JSON Form", e);
-        }
+        return paramsList;
+
     }
 
     @Override
