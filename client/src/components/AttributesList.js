@@ -8,6 +8,7 @@ export default function Attributes() {
 
     useEffect(() => {
         const fetchData = async () => {
+            // нужно изменить как только появится url с id сессий
             const result = await backend.get("sessions/1/attributes")
             setData(result.data);
         };

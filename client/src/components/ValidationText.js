@@ -7,6 +7,7 @@ export default function ValidationText()  {
 
     useEffect(() => {
         const fetchData = async () => {
+            // нужно изменить как только появится url с id сессий
             const result = await backend.get("sessions/1/validation")
             setText(result.data);
         };
@@ -14,7 +15,7 @@ export default function ValidationText()  {
         fetchData();
     }, []);
 
-    debugger
+
     return text
 
 }
