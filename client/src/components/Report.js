@@ -1,9 +1,21 @@
-import React from "react";
+import React, {useState} from "react";
 import MySteps from "./MySteps";
 import { Content } from "antd/es/layout/layout";
-import { Table, Tag } from "antd";
+import  {Select, Table, Tag} from "antd";
+import SelectAtrributes from "./ReportSubComponents/SelectAtrributes";
+import AttributesList from "./AttributesList";
+import ReportInfo from "./ReportSubComponents/ReportInfo";
+import BuildReport from "./ReportSubComponents/BuildReport";
+const { Option } = Select;
+
+
 
 export default function Report() {
+
+    const [selectedColumn, setColumn] = useState("Email")
+
+    const reportInfo = ReportInfo()
+
     const columns = [
         {
             title: '№',
@@ -12,7 +24,7 @@ export default function Report() {
             width: 20,
         },
         {
-            title: 'ФИО',
+            title: selectedColumn,
             dataIndex: 'name',
             key: 'name',
         },
@@ -27,7 +39,7 @@ export default function Report() {
             key: 'status',
             render: status => {
                 let color = 'green';
-                if (status === 'Ошибка') {
+                if (status !== 'ok') {
                     color = 'volcano';
                 }
                 return (
@@ -37,66 +49,18 @@ export default function Report() {
         }
     ];
 
-    const data = [
-        {
-            key: '1',
-            number: '1',
-            name: 'Aaron Aldenburg',
-            channel: 'E-mail: aa@mail.ru',
-            status: 'Успешно'
-        },
-        {
-            key: '2',
-            // number: '1',
-            // name: 'Aaron Aldenburg',
-            number: '',
-            name: '',
-            channel: 'tg: @aa',
-            status: 'Ошибка'
-        },
-        {
-            key: '3',
-            number: '2',
-            name: 'Berthold Blake',
-            channel: 'email: bb@mail.ru',
-            status: 'Успешно'
-        },
-        {
-            key: '4',
-            number: '3',
-            name: 'Carl Clopp',
-            channel: 'email: cc@mail.ru',
-            status: 'Успешно'
-        },
-        {
-            key: '5',
-            // number: '3',
-            // name: 'Carl Clopp',
-            number: '',
-            name: '',
-            channel: 'telegram: @cc',
-            status: 'Ошибка'
-        },
-        {
-            key: '6',
-            number: '4',
-            name: 'Dick Donovan',
-            channel: 'email: dd@mail.ru',
-            status: 'Ошибка'
-        },
-        {
-            key: '7',
-            number: '5',
-            name: 'Emanuel East',
-            channel: 'email: ee@mail.ru',
-            status: 'Успешно'
-        },
-    ]
+    const data = BuildReport(reportInfo, selectedColumn)
+
+    function handler(val) {
+        setColumn(val)
+    }
+
 
     return (
         <div>
             <MySteps current = {4} />
             <Content style={{ padding: '40px 50px 0' }}>
+                <SelectAtrributes change={handler} attributesList={AttributesList()} />
                 <div className="site-layout-content">
                     <Table
                         columns={columns}
