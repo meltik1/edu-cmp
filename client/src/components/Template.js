@@ -9,7 +9,7 @@ export default function Template() {
     const {TextArea} = Input;
 
     const data = AttributesList()
-    debugger
+
     return (
         <div>
             <MySteps current={2}/>

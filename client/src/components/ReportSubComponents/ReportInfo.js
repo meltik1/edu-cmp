@@ -9,6 +9,7 @@ export default function ReportInfo() {
 
     useEffect(() => {
         const fetchData = async () => {
+            // нужно изменить как только появится url с id сессий
             const result = await backend.get("sessions/1/report")
             const tmp = result.data
 
@@ -17,6 +18,6 @@ export default function ReportInfo() {
 
         fetchData();
     }, []);
-    
+
     return report
 }
