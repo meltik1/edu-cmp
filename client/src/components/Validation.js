@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import MySteps from "./MySteps";
 import { Content } from "antd/es/layout/layout";
 import { Divider } from "antd";
 import './Validation.css';
-import ValidationText from "./ValidationText";
-import AttributesList from "./AttributesList";
+import InitializeData from "./ReportSubComponents/InitializeData";
 
 
 
 export default function Validation() {
     const theme = 'Обучение в Учебном Центре Netсracker 2020'
-    const text = ValidationText()
+    const [text, setText] =  useState("");
+
+    InitializeData("sessions/1/validation", setText)
 
     return (
         <div>
