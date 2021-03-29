@@ -49,7 +49,7 @@ export default function App() {
         },
     ];
 
-    const links = ["/", "/pick-file", "/mapping", "/template", "/validation", "/report"]
+    const links = ["/", "/:id/pick-file", "/mapping", "/template", "/validation", "/report"]
 
     const [current, setCurrent] = React.useState(0);
 
@@ -73,7 +73,7 @@ export default function App() {
                         <Route exact path="/">
                             <GetSessions />
                         </Route>
-                        <Route path="/pick-file">
+                        <Route path="/:id/pick-file">
                             <PickFile />
                         </Route>
                         <Route path="/mapping">
