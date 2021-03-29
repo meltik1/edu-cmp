@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Button, Input, Modal, Table, Tag } from "antd";
-import { PlusOutlined } from '@ant-design/icons';
+import {PlusOutlined} from '@ant-design/icons';
 import { Content } from "antd/es/layout/layout";
 import "../App.css";
 import "../ServerApi.js"
 import { backend } from "../ServerApi";
+import {Link} from "react-router-dom";
 
 export default function GetSessions() {
     const dataSource = [
@@ -12,19 +13,22 @@ export default function GetSessions() {
             key: '1',
             name: 'Приглашение на онлайн-этап обучения',
             date: '2020.07.05',
-            status: 'Завершено успешно'
+            status: 'Завершено успешно',
+            stage: '1',
         },
         {
             key: '2',
             name: 'Приглашение на очный этап обучения',
             date: '2020.09.07',
-            status: 'Завершено с ошибками'
+            status: 'Завершено с ошибками',
+            stage: '1',
         },
         {
             key: '3',
             name: 'Ещё одна сессия',
             date: '2021.02.23',
-            status: 'Заполнение шаблона'
+            status: 'Заполнение шаблона',
+            stage: '1',
         }
     ];
 
@@ -33,6 +37,22 @@ export default function GetSessions() {
             title: 'Название',
             dataIndex: 'name',
             key: 'name',
+            render: (name, stage) => {
+                switch (stage.stage) {
+                    case '1':
+                        return (<Link to={"/" + stage.key + "/pick-file"}> <u>{name}</u> </Link>);
+                    case '2':
+                        return (<Link to={"/" + stage.key + "/mapping"}> <u>{name}</u> </Link>);
+                    case '3':
+                        return (<Link to={"/" + stage.key + "/template"}> <u>{name}</u> </Link>);
+                    case '4':
+                        return (<Link to={"/" + stage.key + "/validation"}> <u>{name}</u> </Link>);
+                    case '5':
+                        return (<Link to={"/" + stage.key + "/report"}> <u>{name}</u> </Link>);
+                    default:
+                        return (<Link to={"/" + stage.key + "/pick-file"}> <u>{name}</u> </Link>);
+                }
+            }
         },
         {
             title: 'Дата',

@@ -1,9 +1,10 @@
 import React from "react";
 import MySteps from "./MySteps";
-import { Upload } from 'antd';
+import {Button, Upload} from 'antd';
 import { Content } from "antd/es/layout/layout";
-import { InboxOutlined } from '@ant-design/icons';
+import {ArrowLeftOutlined, ArrowRightOutlined, InboxOutlined} from '@ant-design/icons';
 import "./PickFile.css";
+import {Link} from "react-router-dom";
 
 export default function PickFile() {
 
@@ -29,6 +30,14 @@ export default function PickFile() {
                 </Dragger>
                 </div>
             </Content>
+            <div className={"buttons"}>
+                <Button type={"secondary"}>
+                    <Link to={"/"}> <ArrowLeftOutlined /> Назад </Link>
+                </Button>
+                <Button type={"primary"}>
+                    <Link to={"/mapping"}> Далее <ArrowRightOutlined /> </Link>
+                </Button>
+            </div>
         </div>
     )
 }

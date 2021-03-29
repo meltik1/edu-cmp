@@ -1,7 +1,9 @@
 import React from "react";
 import MySteps from "./MySteps";
 import { Content } from "antd/es/layout/layout";
-import { Table, Tag } from "antd";
+import {Button, Select, Table, Tag} from "antd";
+import {Link} from "react-router-dom";
+import {ArrowLeftOutlined, HomeOutlined} from "@ant-design/icons";
 
 export default function Report() {
     const columns = [
@@ -93,11 +95,24 @@ export default function Report() {
         },
     ]
 
+    const { Option } = Select;
+
+    let params = ["fio", "email", "phone"];
+
+    function handleChange(value) {
+        console.log('selected '+ value);
+    }
+
     return (
         <div>
             <MySteps current = {4} />
             <Content style={{ padding: '40px 50px 0' }}>
                 <div className="site-layout-content">
+                    <Select defaultValue={"fio"} onChange={handleChange} style={{width: 120}}>
+                        {params.map(value => {
+                            return <Option value={value}>{value}</Option>
+                        })}
+                    </Select>
                     <Table
                         columns={columns}
                         dataSource={data}
@@ -105,6 +120,14 @@ export default function Report() {
                     />
                 </div>
             </Content>
+            <div className={"buttons"}>
+                <Button type={"secondary"}>
+                    <Link to={"/validation"}> <ArrowLeftOutlined /> Назад </Link>
+                </Button>
+                <Button type={"primary"}>
+                    <Link to={"/"}> Домой <HomeOutlined /> </Link>
+                </Button>
+            </div>
         </div>
     )
 }

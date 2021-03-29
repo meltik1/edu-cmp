@@ -1,3 +1,10 @@
 .input-box {
     width: 120px;
 }
+
+
+.buttons {
+    padding: 20px 50px 0;
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,8 +1,10 @@
 import React from "react";
 import MySteps from "./MySteps";
 import { Content } from "antd/es/layout/layout";
-import { Divider } from "antd";
+import {Button, Divider} from "antd";
 import './Validation.css';
+import {Link} from "react-router-dom";
+import {ArrowLeftOutlined, ArrowRightOutlined} from "@ant-design/icons";
 
 const theme = 'Обучение в Учебном Центре Netсracker 2020'
 const text = 'Поздравляем, вы приняты в Учебный Центр компании Netcracker\n' +
@@ -34,6 +36,14 @@ export default function Validation() {
                     <div className={"text"}>{text}</div>
                 </div>
             </Content>
+            <div className={"buttons"}>
+                <Button type={"secondary"}>
+                    <Link to={"/template"}> <ArrowLeftOutlined /> Назад </Link>
+                </Button>
+                <Button type={"primary"}>
+                    <Link to={"/report"}> Далее <ArrowRightOutlined /> </Link>
+                </Button>
+            </div>
         </div>
     )
 }
