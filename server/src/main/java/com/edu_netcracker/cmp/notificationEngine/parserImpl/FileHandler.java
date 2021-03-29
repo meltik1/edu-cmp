@@ -1,6 +1,7 @@
 package com.edu_netcracker.cmp.notificationEngine.parserImpl;
 
 import com.edu_netcracker.cmp.notificationEngine.parserImpl.dataMinerImpl.XLSXDataMiner;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,11 +45,11 @@ public class FileHandler {
         return this.getFileDataMiner().getRawFileData();
     }
 
-    public String sendAttributes(Map<String, String> attributes) throws NullPointerException {
+    public String sendAttributes(String students, Map<String, String> attributes) throws NullPointerException {
         if (this.getFileDataMiner() == null) {
             throw new NullPointerException("FileDataMiner not initialized");
         }
-        return this.getFileDataMiner().applyMappedAttributes(attributes);
+        return FileDataMiner.applyMappedAttributes(students, attributes);
     }
 
     private void initializeFileDataMiner(MultipartFile multipartFile) throws IOException, NullPointerException {

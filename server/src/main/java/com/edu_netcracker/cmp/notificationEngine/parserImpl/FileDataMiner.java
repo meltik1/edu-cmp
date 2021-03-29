@@ -1,6 +1,7 @@
 package com.edu_netcracker.cmp.notificationEngine.parserImpl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -57,16 +58,22 @@ public abstract class FileDataMiner {
         this.rawFileData.remove(FIRST_ROW);
     }
 
-    public String applyMappedAttributes(Map<String, String> attributes) {
-        ArrayNode arrayNode = MAPPER.createArrayNode();
-        for (RawFileData curRawFileData : rawFileData) {
-            ObjectNode objectNode = MAPPER.createObjectNode();
-            for (String key : attributes.keySet()) {
-                objectNode.put(attributes.get(key), curRawFileData.getRawFileData().get(Integer.valueOf(key)));
+    public static String applyMappedAttributes(String students, Map<String, String> attributes) {
+        try {
+            ArrayNode arrayNode = MAPPER.createArrayNode();
+            List<RawFileData> rawFileData = MAPPER.readValue(students, new TypeReference<List<RawFileData>>(){});
+            for (RawFileData curRawFileData : rawFileData) {
+                ObjectNode objectNode = MAPPER.createObjectNode();
+                for (String key : attributes.keySet()) {
+                    objectNode.put(attributes.get(key), curRawFileData.getRawFileData().get(Integer.valueOf(key)));
+                }
+                arrayNode.add(objectNode);
             }
-            arrayNode.add(objectNode);
+            return arrayNode.toPrettyString();
+        } catch (JsonProcessingException e) {
+            log.warn("Failed to parse json file");
         }
-        return arrayNode.toPrettyString();
+        return "";
     }
 
     public abstract List<RawFileData> parseData(MultipartFile file) throws IOException;
