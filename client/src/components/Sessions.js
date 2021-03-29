@@ -1,58 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Input, Modal, Table, Tag } from "antd";
-import {PlusOutlined} from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
 import { Content } from "antd/es/layout/layout";
 import "../App.css";
 import "../ServerApi.js"
 import { backend } from "../ServerApi";
 import {Link} from "react-router-dom";
+import { useHistory } from "react-router";
 
 export default function GetSessions() {
-    const dataSource = [
-        {
-            key: '1',
-            name: 'Приглашение на онлайн-этап обучения',
-            date: '2020.07.05',
-            status: 'Завершено успешно',
-            stage: '1',
-        },
-        {
-            key: '2',
-            name: 'Приглашение на очный этап обучения',
-            date: '2020.09.07',
-            status: 'Завершено с ошибками',
-            stage: '1',
-        },
-        {
-            key: '3',
-            name: 'Ещё одна сессия',
-            date: '2021.02.23',
-            status: 'Заполнение шаблона',
-            stage: '1',
-        }
-    ];
+    const sessionStatus = new Map([
+        ['FILESELECTION', 'Загрузка файла'],
+        ['MAPPING', 'Маппинг параметров'],
+        ['TEMPLATE', 'Заполнение шаблона'],
+        ['VALIDATION', 'Валидация'],
+        ['REPORT', 'Отчет'],
+    ]);
+
+    let [dataSource, setDataSource] = useState([]);
 
     const columns = [
         {
             title: 'Название',
             dataIndex: 'name',
             key: 'name',
-            render: (name, stage) => {
-                switch (stage.stage) {
-                    case '1':
-                        return (<Link to={"/" + stage.key + "/pick-file"}> <u>{name}</u> </Link>);
-                    case '2':
-                        return (<Link to={"/" + stage.key + "/mapping"}> <u>{name}</u> </Link>);
-                    case '3':
-                        return (<Link to={"/" + stage.key + "/template"}> <u>{name}</u> </Link>);
-                    case '4':
-                        return (<Link to={"/" + stage.key + "/validation"}> <u>{name}</u> </Link>);
-                    case '5':
-                        return (<Link to={"/" + stage.key + "/report"}> <u>{name}</u> </Link>);
-                    default:
-                        return (<Link to={"/" + stage.key + "/pick-file"}> <u>{name}</u> </Link>);
-                }
-            }
         },
         {
             title: 'Дата',
@@ -89,18 +60,56 @@ export default function GetSessions() {
 
     const handleOk = () => {
         setIsModalVisible(false);
+        createSession();
+        return dataSource;
     };
+
+    const createSession = () => {
+        backend.post('sessions/create?name="' + input +'"')
+            .then(getAllSessions)
+            .catch(console.log)
+    }
+
+    const getAllSessions = () => {
+        backend.get('sessions')
+            .then((res) => {
+                const results = res.data.map(row => ({
+                    key: row.id,
+                    name: row.name.replaceAll('"', ""),
+                    date: row.date,
+                    status: sessionStatus.get(row.status)
+                }));
+                setDataSource(results)
+            })
+            .catch(console.log)
+        return dataSource;
+    }
+
+    const history = useHistory();
+
+    const onClickRow = (record) => {
+        return {
+            onClick: () => {
+                history.push({
+                    pathname:  record.key + "/pick-file",
+                });
+            },
+        };
+
+    }
+
+    const [input, setInput] = useState('');
+    const nameChange = (input) => {
+        setInput(input.target.value)
+    }
+
+    useEffect( () => {
+        getAllSessions();
+    }, []);
 
     const handleCancel = () => {
         setIsModalVisible(false);
     };
-
-    const callServer = async () => {
-        const resp = await backend.get(
-            "sessions",
-        )
-        console.log(resp.data);
-    }
 
     return (
         <Content style={{ padding: '40px 50px 0' }}>
@@ -113,13 +122,12 @@ export default function GetSessions() {
                     Новая сессия
                 </Button>
                 <Modal title="Новая сессия" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                    <Input placeholder={"Название"} />
+                    <Input placeholder={"Название"} onChange={nameChange}/>
                 </Modal>
                 <div>
-                    <Table dataSource={dataSource} columns={columns} />
+                    <Table dataSource={dataSource} columns={columns} onRow={onClickRow} />
                 </div>
             </div>
-            {/*<Button onClick={() => callServer()}>Test</Button>*/}
         </Content>
     );
 }

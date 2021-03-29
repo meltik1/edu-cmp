@@ -1,4 +1,4 @@
-# GENERIC
+ # GENERIC
 
 .idea
 *.iml
@@ -6,7 +6,11 @@
 # SERVER
 target
 *.class
+*.log
+rest-examples
 
+# SRC
+test
 
 # CLIENT
 

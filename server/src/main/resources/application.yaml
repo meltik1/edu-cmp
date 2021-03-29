@@ -1,0 +1,47 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: 300800
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+logging:
+  file:
+    name: logs.log
+  level:
+    com.edu_netcracker: TRACE
+
+security:
+  trusted-application-code: 95c9e20e-831c-11eb-8dcd-0242ac130003
+
+bot:
+  token: 1531954543:AAHgZt4bem3JygKOQ69JSD-oM51odOA2POg
+
+mail:
+  protocol: smtp
+  smtp:
+    auth: true
+    starttls.enable: true
+    debug: true
+    starttls.required: true
+  from: testFrom@gmail.com
+  host: smtp.mailtrap.io
+  port: 2525
+  username: username
+  password: password
+---
+spring:
+  profiles: prod
+  datasource:
+    url: jdbc:postgresql://localhost:5432/edu_notification_engine
+    username: postgres
+    password: ${POSTGRES_DATABASE_PASSWORD}
+server:
+  port: 8888
+bot:
+  token: 1553238646:AAE81yqhXVq_9XjYVEmkEay75U7Ej1ULd-U
+
+
+
