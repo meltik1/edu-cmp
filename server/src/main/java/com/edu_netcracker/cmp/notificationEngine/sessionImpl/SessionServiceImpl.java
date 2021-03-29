@@ -100,6 +100,20 @@ public class SessionServiceImpl implements SessionsService {
     }
 
 
+    private Boolean checkIfInRange(JsonNode range, Integer index) {
+
+        for(Iterator<JsonNode> itRange = range.elements(); itRange.hasNext(); ) {
+            JsonNode rangeNode = itRange.next();
+            int start = rangeNode.findValue("start").asInt();
+            int end = rangeNode.findValue("end").asInt();
+
+            if (index >= start && index <= end) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     @Override
     public void sendMessages(Long id) throws JsonProcessingException {
@@ -117,53 +131,52 @@ public class SessionServiceImpl implements SessionsService {
         JsonNode root = mapper.readTree(s);
         
         List<Map<String, String>> reportsOfAllStudents = new ArrayList<>();
-        // Каждая итерация цикла - новый студент
-        for (Iterator<JsonNode> it = root.elements(); it.hasNext(); ) {
+        String range = session.getRangeJSON();
+        JsonNode rangeJSONNode = mapper.readTree(range);
+
+
+        Integer index = 1;
+        for (Iterator<JsonNode> it = root.elements() ; it.hasNext(); index++ ) {
             JsonNode node = it.next();
+            if (checkIfInRange(rangeJSONNode, index)) { ;
+                String telegramName = node.findValue("Telegram").asText();
+                String email = node.findValue("Email").asText();
+                Map<String, String> mappedAttributes = mapper.convertValue(node, new TypeReference<Map<String, String>>() {
+                });
+                Map<String, String> studentIReport = new HashMap<>(mappedAttributes);
 
 
-            String telegramName = node.findValue("Telegram").asText();
-            String email = node.findValue("Email").asText();
-            Map<String, String> mappedAttributes = mapper.convertValue(node, new TypeReference<Map<String, String>>() {
-            });
-            Map<String, String> studentIReport = new HashMap<>(mappedAttributes);
+                iTemplate.applyParams(mappedAttributes);
+                this.saveTemplate(id, iTemplate.getTemplate());
+                Map<String, String> contacts = new HashMap<>();
+                contacts.put("Telegram", telegramName);
+                contacts.put("Email", email);
+                iUserMessageInfo.setMapOfContactId(contacts);
+                for (NotificationService service : notificationServicesRealisation) {
+                    if (service.getName().equals("Telegram")) {
+                        if (telegramName != null && !(telegramName.equals(""))) {
+                            try {
+                                service.send(iUserMessageInfo, iTemplate);
+                                studentIReport.put("Telegram status", "ok");
+                            } catch (NullPointerException exception) {
+                                studentIReport.put("Telegram status", "Пользователь не зарегистрирован в боте");
+                            }
 
-
-
-            iTemplate.applyParams(mappedAttributes);
-            this.saveTemplate(id, iTemplate.getTemplate());
-            Map<String, String> contacts = new HashMap<>();
-            contacts.put("Telegram", telegramName);
-            contacts.put("Email", email);
-            iUserMessageInfo.setMapOfContactId(contacts);
-
-            for (NotificationService service : notificationServicesRealisation) {
-                if (service.getName().equals("Telegram")) {
-                    if (telegramName != null && !(telegramName.equals(""))) {
-                        try {
-                            service.send(iUserMessageInfo, iTemplate);
-                            studentIReport.put("Telegram status", "ok");
+                        } else {
+                            studentIReport.put("Telegram status", "Пользователь не указал свой ник ");
                         }
-                        catch (NullPointerException exception) {
-                            studentIReport.put("Telegram status", "Пользователь не зарегистрирован в боте");
-                        }
+                    } else if (service.getName().equals("Email")) {
 
-                    }
-                    else {
-                        studentIReport.put("Telegram status", "Пользователь не указал свой ник ");
-                    }
-                } else if (service.getName().equals("Email")) {
-
-                    if (email != null && !(email.equals(""))) {
+                        if (email != null && !(email.equals(""))) {
                             service.send(iUserMessageInfo, iTemplate);
                             studentIReport.put("Email status", "ok");
-                    }
-                    else  {
-                        studentIReport.put("Email status", "Пользоватеь не указал Email");
+                        } else {
+                            studentIReport.put("Email status", "Пользоватеь не указал Email");
+                        }
                     }
                 }
+                reportsOfAllStudents.add(studentIReport);
             }
-            reportsOfAllStudents.add(studentIReport);
         }
         session.setReportJSON(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(reportsOfAllStudents));
         sessionJPA.saveAndFlush(session);
@@ -240,7 +253,7 @@ public class SessionServiceImpl implements SessionsService {
         JsonNode rangeJson = root.at("/range");
         rangeValidation(rangeJson);
 
-        session.setRangeJSON(rangeJson.asText());
+        session.setRangeJSON(rangeJson.toString());
         session.setColumnMappingMap(columnsMapping);
         session.setStatus(SessionStatus.TEMPLATE);
         sessionJPA.saveAndFlush(session);

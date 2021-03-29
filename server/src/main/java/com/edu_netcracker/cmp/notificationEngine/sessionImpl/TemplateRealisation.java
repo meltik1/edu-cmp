@@ -17,6 +17,7 @@ public class TemplateRealisation implements ITemplate {
     private final MustacheFactory MF = new DefaultMustacheFactory();
 
     private String template;
+    private String macrosTemplate;
 
     @Override
     public String getTemplate() {
@@ -26,13 +27,13 @@ public class TemplateRealisation implements ITemplate {
     @Override
     public void applyParams(Map<String, String> params) {
         StringWriter stringWriter = new StringWriter();
-        Mustache mustache = MF.compile(new StringReader(template), "template");
+        Mustache mustache = MF.compile(new StringReader(macrosTemplate), "template");
         mustache.execute(stringWriter, params);
-        this.setTemplate(stringWriter.toString());
+        this.template = stringWriter.toString();
     }
 
     @Override
     public void setTemplate(String template) {
-        this.template = template;
+        this.macrosTemplate = template;
     }
 }
