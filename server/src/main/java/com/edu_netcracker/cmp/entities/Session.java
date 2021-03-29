@@ -23,8 +23,6 @@ public class Session {
 
     private String name;
 
-    private String date;
-
 
     @ElementCollection
     private Map<String, String> columnMappingMap;
