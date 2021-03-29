@@ -73,7 +73,7 @@ export default function App() {
                         <Route exact path="/">
                             <GetSessions />
                         </Route>
-                        <Route path="/pick-file">
+                        <Route path="/:id/pick-file">
                             <PickFile />
                         </Route>
                         <Route path="/mapping">
