@@ -1,6 +1,5 @@
 package com.edu_netcracker.cmp.notificationEngine.sessionImpl;
 
-import com.edu_netcracker.cmp.entities.Attributes;
 import com.edu_netcracker.cmp.entities.DTO.StudentsAttributesDTO;
 import com.edu_netcracker.cmp.entities.Session;
 import com.edu_netcracker.cmp.entities.SessionStatus;
@@ -167,7 +166,12 @@ public class SessionServiceImpl implements SessionsService {
                         }
                     } else if (service.getName().equals("Email")) {
 
-                        if (email != null && !(email.equals(""))) {
+                    }
+                    else {
+                        studentIReport.put("Telegram status", "Пользователь не указал свой ник ");
+                    }
+                } else if (service.getName().equals("Email")) {
+                    if (email != null && !(email.equals(""))) {
                             service.send(iUserMessageInfo, iTemplate);
                             studentIReport.put("Email status", "ok");
                         } else {
