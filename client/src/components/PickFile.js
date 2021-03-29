@@ -2,7 +2,7 @@ import React from "react";
 import MySteps from "./MySteps";
 import {Button, Upload} from 'antd';
 import { Content } from "antd/es/layout/layout";
-import {ArrowLeftOutlined, ArrowRightOutlined, InboxOutlined} from '@ant-design/icons';
+import { ArrowLeftOutlined, ArrowRightOutlined, InboxOutlined } from '@ant-design/icons';
 import "./PickFile.css";
 import {Link} from "react-router-dom";
 

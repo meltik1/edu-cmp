@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import MySteps from "./MySteps";
 import { Content } from "antd/es/layout/layout";
 import {Table, Select, Button} from "antd";
@@ -84,8 +84,15 @@ export default function Mapping() {
 
     const { Option } = Select;
 
+    const [ranges, setRanges] = useState([]);
+
     function handleChange(value) {
         console.log('selected ' + value);
+    }
+
+    function alert(rangesNew) {
+        console.log(rangesNew);
+        setRanges(rangesNew);
     }
 
     return (
@@ -108,7 +115,7 @@ export default function Mapping() {
                         dataSource={data}
                         size={"small"}
                     />
-                    <RangeSelector />
+                    <RangeSelector alert={alert} />
                 </div>
             </Content>
             <div className={"buttons"}>

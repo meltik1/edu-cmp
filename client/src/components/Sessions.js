@@ -119,7 +119,7 @@ export default function GetSessions() {
                     <Table dataSource={dataSource} columns={columns} />
                 </div>
             </div>
-            <Button onClick={() => callServer()}>Test</Button>
+            {/*<Button onClick={() => callServer()}>Test</Button>*/}
         </Content>
     );
 }
