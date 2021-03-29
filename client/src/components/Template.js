@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import MySteps from "./MySteps";
-import {Content} from "antd/es/layout/layout";
+import { Content } from "antd/es/layout/layout";
 import { Input, List } from "antd";
-import AttributesList from "./AttributesList";
+import InitializeData from "./ReportSubComponents/InitializeData";
 
 export default function Template() {
 
-    const {TextArea} = Input;
+    const { TextArea } = Input;
+    const [attributes, setAttributes] = useState([]);
 
-    const data = AttributesList()
+    InitializeData('sessions/1/attributes' , setAttributes);
 
     return (
         <div>
@@ -18,7 +19,7 @@ export default function Template() {
                     size="large"
                     header={<div>Аттрибуты для шаблона</div>}
                     bordered
-                    dataSource={data}
+                    dataSource={attributes}
                     renderItem={item => <List.Item>{item}</List.Item>}
                 />
                 <div className="site-layout-content">

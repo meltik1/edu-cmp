@@ -1,11 +1,10 @@
 import React, {useState} from "react";
 import MySteps from "./MySteps";
 import { Content } from "antd/es/layout/layout";
-import  {Select, Table, Tag} from "antd";
+import  { Select, Table, Tag } from "antd";
 import SelectAtrributes from "./ReportSubComponents/SelectAtrributes";
-import AttributesList from "./AttributesList";
-import ReportInfo from "./ReportSubComponents/ReportInfo";
 import BuildReport from "./ReportSubComponents/BuildReport";
+import InitializeData from "./ReportSubComponents/InitializeData";
 const { Option } = Select;
 
 
@@ -13,8 +12,11 @@ const { Option } = Select;
 export default function Report() {
 
     const [selectedColumn, setColumn] = useState("Email")
+    const [reportInfo, setReportInfo] = useState({});
+    const [attributes, setAttributes] = useState([]);
 
-    const reportInfo = ReportInfo()
+    InitializeData('sessions/1/attributes' , setAttributes);
+    InitializeData("sessions/1/report", setReportInfo);
 
     const columns = [
         {
@@ -60,7 +62,7 @@ export default function Report() {
         <div>
             <MySteps current = {4} />
             <Content style={{ padding: '40px 50px 0' }}>
-                <SelectAtrributes change={handler} attributesList={AttributesList()} />
+                <SelectAtrributes change={handler} attributesList={attributes} />
                 <div className="site-layout-content">
                     <Table
                         columns={columns}
