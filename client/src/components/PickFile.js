@@ -1,17 +1,34 @@
 import React from "react";
 import MySteps from "./MySteps";
-import { Upload } from 'antd';
+import { message, Upload } from 'antd';
 import { Content } from "antd/es/layout/layout";
 import { InboxOutlined } from '@ant-design/icons';
 import "./PickFile.css";
+import {useParams} from "react-router";
+import "../ServerApi.js"
+import Settings from "../backend.settings.json"
 
 export default function PickFile() {
+
+    const sessionId = useParams().id;
 
     const { Dragger } = Upload;
 
     const props = {
         name: 'file',
         multiple: false,
+        action :  Settings.backend.url + 'sessions/'+ sessionId + '/pick-file',
+        onChange(info) {
+            const { status } = info.file;
+            if (status !== 'uploading') {
+                console.log(info.file, info.fileList);
+            }
+            if (status === 'done') {
+                message.success(`${info.file.name} file uploaded successfully.`);
+            } else if (status === 'error') {
+                message.error(`${info.file.name} file upload failed.`);
+            }
+        },
     }
 
     return (

@@ -92,8 +92,6 @@ export default function GetSessions() {
                 history.push({
                     pathname:  record.key + "/pick-file",
                 });
-                console.log(record.key);
-
             },
         };
 
