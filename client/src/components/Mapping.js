@@ -4,10 +4,14 @@ import { Content } from "antd/es/layout/layout";
 import {Table, Select, Button} from "antd";
 import "./Mapping.css";
 import RangeSelector from "./RangeSelector";
+import {useParams} from "react-router";
 import {Link} from "react-router-dom";
 import {ArrowLeftOutlined, ArrowRightOutlined} from "@ant-design/icons";
 
 export default function Mapping() {
+
+    const sessionId = useParams().d;
+
     const columns = [
         {
             title: '№',
@@ -120,10 +124,10 @@ export default function Mapping() {
             </Content>
             <div className={"buttons"}>
                 <Button type={"secondary"}>
-                    <Link to={"/pick-file"}> <ArrowLeftOutlined /> Назад </Link>
+                    <Link to={`/${sessionId}/pick-file`}> <ArrowLeftOutlined /> Назад </Link>
                 </Button>
                 <Button type={"primary"}>
-                    <Link to={"/template"}> Далее <ArrowRightOutlined /> </Link>
+                    <Link to={`/${sessionId}/template`}> Далее <ArrowRightOutlined /> </Link>
                 </Button>
             </div>
         </div>

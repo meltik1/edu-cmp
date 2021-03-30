@@ -2,10 +2,14 @@ import React from "react";
 import MySteps from "./MySteps";
 import { Content } from "antd/es/layout/layout";
 import {Button, Select, Table, Tag} from "antd";
+import {useParams} from "react-router";
 import {Link} from "react-router-dom";
 import {ArrowLeftOutlined, HomeOutlined} from "@ant-design/icons";
 
 export default function Report() {
+
+    const sessionId = useParams().d;
+
     const columns = [
         {
             title: '№',
@@ -122,10 +126,10 @@ export default function Report() {
             </Content>
             <div className={"buttons"}>
                 <Button type={"secondary"}>
-                    <Link to={"/validation"}> <ArrowLeftOutlined /> Назад </Link>
+                    <Link to={`/${sessionId}/validation`}> <ArrowLeftOutlined /> Назад </Link>
                 </Button>
                 <Button type={"primary"}>
-                    <Link to={"/"}> Домой <HomeOutlined /> </Link>
+                    <Link to={"/sessions"}> Домой <HomeOutlined /> </Link>
                 </Button>
             </div>
         </div>

@@ -3,29 +3,34 @@ import MySteps from "./MySteps";
 import { Content } from "antd/es/layout/layout";
 import {Button, Divider} from "antd";
 import './Validation.css';
+import {useParams} from "react-router";
 import {Link} from "react-router-dom";
 import {ArrowLeftOutlined, ArrowRightOutlined} from "@ant-design/icons";
 
-const theme = 'Обучение в Учебном Центре Netсracker 2020'
-const text = 'Поздравляем, вы приняты в Учебный Центр компании Netcracker\n' +
-    '\n'+
-    'Всем привет! Мы рады сообщить, что вы прошли отбор на обучение от компании Netсracker.\n' +
-    'Обучение состоит из двух частей: онлайн-курса и очного проекта с куратором.\n' +
-    'С сегодняшнего дня у вас открыт доступ к онлайн части.\n' +
-    'Курс проходит в двух системах: Java Basics и Java & SQL Skill Bench.\n' +
-    'Ваш логин и пароль для входа в системы – это левая часть адреса email до знака @  (почта которую вы указывали в анкете на поступление).\n' +
-    'Пароль следует сменить сразу после первого логина в обеих системах.\n' +
-    'Более подробно об интерфейсе Skill Bench можно узнать из пошаговой инструкции к Java Skill Bench.\n' +
-    'Java Basics содержит учебные материалы, рекомендации по освоению курса и тесты.\n' +
-    'Решить Java-задачи и применить теорию на практике вы сможете в Skill Bench,  где вам доступны все задания, но решать их лучше последовательно.\n' +
-    'Для обсуждения текущего прогресса и задач создано сообщество в Вконтакте.\n' +
-    'Ответы на популярные вопросы вы найдете в FAQ.\n' +
-    'По другим вопросам можно писать нам на почту EduCenter@NetCracker.com.\n' +
-    '\n'+
-    'С уважением,\n' +
-    'Команда Учебного Центра'
-
 export default function Validation() {
+
+    const sessionId = useParams().d;
+
+    const theme = 'Обучение в Учебном Центре Netсracker 2020';
+
+    const text = 'Поздравляем, вы приняты в Учебный Центр компании Netcracker\n' +
+        '\n'+
+        'Всем привет! Мы рады сообщить, что вы прошли отбор на обучение от компании Netсracker.\n' +
+        'Обучение состоит из двух частей: онлайн-курса и очного проекта с куратором.\n' +
+        'С сегодняшнего дня у вас открыт доступ к онлайн части.\n' +
+        'Курс проходит в двух системах: Java Basics и Java & SQL Skill Bench.\n' +
+        'Ваш логин и пароль для входа в системы – это левая часть адреса email до знака @  (почта которую вы указывали в анкете на поступление).\n' +
+        'Пароль следует сменить сразу после первого логина в обеих системах.\n' +
+        'Более подробно об интерфейсе Skill Bench можно узнать из пошаговой инструкции к Java Skill Bench.\n' +
+        'Java Basics содержит учебные материалы, рекомендации по освоению курса и тесты.\n' +
+        'Решить Java-задачи и применить теорию на практике вы сможете в Skill Bench,  где вам доступны все задания, но решать их лучше последовательно.\n' +
+        'Для обсуждения текущего прогресса и задач создано сообщество в Вконтакте.\n' +
+        'Ответы на популярные вопросы вы найдете в FAQ.\n' +
+        'По другим вопросам можно писать нам на почту EduCenter@NetCracker.com.\n' +
+        '\n'+
+        'С уважением,\n' +
+        'Команда Учебного Центра';
+
     return (
         <div>
             <MySteps current = {3} />
@@ -38,10 +43,10 @@ export default function Validation() {
             </Content>
             <div className={"buttons"}>
                 <Button type={"secondary"}>
-                    <Link to={"/template"}> <ArrowLeftOutlined /> Назад </Link>
+                    <Link to={`/${sessionId}/template`}> <ArrowLeftOutlined /> Назад </Link>
                 </Button>
                 <Button type={"primary"}>
-                    <Link to={"/report"}> Далее <ArrowRightOutlined /> </Link>
+                    <Link to={`/${sessionId}/report`}> Далее <ArrowRightOutlined /> </Link>
                 </Button>
             </div>
         </div>

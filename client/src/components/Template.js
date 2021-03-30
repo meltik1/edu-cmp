@@ -2,11 +2,14 @@ import React from "react";
 import MySteps from "./MySteps";
 import {Content} from "antd/es/layout/layout";
 import {Col, Row, Input, List, Button} from "antd";
+import {useParams} from "react-router"
 import {Link} from "react-router-dom";
 import "./Template.css";
 import {ArrowLeftOutlined, ArrowRightOutlined} from "@ant-design/icons";
 
 export default function Template() {
+
+    const sessionId = useParams().d;
 
     const listHeader = ['Макросы'];
 
@@ -47,10 +50,10 @@ export default function Template() {
             </Content>
             <div className={"buttons"}>
                 <Button type={"secondary"}>
-                    <Link to={"/mapping"}> <ArrowLeftOutlined /> Назад </Link>
+                    <Link to={`/${sessionId}/mapping`}> <ArrowLeftOutlined /> Назад </Link>
                 </Button>
                 <Button type={"primary"}>
-                    <Link to={"/validation"}> Далее <ArrowRightOutlined /> </Link>
+                    <Link to={`/${sessionId}/validation`}> Далее <ArrowRightOutlined /> </Link>
                 </Button>
             </div>
         </div>

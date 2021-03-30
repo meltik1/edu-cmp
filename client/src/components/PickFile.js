@@ -11,7 +11,7 @@ import Settings from "../backend.settings.json"
 
 export default function PickFile() {
 
-    const sessionId = useParams().id;
+    const sessionId = useParams().d;
 
     const { Dragger } = Upload;
 
@@ -46,10 +46,10 @@ export default function PickFile() {
             </Content>
             <div className={"buttons"}>
                 <Button type={"secondary"}>
-                    <Link to={"/"}> <ArrowLeftOutlined /> Назад </Link>
+                    <Link to={"/sessions"}> <ArrowLeftOutlined /> Назад </Link>
                 </Button>
                 <Button type={"primary"}>
-                    <Link to={"/mapping"}> Далее <ArrowRightOutlined /> </Link>
+                    <Link to={`/${sessionId}/mapping`}> Далее <ArrowRightOutlined /> </Link>
                 </Button>
             </div>
         </div>
