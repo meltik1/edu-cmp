@@ -10,8 +10,6 @@ import BuildReport from "./ReportSubComponents/BuildReport";
 import InitializeData from "./ReportSubComponents/InitializeData";
 const { Option } = Select;
 
-
-
 export default function Report() {
 
     const [selectedColumn, setColumn] = useState("Email")
@@ -21,7 +19,7 @@ export default function Report() {
     InitializeData('sessions/1/attributes' , setAttributes);
     InitializeData("sessions/1/report", setReportInfo);
 
-    const sessionId = useParams().d;
+    const sessionId = useParams().id;
 
     const columns = [
         {

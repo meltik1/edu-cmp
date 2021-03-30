@@ -10,7 +10,7 @@ import InitializeData from "./ReportSubComponents/InitializeData";
 
 export default function Template() {
 
-    const sessionId = useParams().d;
+    const sessionId = useParams().id;
 
     const listHeader = ['Макросы'];
 
@@ -19,7 +19,7 @@ export default function Template() {
     const { TextArea } = Input;
     const [attributes, setAttributes] = useState([]);
 
-    InitializeData('sessions/1/attributes' , setAttributes);
+    InitializeData(`sessions/${sessionId}/attributes` , setAttributes);
 
     return (
         <div>

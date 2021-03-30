@@ -11,7 +11,7 @@ import Settings from "../backend.settings.json"
 
 export default function PickFile() {
 
-    const sessionId = useParams().d;
+    const sessionId = useParams().id;
 
     const { Dragger } = Upload;
 

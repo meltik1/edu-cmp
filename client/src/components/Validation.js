@@ -10,12 +10,12 @@ import {ArrowLeftOutlined, ArrowRightOutlined} from "@ant-design/icons";
 
 export default function Validation() {
 
-    const sessionId = useParams().d
+    const sessionId = useParams().id
 
     const theme = 'Обучение в Учебном Центре Netсracker 2020'
     const [text, setText] =  useState("");
 
-    InitializeData("sessions/1/validation", setText)
+    InitializeData(`sessions/${sessionId}/validation`, setText);
 
     return (
         <div>

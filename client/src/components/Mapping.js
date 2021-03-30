@@ -10,7 +10,7 @@ import {ArrowLeftOutlined, ArrowRightOutlined} from "@ant-design/icons";
 
 export default function Mapping() {
 
-    const sessionId = useParams().d;
+    const sessionId = useParams().id;
 
     const columns = [
         {
