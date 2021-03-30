@@ -1,17 +1,21 @@
 import React, { useState } from "react";
 import MySteps from "./MySteps";
 import { Content } from "antd/es/layout/layout";
-import { Divider } from "antd";
+import {Button, Divider} from "antd";
 import './Validation.css';
 import InitializeData from "./ReportSubComponents/InitializeData";
-
-
+import {useParams} from "react-router";
+import {Link} from "react-router-dom";
+import {ArrowLeftOutlined, ArrowRightOutlined} from "@ant-design/icons";
 
 export default function Validation() {
+
+    const sessionId = useParams().id
+
     const theme = 'Обучение в Учебном Центре Netсracker 2020'
     const [text, setText] =  useState("");
 
-    InitializeData("sessions/1/validation", setText)
+    InitializeData(`sessions/${sessionId}/validation`, setText);
 
     return (
         <div>
@@ -23,6 +27,14 @@ export default function Validation() {
                     <div className={"text"}>{text}</div>
                 </div>
             </Content>
+            <div className={"buttons"}>
+                <Button type={"secondary"}>
+                    <Link to={`/${sessionId}/template`}> <ArrowLeftOutlined /> Назад </Link>
+                </Button>
+                <Button type={"primary"}>
+                    <Link to={`/${sessionId}/report`}> Далее <ArrowRightOutlined /> </Link>
+                </Button>
+            </div>
         </div>
     )
 }

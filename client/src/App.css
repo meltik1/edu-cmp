@@ -5,7 +5,7 @@
 }
 
 .site-layout-content-sessions {
-    min-height: calc(100vh - 64px - 164px);
+    min-height: calc(100vh - 16px - 164px);
     padding: 24px;
     background: #ffffff;
 }

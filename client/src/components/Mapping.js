@@ -1,11 +1,17 @@
-import React from "react";
+import React, {useState} from "react";
 import MySteps from "./MySteps";
 import { Content } from "antd/es/layout/layout";
-import { Table } from "antd";
+import {Table, Select, Button} from "antd";
 import "./Mapping.css";
 import RangeSelector from "./RangeSelector";
+import {useParams} from "react-router";
+import {Link} from "react-router-dom";
+import {ArrowLeftOutlined, ArrowRightOutlined} from "@ant-design/icons";
 
 export default function Mapping() {
+
+    const sessionId = useParams().id;
+
     const columns = [
         {
             title: '№',
@@ -78,19 +84,52 @@ export default function Mapping() {
         },
     ];
 
+    let params = ["fio", "email", "phone"];
+
+    const { Option } = Select;
+
+    const [ranges, setRanges] = useState([]);
+
+    function handleChange(value) {
+        console.log('selected ' + value);
+    }
+
+    function alert(rangesNew) {
+        console.log(rangesNew);
+        setRanges(rangesNew);
+    }
+
     return (
         <div>
             <MySteps current = {1} />
             <Content style={{ padding: '40px 50px 0' }}>
                 <div className="site-layout-content">
+                    <Select
+                        mode={"multiple"}
+                        defaultValue={["fio", "email"]}
+                        onChange={handleChange}
+                        style={{width: '30%'}}
+                    >
+                        {params.map(value => {
+                            return <Option value={value}>{value}</Option>
+                        })}
+                    </Select>
                     <Table
                         columns={columns}
                         dataSource={data}
                         size={"small"}
                     />
-                    <RangeSelector />
+                    <RangeSelector alert={alert} />
                 </div>
             </Content>
+            <div className={"buttons"}>
+                <Button type={"secondary"}>
+                    <Link to={`/${sessionId}/pick-file`}> <ArrowLeftOutlined /> Назад </Link>
+                </Button>
+                <Button type={"primary"}>
+                    <Link to={`/${sessionId}/template`}> Далее <ArrowRightOutlined /> </Link>
+                </Button>
+            </div>
         </div>
     )
 }

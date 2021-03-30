@@ -1,9 +1,10 @@
 import React from "react";
 import MySteps from "./MySteps";
-import { message, Upload } from 'antd';
+import { message, Button, Upload } from 'antd';
 import { Content } from "antd/es/layout/layout";
-import { InboxOutlined } from '@ant-design/icons';
+import { ArrowLeftOutlined, ArrowRightOutlined, InboxOutlined } from '@ant-design/icons';
 import "./PickFile.css";
+import {Link} from "react-router-dom";
 import { useParams } from "react-router";
 import "../ServerApi.js"
 import Settings from "../backend.settings.json"
@@ -43,6 +44,14 @@ export default function PickFile() {
                 </Dragger>
                 </div>
             </Content>
+            <div className={"buttons"}>
+                <Button type={"secondary"}>
+                    <Link to={"/sessions"}> <ArrowLeftOutlined /> Назад </Link>
+                </Button>
+                <Button type={"primary"}>
+                    <Link to={`/${sessionId}/mapping`}> Далее <ArrowRightOutlined /> </Link>
+                </Button>
+            </div>
         </div>
     )
 }

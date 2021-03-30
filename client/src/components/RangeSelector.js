@@ -7,11 +7,8 @@ export default class RangeSelector extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            ranges: [
-                // {id: 1, begin: 1, end: 2},
-                // {id: 2, begin: 4, end: 5},
-            ],
-        }
+            ranges: [],
+           }
     }
 
     newId = () => {
@@ -65,6 +62,21 @@ export default class RangeSelector extends React.Component {
         });
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.state !== prevState) {
+            this.props.alert(this.state.ranges);
+        }
+    }
+
+    next = () => {
+        let output = [];
+        for (let i = 0; i < this.state.ranges.length; i++) {
+            output.push(this.state.ranges[i].begin.toString() + ' - ' + this.state.ranges[i].end.toString() )
+        }
+        console.log(output);
+        return output;
+    }
+
     render() {
         return (
             <div>
@@ -104,7 +116,7 @@ export default class RangeSelector extends React.Component {
                             </Form.Item>
 
                             <Form.Item>
-                                <Button type={"primary"} htmlType={"submit"}>
+                                <Button type={"secondary"} htmlType={"submit"}>
                                     Добавить
                                 </Button>
                             </Form.Item>

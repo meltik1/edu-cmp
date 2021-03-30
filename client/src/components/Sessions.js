@@ -5,6 +5,7 @@ import { Content } from "antd/es/layout/layout";
 import "../App.css";
 import "../ServerApi.js"
 import { backend } from "../ServerApi";
+import {Link} from "react-router-dom";
 import { useHistory } from "react-router";
 
 export default function GetSessions() {
@@ -110,13 +111,6 @@ export default function GetSessions() {
         setIsModalVisible(false);
     };
 
-    const callServer = async () => {
-        const resp = await backend.get(
-            "sessions",
-        )
-        console.log(resp.data);
-    }
-
     return (
         <Content style={{ padding: '40px 50px 0' }}>
             <div className={"site-layout-content-sessions"}>
@@ -134,7 +128,6 @@ export default function GetSessions() {
                     <Table dataSource={dataSource} columns={columns} onRow={onClickRow} />
                 </div>
             </div>
-            <Button onClick={() => callServer()}>Test</Button>
         </Content>
     );
 }

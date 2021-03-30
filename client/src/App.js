@@ -4,13 +4,10 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link,
+    Redirect,
 } from "react-router-dom";
 
-import {
-    Layout,
-    Button
-} from "antd";
+import {Layout} from "antd";
 import 'antd/dist/antd.css';
 
 import GetSessions from "./components/Sessions";
@@ -25,43 +22,6 @@ import logo from "./img/logo_dark_removebg_try.png";
 const {Header, Footer} = Layout;
 
 export default function App() {
-
-    const steps = [
-        {
-            title: "Выбор файла",
-            description: "Загузка таблицы",
-        },
-        {
-            title: "Маппинг",
-            description: "Выбор получателей",
-        },
-        {
-            title: "Шаблон",
-            description: "Набор сообщения",
-        },
-        {
-            title: "Валидация",
-            description: "Проверка",
-        },
-        {
-            title: "Отчёт",
-            description: "Результат",
-        },
-    ];
-
-    const links = ["/", "/:id/pick-file", "/mapping", "/template", "/validation", "/report"]
-
-    const [current, setCurrent] = React.useState(0);
-
-    const next = () => {
-        setCurrent(current + 1);
-
-    };
-
-    const prev = ( ) => {
-        setCurrent(current - 1);
-    };
-
     return (
         <Router>
             <div>
@@ -72,43 +32,27 @@ export default function App() {
 
                     <Switch>
                         <Route exact path="/">
+                            <Redirect to="/sessions" />
+                        </Route>
+                        <Route path="/sessions">
                             <GetSessions />
                         </Route>
                         <Route path="/:id/pick-file">
                             <PickFile />
                         </Route>
-                        <Route path="/mapping">
+                        <Route path="/:id/mapping">
                             <Mapping />
                         </Route>
-                        <Route path="/template">
+                        <Route path="/:id/template">
                             <Template />
                         </Route>
-                        <Route path="/validation">
+                        <Route path="/:id/validation">
                             <Validation />
                         </Route>
-                        <Route path="/report">
+                        <Route path="/:id/report">
                             <Report />
                         </Route>
                     </Switch>
-
-                    <div className="steps-action" style={{ padding: '20px 50px 0' }}>
-
-                        {current < steps.length && (
-                            <Button type="primary" onClick={() => next()}>
-                                <Link to={links[current + 1]}> Далее </Link>
-                            </Button>
-                        )}
-                        {current === steps.length && (
-                            <Button type="primary">
-                                Готово
-                            </Button>
-                        )}
-                        {current > 0 && (
-                            <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
-                                <Link to={links[current - 1]}> Назад </Link>
-                            </Button>
-                        )}
-                    </div>
 
                     <Footer style={{ textAlign: 'center' }}>(c) Netcracker, 2021</Footer>
 
