@@ -29,8 +29,8 @@ mail:
   from: testFrom@gmail.com
   host: smtp.mailtrap.io
   port: 2525
-  username: username
-  password: password
+  username: 2200b34d528607
+  password: 8d9bf595d67abb
 ---
 spring:
   profiles: prod
