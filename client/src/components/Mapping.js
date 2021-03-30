@@ -1,98 +1,122 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import MySteps from "./MySteps";
 import { Content } from "antd/es/layout/layout";
-import {Table, Select, Button} from "antd";
+import {Table, Button, List, Input} from "antd";
 import "./Mapping.css";
 import RangeSelector from "./RangeSelector";
 import {useParams} from "react-router";
 import {Link} from "react-router-dom";
 import {ArrowLeftOutlined, ArrowRightOutlined} from "@ant-design/icons";
+import {backend} from "../ServerApi";
 
 export default function Mapping() {
 
-    const sessionId = useParams().id;
+    const [, rerender] = useState();
 
-    const columns = [
-        {
+    const [attributes, setAttributes] = useState(['email', 'tg']);
+    const [tempAttribute, setTempAttribute] = useState("");
+    const [columns, setColumns] = useState(new Array(5));// TODO: as max column number from sever
+
+
+    const getMapper = (i) => (
+        <div>
+            <Input
+                placeholder="Введите новый макрос"
+                value={tempAttribute}
+                onChange={(e) => {setTempAttribute(e.target.value)}}
+                onPressEnter={(e) => {
+                    attributes.push(tempAttribute)
+                    setTempAttribute("")
+                    setAttributes(attributes)
+                    rerender({});
+                }}/>
+            <List
+                size="small"
+                bordered
+                dataSource={attributes}
+                renderItem={item => <List.Item onClick={() => {
+                    columns[i] = item;
+                    setColumns(columns)
+                    rerender({})
+                }}>{item}</List.Item>}
+            />
+        </div>
+    )
+
+    const generateColumns = (names) => {
+
+        const result = [];
+
+        // add rownum column
+        result.push({
             title: '№',
             dataIndex: 'number',
             key: 'number',
             width: 20,
-        },
-        {
-            title: 'ФИО',
-            dataIndex: 'name',
-            key: 'name',
-        },
-        {
-            title: 'E-mail',
-            dataIndex: 'email',
-            key: 'email',
-        },
-        {
-            title: 'Телефон',
-            dataIndex: 'phone',
-            key: 'phone',
-        },
-        {
-            title: 'Telegram',
-            dataIndex: 'telegram',
-            key: 'telegram',
+        })
+
+        for (let i = 0; i < names.length; i++) {
+            result.push(
+                {
+                    title: names[i],
+                    dataIndex: i,
+                    key: i,
+                    filterDropdown: getMapper(i)
+                }
+            )
         }
-    ];
 
-    const data = [
-        {
-            key: '1',
-            number: '1',
-            name: 'Aaron Aldenburg',
-            email: 'aa@mail.ru',
-            phone: '111-111',
-            telegram: '@aa'
-        },
-        {
-            key: '2',
-            number: '2',
-            name: 'Berthold Blake',
-            email: 'bb@mail.ru',
-            phone: '222-222',
-            telegram: '@bb'
-        },
-        {
-            key: '3',
-            number: '3',
-            name: 'Carl Clopp',
-            email: 'cc@mail.ru',
-            phone: '333-333',
-            telegram: '@cc'
-        },
-        {
-            key: '4',
-            number: '4',
-            name: 'Dick Donovan',
-            email: 'dd@mail.ru',
-            phone: '444-444',
-            telegram: '@dd'
-        },
-        {
-            key: '5',
-            number: '5',
-            name: 'Emanuel East',
-            email: 'ee@mail.ru',
-            phone: '555-555',
-            telegram: '@ee'
-        },
-    ];
+        return result;
+    }
 
-    let params = ["fio", "email", "phone"];
+    const sessionId = useParams().id;
 
-    const { Option } = Select;
+    const [data, setData] = useState();
+    const [tableData, setTableData] = useState(
+        {
+            generated: false,
+            dataset: []
+        }
+    );
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await backend.get(`/sessions/${sessionId}/map-columns`)
+            setData(result.data);
+        };
+
+        fetchData();
+    }, []);
+
+    if (data !== undefined && !tableData.generated) {
+        console.log(data);
+
+        let maxIter = 0;
+
+        // parse data
+        const mapped = data.map(x => {
+            return x.rawFileData;
+        }).map((x, index) => {
+
+            let newX = x;
+            newX.key = index + 1;
+            newX.number = index + 1;
+
+            return newX;
+        });
+
+        setTableData(
+            {
+                generated: true,
+                dataset: mapped
+            }
+        )
+
+    }
 
     const [ranges, setRanges] = useState([]);
 
-    function handleChange(value) {
-        console.log('selected ' + value);
-    }
 
     function alert(rangesNew) {
         console.log(rangesNew);
@@ -104,19 +128,9 @@ export default function Mapping() {
             <MySteps current = {1} />
             <Content style={{ padding: '40px 50px 0' }}>
                 <div className="site-layout-content">
-                    <Select
-                        mode={"multiple"}
-                        defaultValue={["fio", "email"]}
-                        onChange={handleChange}
-                        style={{width: '30%'}}
-                    >
-                        {params.map(value => {
-                            return <Option value={value}>{value}</Option>
-                        })}
-                    </Select>
                     <Table
-                        columns={columns}
-                        dataSource={data}
+                        columns={generateColumns(columns)}
+                        dataSource={tableData.dataset}
                         size={"small"}
                     />
                     <RangeSelector alert={alert} />
@@ -126,8 +140,12 @@ export default function Mapping() {
                 <Button type={"secondary"}>
                     <Link to={`/${sessionId}/pick-file`}> <ArrowLeftOutlined /> Назад </Link>
                 </Button>
-                <Button type={"primary"}>
-                    <Link to={`/${sessionId}/template`}> Далее <ArrowRightOutlined /> </Link>
+                <Button type={"primary"} onClick={() => {
+                    console.log(columns)
+                    console.log(ranges)
+                }}>
+                    Далее
+                    <ArrowRightOutlined />
                 </Button>
             </div>
         </div>
