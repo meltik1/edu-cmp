@@ -80,7 +80,7 @@ public class SessionsControllers {
     }
 
     @RequestMapping(value = "{id}/attributes", method = RequestMethod.GET)
-    public String getAttributes(@PathVariable String id) {
+    public List<String> getAttributes(@PathVariable String id) {
         return sessionsService.getMappedAttributes(Long.parseLong(id));
     }
 

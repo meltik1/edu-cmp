@@ -37,19 +37,19 @@ export default function App() {
                         <Route path="/sessions">
                             <GetSessions />
                         </Route>
-                        <Route path="/:d*/pick-file">
+                        <Route path="/:id/pick-file">
                             <PickFile />
                         </Route>
-                        <Route path="/:d*/mapping">
+                        <Route path="/:id/mapping">
                             <Mapping />
                         </Route>
-                        <Route path="/:d*/template">
+                        <Route path="/:id/template">
                             <Template />
                         </Route>
-                        <Route path="/:d*/validation">
+                        <Route path="/:id/validation">
                             <Validation />
                         </Route>
-                        <Route path="/:d*/report">
+                        <Route path="/:id/report">
                             <Report />
                         </Route>
                     </Switch>

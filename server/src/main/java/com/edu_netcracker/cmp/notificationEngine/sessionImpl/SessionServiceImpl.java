@@ -1,9 +1,7 @@
 package com.edu_netcracker.cmp.notificationEngine.sessionImpl;
 
-import com.edu_netcracker.cmp.entities.DTO.StudentsAttributesDTO;
 import com.edu_netcracker.cmp.entities.Session;
 import com.edu_netcracker.cmp.entities.SessionStatus;
-import com.edu_netcracker.cmp.entities.StudentsToAttributes;
 import com.edu_netcracker.cmp.entities.jpa.STAJPA;
 import com.edu_netcracker.cmp.entities.jpa.SessionJPA;
 import com.edu_netcracker.cmp.notificationEngine.ITemplate;
@@ -11,21 +9,16 @@ import com.edu_netcracker.cmp.notificationEngine.IUserMessageInfo;
 import com.edu_netcracker.cmp.notificationEngine.NotificationService;
 import com.edu_netcracker.cmp.notificationEngine.SessionsService;
 import com.edu_netcracker.cmp.notificationEngine.parserImpl.FileHandler;
-
-import com.edu_netcracker.cmp.notificationEngine.telegramImpl.NotificationServiceTG;
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import lombok.extern.slf4j.Slf4j;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Component
@@ -67,6 +60,7 @@ public class SessionServiceImpl implements SessionsService {
 
         session.setName(name);
         session.setStatus(SessionStatus.FILESELECTION);
+        session.setDate(this.getDate());
         sessionJPA.save(session);
         return session;
     }
@@ -99,6 +93,20 @@ public class SessionServiceImpl implements SessionsService {
     }
 
 
+    private Boolean checkIfInRange(JsonNode range, Integer index) {
+
+        for(Iterator<JsonNode> itRange = range.elements(); itRange.hasNext(); ) {
+            JsonNode rangeNode = itRange.next();
+            int start = rangeNode.findValue("start").asInt();
+            int end = rangeNode.findValue("end").asInt();
+
+            if (index >= start && index <= end) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     @Override
     public void sendMessages(Long id) throws JsonProcessingException {
@@ -110,61 +118,61 @@ public class SessionServiceImpl implements SessionsService {
         Map<String, String> params = session.getColumnMappingMap();
 
 
-
-        String s = handler.sendAttributes(params);
+        String s = handler.sendAttributes(students, params);
 
         JsonNode root = mapper.readTree(s);
-        
+
         List<Map<String, String>> reportsOfAllStudents = new ArrayList<>();
-        // Каждая итерация цикла - новый студент
-        for (Iterator<JsonNode> it = root.elements(); it.hasNext(); ) {
+        String range = session.getRangeJSON();
+        JsonNode rangeJSONNode = mapper.readTree(range);
+
+
+        Integer index = 1;
+        for (Iterator<JsonNode> it = root.elements(); it.hasNext(); index++) {
             JsonNode node = it.next();
+            if (checkIfInRange(rangeJSONNode, index)) {
+                String telegramName = node.findValue("Telegram").asText();
+                String email = node.findValue("Email").asText();
+                Map<String, String> mappedAttributes = mapper.convertValue(node, new TypeReference<Map<String, String>>() {
+                });
+                Map<String, String> studentIReport = new HashMap<>(mappedAttributes);
 
 
-            String telegramName = node.findValue("Telegram").asText();
-            String email = node.findValue("Email").asText();
-            Map<String, String> mappedAttributes = mapper.convertValue(node, new TypeReference<Map<String, String>>() {
-            });
-            Map<String, String> studentIReport = new HashMap<>(mappedAttributes);
-
-
-
-            iTemplate.applyParams(mappedAttributes);
-            this.saveTemplate(id, iTemplate.getTemplate());
-            Map<String, String> contacts = new HashMap<>();
-            contacts.put("Telegram", telegramName);
-            contacts.put("Email", email);
-            iUserMessageInfo.setMapOfContactId(contacts);
-
-            for (NotificationService service : notificationServicesRealisation) {
-                if (service.getName().equals("Telegram")) {
-                    if (telegramName != null) {
-                        try {
+                iTemplate.applyParams(mappedAttributes);
+                this.saveTemplate(id, iTemplate.getTemplate());
+                Map<String, String> contacts = new HashMap<>();
+                contacts.put("Telegram", telegramName);
+                contacts.put("Email", email);
+                iUserMessageInfo.setMapOfContactId(contacts);
+                for (NotificationService service : notificationServicesRealisation) {
+                    if (service.getName().equals("Telegram")) {
+                        if (telegramName != null && !(telegramName.equals(""))) {
+                            try {
+                                service.send(iUserMessageInfo, iTemplate);
+                                studentIReport.put("Telegram status", "ok");
+                            } catch (NullPointerException exception) {
+                                studentIReport.put("Telegram status", "Пользователь не зарегистрирован в боте");
+                            }
+                        } else {
+                            studentIReport.put("Telegram status", "Пользователь не указал свой ник ");
+                        }
+                    } else if (service.getName().equals("Email")) {
+                        if (email != null && !(email.equals(""))) {
                             service.send(iUserMessageInfo, iTemplate);
-                            studentIReport.put("Telegram status", "ok");
+                            studentIReport.put("Email status", "ok");
+                        } else {
+                            studentIReport.put("Email status", "Пользоватеь не указал Email");
                         }
-                        catch (NullPointerException exception) {
-                            studentIReport.put("Telegram status", "Пользователь не зарегистрирован в боте");
-                        }
-
                     }
                     else {
                         studentIReport.put("Telegram status", "Пользователь не указал свой ник ");
                     }
-                } else if (service.getName().equals("Email")) {
-                    if (email != null) {
-                            service.send(iUserMessageInfo, iTemplate);
-                            studentIReport.put("Email status", "ok");
-                    }
-                    else  {
-                        studentIReport.put("Email status", "Пользоватеь не указал Email");
-                    }
-                }
             }
             reportsOfAllStudents.add(studentIReport);
         }
-        session.setReportJSON(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(reportsOfAllStudents));
-        sessionJPA.saveAndFlush(session);
+            session.setReportJSON(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(reportsOfAllStudents));
+            sessionJPA.saveAndFlush(session);
+        }
     }
 
     @Override
@@ -183,15 +191,12 @@ public class SessionServiceImpl implements SessionsService {
     }
 
     @Override
-    public String getMappedAttributes(Long id) {
+    public List<String> getMappedAttributes(Long id) {
         Map<String, String> params = sessionJPA.findById(id).get().getColumnMappingMap();
+        List<String> paramsList = new ArrayList<>(params.values());
 
-        try {
-            return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(params);
-        } catch (JsonProcessingException e) {
-            log.error("{} invaild json form in session with id {} ", e.getMessage(), id);
-            throw new IllegalStateException("Invalid JSON Form", e);
-        }
+        return paramsList;
+
     }
 
     @Override
@@ -241,7 +246,7 @@ public class SessionServiceImpl implements SessionsService {
         JsonNode rangeJson = root.at("/range");
         rangeValidation(rangeJson);
 
-        session.setRangeJSON(rangeJson.asText());
+        session.setRangeJSON(rangeJson.toString());
         session.setColumnMappingMap(columnsMapping);
         session.setStatus(SessionStatus.TEMPLATE);
         sessionJPA.saveAndFlush(session);
@@ -252,7 +257,7 @@ public class SessionServiceImpl implements SessionsService {
         Session session = sessionJPA.getOne(id);
         try {
             Map<String, String> params = session.getColumnMappingMap();
-            String s = handler.sendAttributes(params);
+            String s = handler.sendAttributes(session.getStudentsJSON(), params);
             JsonNode root = mapper.readTree(s);
             Map<String, String> firstStudent = mapper.convertValue(root.get(0), new TypeReference<Map<String, String>>(){});
             iTemplate.setTemplate(session.getTemplate());
@@ -262,5 +267,11 @@ public class SessionServiceImpl implements SessionsService {
             log.warn("Unable to parse json file");
         }
         return session.getTemplate();
+    }
+
+    private String getDate() {
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+        return formatter.format(date);
     }
 }

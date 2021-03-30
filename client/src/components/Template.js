@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import MySteps from "./MySteps";
 import {Content} from "antd/es/layout/layout";
 import {Col, Row, Input, List, Button} from "antd";
@@ -6,6 +6,7 @@ import {useParams} from "react-router"
 import {Link} from "react-router-dom";
 import "./Template.css";
 import {ArrowLeftOutlined, ArrowRightOutlined} from "@ant-design/icons";
+import InitializeData from "./ReportSubComponents/InitializeData";
 
 export default function Template() {
 
@@ -16,11 +17,21 @@ export default function Template() {
     let macros = ['fio', 'login', 'password'];
 
     const { TextArea } = Input;
+    const [attributes, setAttributes] = useState([]);
+
+    InitializeData('sessions/1/attributes' , setAttributes);
 
     return (
         <div>
-            <MySteps current = {2} />
-            <Content style={{ padding: '40px 50px 0' }}>
+            <MySteps current={2}/>
+            <Content style={{padding: '40px 50px 0'}}>
+                <List
+                    size="large"
+                    header={<div>Аттрибуты для шаблона</div>}
+                    bordered
+                    dataSource={attributes}
+                    renderItem={item => <List.Item>{item}</List.Item>}
+                />
                 <div className="site-layout-content">
                     <Row gutter={16}>
                         <Col span={20}>
