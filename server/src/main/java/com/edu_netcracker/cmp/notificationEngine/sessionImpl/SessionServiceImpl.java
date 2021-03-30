@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Component
@@ -59,6 +60,7 @@ public class SessionServiceImpl implements SessionsService {
 
         session.setName(name);
         session.setStatus(SessionStatus.FILESELECTION);
+        session.setDate(this.getDate());
         sessionJPA.save(session);
         return session;
     }
@@ -265,5 +267,11 @@ public class SessionServiceImpl implements SessionsService {
             log.warn("Unable to parse json file");
         }
         return session.getTemplate();
+    }
+
+    private String getDate() {
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+        return formatter.format(date);
     }
 }
