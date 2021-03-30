@@ -207,6 +207,20 @@ public class SessionServiceImpl implements SessionsService {
         sessionJPA.save(session);
     }
 
+    @Override
+    public void saveTheme(Long id, String theme) {
+        Session session = sessionJPA.getOne(id);
+        session.setTheme(theme);
+        session.setStatus(SessionStatus.VALIDATION);
+        sessionJPA.save(session);
+    }
+
+    @Override
+    public String getTheme(Long id) {
+        Session session = sessionJPA.getOne(id);
+        return session.getTheme();
+    }
+
     private void rangeValidation(JsonNode node) throws IllegalArgumentException{
         List<String> start = node.findValuesAsText("start");
         List<String> end = node.findValuesAsText("end");

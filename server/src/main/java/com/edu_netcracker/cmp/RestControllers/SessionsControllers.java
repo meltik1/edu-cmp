@@ -64,9 +64,19 @@ public class SessionsControllers {
         return sessionsService.getTemplate(Long.parseLong(id));
     }
 
+    @RequestMapping(value = "{id}/get-theme", method = RequestMethod.GET)
+    public String getTheme(@PathVariable String id) {
+        return sessionsService.getTheme(Long.parseLong(id));
+    }
+
     @RequestMapping(value = "{id}/save-template", method = RequestMethod.POST)
     public void saveTemplate(@PathVariable String id, @RequestBody String template) {
         sessionsService.saveTemplate(Long.parseLong(id), template);
+    }
+
+    @RequestMapping(value = "{id}/save-template-theme", method = RequestMethod.POST)
+    public void saveTheme(@PathVariable String id, @RequestBody String theme) {
+        sessionsService.saveTheme(Long.parseLong(id), theme);
     }
 
     @RequestMapping(value = "{id}/validation", method = RequestMethod.GET)

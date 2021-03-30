@@ -37,4 +37,5 @@ public class Session {
 
     private String rangeJSON;
     private String template;
+    private String theme;
 }
