@@ -1,42 +1,72 @@
 import React, { useState } from "react";
 import MySteps from "./MySteps";
-import {Content} from "antd/es/layout/layout";
-import {Col, Row, Input, List, Button} from "antd";
-import {useParams} from "react-router"
-import {Link} from "react-router-dom";
+import { Content } from "antd/es/layout/layout";
+import { Col, Row, Input, List, Button } from "antd";
+import { useHistory, useParams } from "react-router"
 import "./Template.css";
-import {ArrowLeftOutlined, ArrowRightOutlined} from "@ant-design/icons";
 import InitializeData from "./ReportSubComponents/InitializeData";
+import { backend } from "../ServerApi";
 
 export default function Template() {
 
     const sessionId = useParams().id;
-
-    const listHeader = ['Макросы'];
-
-    let macros = ['fio', 'login', 'password'];
-
     const { TextArea } = Input;
     const [attributes, setAttributes] = useState([]);
+    const [text, setText] = useState('');
+    const [theme, setTheme] = useState('');
+    const listHeader = ['Макросы'];
+    let macros = attributes;
 
     InitializeData(`sessions/${sessionId}/attributes` , setAttributes);
+
+    const goForward = () => {
+        saveTemplate();
+    }
+
+    const goBack = () => {
+        history.push({
+            pathname: `/${sessionId}/mapping`
+        })
+    }
+
+    const onChange = e => {
+        setText(e.target.value);
+    };
+
+    const onChangeTheme = e => {
+        setTheme(e.target.value);
+    };
+
+    const history = useHistory();
+
+    const headers = {
+        'Content-Type': 'text/html; charset=UTF-8'
+    }
+
+    const saveTemplate = async () => {
+
+        await backend.post(`/sessions/${sessionId}/save-template`, text, {
+            headers: headers
+        })
+            .catch(console.log)
+        await backend.post(`/sessions/${sessionId}/save-template-theme`, theme, {
+            headers: headers
+        })
+            .catch(console.log)
+        history.push({
+            pathname: `/${sessionId}/validation`
+        })
+    }
 
     return (
         <div>
             <MySteps current={2}/>
             <Content style={{padding: '40px 50px 0'}}>
-                <List
-                    size="large"
-                    header={<div>Аттрибуты для шаблона</div>}
-                    bordered
-                    dataSource={attributes}
-                    renderItem={item => <List.Item>{item}</List.Item>}
-                />
                 <div className="site-layout-content">
                     <Row gutter={16}>
                         <Col span={20}>
-                            <Input placeholder={'Тема'} style={{ marginBottom: '12px' }} />
-                            <TextArea placeholder={'Текст сообщения'} rows={14} />
+                            <Input placeholder={'Тема'} style={{ marginBottom: '12px' }} onChange={onChangeTheme} />
+                            <TextArea placeholder={'Текст сообщения'} rows={14} onChange={onChange} />
                         </Col>
                         <Col span={4}>
                             <List
@@ -60,11 +90,11 @@ export default function Template() {
                 </div>
             </Content>
             <div className={"buttons"}>
-                <Button type={"secondary"}>
-                    <Link to={`/${sessionId}/mapping`}> <ArrowLeftOutlined /> Назад </Link>
+                <Button type={"secondary"} onClick={goBack}>
+                    Назад
                 </Button>
-                <Button type={"primary"}>
-                    <Link to={`/${sessionId}/validation`}> Далее <ArrowRightOutlined /> </Link>
+                <Button type={"primary"} onClick={goForward}>
+                    Далее
                 </Button>
             </div>
         </div>

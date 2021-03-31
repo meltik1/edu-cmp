@@ -1,25 +1,35 @@
 import React, {useState} from "react";
 import MySteps from "./MySteps";
 import { Content } from "antd/es/layout/layout";
-import {Button, Select, Table, Tag} from "antd";
-import {useParams} from "react-router";
-import {Link} from "react-router-dom";
-import {ArrowLeftOutlined, HomeOutlined} from "@ant-design/icons";
+import { Button, Table, Tag } from "antd";
+import { useHistory, useParams } from "react-router";
 import SelectAtrributes from "./ReportSubComponents/SelectAtrributes";
 import BuildReport from "./ReportSubComponents/BuildReport";
 import InitializeData from "./ReportSubComponents/InitializeData";
-const { Option } = Select;
 
 export default function Report() {
 
+    const sessionId = useParams().id;
     const [selectedColumn, setColumn] = useState("Email")
     const [reportInfo, setReportInfo] = useState({});
     const [attributes, setAttributes] = useState([]);
 
-    InitializeData('sessions/1/attributes' , setAttributes);
-    InitializeData("sessions/1/report", setReportInfo);
+    InitializeData(`sessions/${sessionId}/attributes` , setAttributes);
+    InitializeData(`sessions/${sessionId}/report`, setReportInfo);
 
-    const sessionId = useParams().id;
+    const history = useHistory();
+
+    const goBack = () => {
+        history.push({
+            pathname: `/${sessionId}/validation`
+        })
+    }
+
+    const goHome = () => {
+        history.push({
+            pathname: `/sessions`
+        })
+    }
 
     const columns = [
         {
@@ -60,26 +70,12 @@ export default function Report() {
         setColumn(val)
     }
 
-
-    const { Option } = Select;
-
-    let params = ["fio", "email", "phone"];
-
-    function handleChange(value) {
-        console.log('selected '+ value);
-    }
-
     return (
         <div>
             <MySteps current = {4} />
             <Content style={{ padding: '40px 50px 0' }}>
-                <SelectAtrributes change={handler} attributesList={attributes} />
                 <div className="site-layout-content">
-                    <Select defaultValue={"fio"} onChange={handleChange} style={{width: 120}}>
-                        {params.map(value => {
-                            return <Option value={value}>{value}</Option>
-                        })}
-                    </Select>
+                    <SelectAtrributes change={handler} attributesList={attributes} />
                     <Table
                         columns={columns}
                         dataSource={data}
@@ -89,10 +85,9 @@ export default function Report() {
             </Content>
             <div className={"buttons"}>
                 <Button type={"secondary"}>
-                    <Link to={`/${sessionId}/validation`}> <ArrowLeftOutlined /> Назад </Link>
                 </Button>
-                <Button type={"primary"}>
-                    <Link to={"/sessions"}> Домой <HomeOutlined /> </Link>
+                <Button type={"primary"} onClick={goHome}>
+                    Домой
                 </Button>
             </div>
         </div>

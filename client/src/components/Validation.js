@@ -4,18 +4,33 @@ import { Content } from "antd/es/layout/layout";
 import {Button, Divider} from "antd";
 import './Validation.css';
 import InitializeData from "./ReportSubComponents/InitializeData";
-import {useParams} from "react-router";
-import {Link} from "react-router-dom";
-import {ArrowLeftOutlined, ArrowRightOutlined} from "@ant-design/icons";
+import { useHistory, useParams } from "react-router";
+import { backend } from "../ServerApi";
 
 export default function Validation() {
 
     const sessionId = useParams().id
-
-    const theme = 'Обучение в Учебном Центре Netсracker 2020'
+    const [theme, setTheme] =  useState("");
     const [text, setText] =  useState("");
 
     InitializeData(`sessions/${sessionId}/validation`, setText);
+    InitializeData(`sessions/${sessionId}/get-theme`, setTheme);
+
+    const history = useHistory();
+
+    const goBack = () => {
+        history.push({
+            pathname: `/${sessionId}/template`
+        })
+    }
+
+    const goForward = async () => {
+        await backend.get(`/sessions/${sessionId}/send`)
+            .catch(console.log)
+        history.push({
+            pathname: `/${sessionId}/report`,
+        })
+    }
 
     return (
         <div>
@@ -28,11 +43,11 @@ export default function Validation() {
                 </div>
             </Content>
             <div className={"buttons"}>
-                <Button type={"secondary"}>
-                    <Link to={`/${sessionId}/template`}> <ArrowLeftOutlined /> Назад </Link>
+                <Button type={"secondary"} onClick={goBack}>
+                    Назад
                 </Button>
-                <Button type={"primary"}>
-                    <Link to={`/${sessionId}/report`}> Далее <ArrowRightOutlined /> </Link>
+                <Button type={"primary"} onClick={goForward}>
+                    Далее
                 </Button>
             </div>
         </div>

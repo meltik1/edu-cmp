@@ -181,6 +181,7 @@ public class SessionServiceImpl implements SessionsService {
         String report =  session.getReportJSON();
         if (report != null) {
             session.setStatus(SessionStatus.REPORT);
+            sessionJPA.save(session);
         }
         return report;
     }
@@ -205,6 +206,19 @@ public class SessionServiceImpl implements SessionsService {
         session.setTemplate(template);
         session.setStatus(SessionStatus.VALIDATION);
         sessionJPA.save(session);
+    }
+
+    @Override
+    public void saveTheme(Long id, String theme) {
+        Session session = sessionJPA.getOne(id);
+        session.setTheme(theme);
+        sessionJPA.save(session);
+    }
+
+    @Override
+    public String getTheme(Long id) {
+        Session session = sessionJPA.getOne(id);
+        return session.getTheme();
     }
 
     private void rangeValidation(JsonNode node) throws IllegalArgumentException{
