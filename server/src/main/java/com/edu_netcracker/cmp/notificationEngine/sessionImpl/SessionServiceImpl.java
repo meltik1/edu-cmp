@@ -140,6 +140,7 @@ public class SessionServiceImpl implements SessionsService {
 
                 iTemplate.applyParams(mappedAttributes);
                 this.saveTemplate(id, iTemplate.getTemplate());
+                iTemplate.setTheme(session.getTheme());
                 Map<String, String> contacts = new HashMap<>();
                 contacts.put("Telegram", telegramName);
                 contacts.put("Email", email);

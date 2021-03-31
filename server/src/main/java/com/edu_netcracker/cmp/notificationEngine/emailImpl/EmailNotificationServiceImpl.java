@@ -26,14 +26,14 @@ public class EmailNotificationServiceImpl implements NotificationService {
 
     private String name = "Email";
 
-    public MimeMessage createMimeMessage(String msg, String to) throws MessagingException {
+    public MimeMessage createMimeMessage(String msg, String to, String theme) throws MessagingException {
 
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 
         messageHelper.setFrom(mailConfig.getFrom());
         messageHelper.setTo(to);
-        messageHelper.setSubject(msg);
+        messageHelper.setSubject(theme);
         messageHelper.setText(msg);
 
         return mimeMessage;
@@ -47,7 +47,7 @@ public class EmailNotificationServiceImpl implements NotificationService {
     public void send(IUserMessageInfo userMessageInfo, ITemplate template) {
         try {
             MimeMessage mimeMessage = createMimeMessage(template.getTemplate(),
-                                                        userMessageInfo.getMapOfContactId().get("Email"));
+                                                        userMessageInfo.getMapOfContactId().get("Email"), template.getTheme());
             mailSender.send(mimeMessage);
         } catch (MessagingException e) {
             log.info(e.toString());
