@@ -84,8 +84,7 @@ export default function Report() {
                 </div>
             </Content>
             <div className={"buttons"}>
-                <Button type={"secondary"} onClick={goBack}>
-                    Назад
+                <Button type={"secondary"}>
                 </Button>
                 <Button type={"primary"} onClick={goHome}>
                     Домой

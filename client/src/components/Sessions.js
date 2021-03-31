@@ -5,7 +5,12 @@ import { Content } from "antd/es/layout/layout";
 import "../App.css";
 import "../ServerApi.js"
 import { backend } from "../ServerApi";
+import {Link, Route, Switch} from "react-router-dom";
 import { useHistory } from "react-router";
+import PickFile from "./PickFile";
+import Mapping from "./Mapping";
+import Template from "./Template";
+import Validation from "./Validation";
 
 export default function GetSessions() {
     const sessionStatus = new Map([
@@ -14,6 +19,15 @@ export default function GetSessions() {
         ['TEMPLATE', 'Заполнение шаблона'],
         ['VALIDATION', 'Валидация'],
         ['REPORT', 'Отчет'],
+    ]);
+
+
+    const sessionStatusToPath = new Map([
+        ['Загрузка файла', '/pick-file'],
+        ['Маппинг параметров', '/mapping'],
+        ['Заполнение шаблона', '/template'],
+        ['Валидация', '/validation'],
+        ['Отчет', '/report'],
     ]);
 
     let [dataSource, setDataSource] = useState([]);
@@ -90,7 +104,7 @@ export default function GetSessions() {
         return {
             onClick: () => {
                 history.push({
-                    pathname:  record.key + "/pick-file",
+                    pathname:  record.key + sessionStatusToPath.get(record.status)
                 });
             },
         };

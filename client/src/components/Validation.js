@@ -5,6 +5,7 @@ import {Button, Divider} from "antd";
 import './Validation.css';
 import InitializeData from "./ReportSubComponents/InitializeData";
 import { useHistory, useParams } from "react-router";
+import { backend } from "../ServerApi";
 
 export default function Validation() {
 
@@ -23,7 +24,9 @@ export default function Validation() {
         })
     }
 
-    const goForward = () => {
+    const goForward = async () => {
+        await backend.get(`/sessions/${sessionId}/send`)
+            .catch(console.log)
         history.push({
             pathname: `/${sessionId}/report`,
         })

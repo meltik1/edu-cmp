@@ -181,6 +181,7 @@ public class SessionServiceImpl implements SessionsService {
         String report =  session.getReportJSON();
         if (report != null) {
             session.setStatus(SessionStatus.REPORT);
+            sessionJPA.save(session);
         }
         return report;
     }
@@ -211,7 +212,6 @@ public class SessionServiceImpl implements SessionsService {
     public void saveTheme(Long id, String theme) {
         Session session = sessionJPA.getOne(id);
         session.setTheme(theme);
-        session.setStatus(SessionStatus.VALIDATION);
         sessionJPA.save(session);
     }
 
