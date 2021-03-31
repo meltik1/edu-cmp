@@ -57,7 +57,7 @@ export default function Mapping() {
 
     }
 
-    const [attributes, setAttributes] = useState(['email', 'tg']);
+    const [attributes, setAttributes] = useState(['Email', 'Telegram']);
     const [tempAttribute, setTempAttribute] = useState("");
     const [columns, setColumns] = useState([]);
     for (let i = 0; i < maxNumber; i++) {
@@ -149,7 +149,14 @@ export default function Mapping() {
 
         const responseJSON = JSON.stringify(response);
 
-        backend.post(`sessions/${sessionId}/save-columns-mapping`, responseJSON)
+        await backend.post(
+            `sessions/${sessionId}/save-columns-mapping`,
+            responseJSON,
+            {
+                headers: {
+                    "Content-Type":"application/json"
+                }
+            })
             .catch(console.log);
 
         history.push({
