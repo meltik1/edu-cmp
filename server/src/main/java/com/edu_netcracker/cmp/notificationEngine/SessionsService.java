@@ -41,5 +41,7 @@ public interface SessionsService {
 
      String getTemplate(Long id);
 
+     void saveTheme(Long parseLong, String theme);
 
+     String getTheme(Long id);
 }
