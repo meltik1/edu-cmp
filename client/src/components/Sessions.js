@@ -5,7 +5,6 @@ import { Content } from "antd/es/layout/layout";
 import "../App.css";
 import "../ServerApi.js"
 import { backend } from "../ServerApi";
-import {Link} from "react-router-dom";
 import { useHistory } from "react-router";
 
 export default function GetSessions() {
