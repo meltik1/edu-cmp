@@ -268,6 +268,7 @@ public class SessionServiceImpl implements SessionsService {
 
     @Override
     public String getValidationTemplate(Long id) {
+        String result = "";
         Session session = sessionJPA.getOne(id);
         try {
             Map<String, String> params = session.getColumnMappingMap();
@@ -276,11 +277,11 @@ public class SessionServiceImpl implements SessionsService {
             Map<String, String> firstStudent = mapper.convertValue(root.get(0), new TypeReference<Map<String, String>>(){});
             iTemplate.setTemplate(session.getTemplate());
             iTemplate.applyParams(firstStudent);
-            this.saveTemplate(id, iTemplate.getTemplate());
+            result = iTemplate.getTemplate();
         } catch (JsonProcessingException e) {
             log.warn("Unable to parse json file");
         }
-        return session.getTemplate();
+        return result;
     }
 
     private String getDate() {
