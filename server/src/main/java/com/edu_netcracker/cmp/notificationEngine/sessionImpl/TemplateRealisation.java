@@ -18,6 +18,7 @@ public class TemplateRealisation implements ITemplate {
 
     private String template;
     private String macrosTemplate;
+    private String theme;
 
     @Override
     public String getTemplate() {
@@ -35,5 +36,15 @@ public class TemplateRealisation implements ITemplate {
     @Override
     public void setTemplate(String template) {
         this.macrosTemplate = template;
+    }
+
+    @Override
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
+
+    @Override
+    public String getTheme() {
+        return this.theme;
     }
 }
