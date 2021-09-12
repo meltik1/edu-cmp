@@ -1,11 +1,12 @@
 import React, {useState} from "react";
 import MySteps from "./MySteps";
 import { Content } from "antd/es/layout/layout";
-import { Button, Table, Tag } from "antd";
+import {Popconfirm, Button, Table, Tag } from "antd";
 import { useHistory, useParams } from "react-router";
 import SelectAtrributes from "./ReportSubComponents/SelectAtrributes";
 import BuildReport from "./ReportSubComponents/BuildReport";
 import InitializeData from "./ReportSubComponents/InitializeData";
+import {backend} from "../ServerApi";
 
 export default function Report() {
 
@@ -18,6 +19,12 @@ export default function Report() {
     InitializeData(`sessions/${sessionId}/report`, setReportInfo);
 
     const history = useHistory();
+
+
+    const confirm =  async () => {
+        await backend.get(`/sessions/${sessionId}/save-to-db`
+        )
+    }
 
     const goBack = () => {
         history.push({
@@ -84,8 +91,11 @@ export default function Report() {
                 </div>
             </Content>
             <div className={"buttons"}>
+                <Popconfirm placement="topLeft" title="Хотите создать аккаунты для студентов?" onConfirm={confirm} okText="Да" cancelText="Нет">
                 <Button type={"secondary"}>
+                    Сохранить В базу
                 </Button>
+                </Popconfirm>
                 <Button type={"primary"} onClick={goHome}>
                     Домой
                 </Button>

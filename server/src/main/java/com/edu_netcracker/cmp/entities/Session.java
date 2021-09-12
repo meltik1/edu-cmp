@@ -30,7 +30,7 @@ public class Session {
     private Map<String, String> columnMappingMap;
 
     @Column(length=100000)
-    private String studentsJSON;
+    private String usersInfoJSON;
 
     @Column(length = 100000)
     private String reportJSON;

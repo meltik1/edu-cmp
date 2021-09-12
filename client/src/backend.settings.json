@@ -1,6 +1,6 @@
 {
   "backend": {
-    "url": "http://84.201.139.62:8888",
-    "auth": "95c9e20e-831c-11eb-8dcd-0242ac130003"
+    "url": "http://localhost:8080",
+    "auth": "Basic TmlraXRhOjMwMDgwMA=="
   }
 }

@@ -48,6 +48,12 @@ public class SessionsControllers {
         return sessionsService.getStudentsAttributes(Long.parseLong(id));
     }
 
+    @RequestMapping(value = "{id}/save-to-db", method = RequestMethod.GET)
+    public void saveStudentsInfoToDB(@PathVariable String id) throws JsonProcessingException {
+        sessionsService.transformDataToEAV(Long.parseLong(id));
+    }
+
+
     @RequestMapping(value = "{id}/save-columns-mapping", method = RequestMethod.POST)
     public ResponseEntity<String> saveMapColumns(@PathVariable String id, @RequestBody String body) {
         try {

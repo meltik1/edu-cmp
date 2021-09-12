@@ -19,5 +19,7 @@ public class Attributes {
 
     private String attributeName;
 
+    private Boolean isCommunicationSource;
+
 
 }

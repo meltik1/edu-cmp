@@ -12,7 +12,4 @@ public interface STAJPA extends JpaRepository<StudentsToAttributes, Long> {
             "WHERE st.student.id = ?1 and a.attributeName = ?2 and st.charValue is not null")
     List<StudentsToAttributes> findStudentAttributeValue(Long studentId, String attribute_name);
 
-    @Query("SELECT st FROM StudentsToAttributes st join st.student s " +
-            "WHERE s.session.id = ?1")
-    List<StudentsToAttributes> findStudentsToAttributesBySessionId(Long sessionId);
 }

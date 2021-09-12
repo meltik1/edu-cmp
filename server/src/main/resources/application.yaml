@@ -6,6 +6,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
+  profiles:
+    active: zuev
 
 logging:
   file:

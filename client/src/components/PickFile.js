@@ -1,6 +1,6 @@
 import React from "react";
 import MySteps from "./MySteps";
-import { message, Button, Upload } from 'antd';
+import {  Popconfirm, message, Button, Upload } from 'antd';
 import { Content } from "antd/es/layout/layout";
 import { ArrowLeftOutlined, ArrowRightOutlined, InboxOutlined } from '@ant-design/icons';
 import "./PickFile.css";
@@ -19,6 +19,9 @@ export default function PickFile() {
         name: 'file',
         multiple: false,
         action :  Settings.backend.url + '/sessions/'+ sessionId + '/pick-file',
+        headers: {
+            "Authorization": Settings.backend.auth
+        },
         onChange(info) {
             const { status } = info.file;
             if (status === 'done') {

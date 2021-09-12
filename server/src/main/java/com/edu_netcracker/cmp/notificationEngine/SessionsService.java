@@ -25,6 +25,7 @@ public interface SessionsService {
 
      String getStudentsAttributes(Long id);
 
+     public void transformDataToEAV(Long sessionId) throws JsonProcessingException;
 
      List<String> getMappedAttributes(Long id);
 

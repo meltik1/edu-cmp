@@ -22,10 +22,6 @@ import java.util.List;
 public class NotificationBot extends TelegramLongPollingBot {
 
     @Autowired
-    StudentsJpa studentsJpa;
-    @Autowired
-    STAJPA stajpa;
-    @Autowired
     TgUsersInfoJPA tgUsersInfoJPA;
 
 

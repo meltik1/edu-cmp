@@ -4,10 +4,7 @@ import com.edu_netcracker.cmp.entities.Session;
 import com.edu_netcracker.cmp.entities.SessionStatus;
 import com.edu_netcracker.cmp.entities.jpa.STAJPA;
 import com.edu_netcracker.cmp.entities.jpa.SessionJPA;
-import com.edu_netcracker.cmp.notificationEngine.ITemplate;
-import com.edu_netcracker.cmp.notificationEngine.IUserMessageInfo;
-import com.edu_netcracker.cmp.notificationEngine.NotificationService;
-import com.edu_netcracker.cmp.notificationEngine.SessionsService;
+import com.edu_netcracker.cmp.notificationEngine.*;
 import com.edu_netcracker.cmp.notificationEngine.parserImpl.FileHandler;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -24,34 +21,40 @@ import java.util.*;
 @Component
 @Slf4j
 public class SessionServiceImpl implements SessionsService {
-
     private final ObjectMapper mapper = new ObjectMapper();
 
-    NotificationService notificationService;
+    private NotificationService notificationService;
+
+    private ITemplate iTemplate;
+
+    private IUserMessageInfo iUserMessageInfo;
+
+    private SessionJPA sessionJPA;
+
+    private STAJPA stajpa;
+
+    private EAVInfoTransformer eavInfoTransformer;
+
+    private List<NotificationService> notificationServicesRealisation;
+
+    private FileHandler handler;
 
     @Autowired
-    ITemplate iTemplate;
+    public SessionServiceImpl(NotificationService notificationService, ITemplate iTemplate, IUserMessageInfo iUserMessageInfo, SessionJPA sessionJPA, STAJPA stajpa, EAVInfoTransformer eavInfoTransformer, List<NotificationService> notificationServicesRealisation, FileHandler handler) {
+        this.notificationService = notificationService;
+        this.iTemplate = iTemplate;
+        this.iUserMessageInfo = iUserMessageInfo;
+        this.sessionJPA = sessionJPA;
+        this.stajpa = stajpa;
+        this.eavInfoTransformer = eavInfoTransformer;
+        this.notificationServicesRealisation = notificationServicesRealisation;
+        this.handler = handler;
+    }
 
-    @Autowired
-    IUserMessageInfo iUserMessageInfo;
-
-    @Autowired
-    SessionJPA sessionJPA;
-
-    @Autowired
-    STAJPA stajpa;
-
-    @Autowired
-    List<NotificationService> notificationServicesRealisation;
-
-    @Autowired
-    FileHandler handler;
 
     @Override
     public List<Session> getAllSessions() {
-        List<Session> sessions = sessionJPA.findAll();
-
-        return sessions;
+        return sessionJPA.findAll();
     }
 
     @Override
@@ -67,8 +70,7 @@ public class SessionServiceImpl implements SessionsService {
 
     @Override
     public Session getSession(Long id) {
-        Session session = sessionJPA.findById(id).get();
-        return session;
+        return sessionJPA.findById(id).get();
     }
 
     @Override
@@ -81,15 +83,15 @@ public class SessionServiceImpl implements SessionsService {
     public void parseFile(Long id, MultipartFile file) {
        Session session =  sessionJPA.getOne(id);
        String json = handler.handle(file);
-       session.setStudentsJSON(json);
+       session.setUsersInfoJSON(json);
        session.setStatus(SessionStatus.MAPPING);
        sessionJPA.saveAndFlush(session);
     }
 
     @Override
     public String getStudentsAttributes(Long id) {
-        Session session =  sessionJPA.getOne(id);
-        return session.getStudentsJSON();
+        Session session = sessionJPA.getOne(id);
+        return session.getUsersInfoJSON();
     }
 
 
@@ -108,18 +110,19 @@ public class SessionServiceImpl implements SessionsService {
     }
 
 
+
+
     @Override
     public void sendMessages(Long id) throws JsonProcessingException {
         Session session = sessionJPA.getOne(id);
 
         iTemplate.setTemplate(session.getTemplate());
 
-        String students = session.getStudentsJSON();
+        String students = session.getUsersInfoJSON();
         Map<String, String> params = session.getColumnMappingMap();
 
 
         String s = handler.sendAttributes(students, params);
-
         JsonNode root = mapper.readTree(s);
 
         List<Map<String, String>> reportsOfAllStudents = new ArrayList<>();
@@ -174,6 +177,11 @@ public class SessionServiceImpl implements SessionsService {
             session.setReportJSON(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(reportsOfAllStudents));
             sessionJPA.saveAndFlush(session);
         }
+    }
+
+    public void transformDataToEAV(Long sessionId) throws JsonProcessingException {
+        Session session = sessionJPA.getOne(sessionId);
+        eavInfoTransformer.transformUserDataToEAV(session);
     }
 
     @Override
@@ -273,7 +281,7 @@ public class SessionServiceImpl implements SessionsService {
         Session session = sessionJPA.getOne(id);
         try {
             Map<String, String> params = session.getColumnMappingMap();
-            String s = handler.sendAttributes(session.getStudentsJSON(), params);
+            String s = handler.sendAttributes(session.getUsersInfoJSON(), params);
             JsonNode root = mapper.readTree(s);
             Map<String, String> firstStudent = mapper.convertValue(root.get(0), new TypeReference<Map<String, String>>(){});
             iTemplate.setTemplate(session.getTemplate());
