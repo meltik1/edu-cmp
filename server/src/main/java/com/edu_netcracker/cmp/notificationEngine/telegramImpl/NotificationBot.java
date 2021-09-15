@@ -1,20 +1,14 @@
 package com.edu_netcracker.cmp.notificationEngine.telegramImpl;
 
-import com.edu_netcracker.cmp.entities.StudentsToAttributes;
 import com.edu_netcracker.cmp.entities.TGUsersInfo;
-import com.edu_netcracker.cmp.entities.jpa.STAJPA;
-import com.edu_netcracker.cmp.entities.jpa.StudentsJpa;
 import com.edu_netcracker.cmp.entities.jpa.TgUsersInfoJPA;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
-import java.util.List;
 
 
 @Slf4j

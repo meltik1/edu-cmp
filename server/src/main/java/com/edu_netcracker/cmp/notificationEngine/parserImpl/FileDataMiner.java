@@ -69,9 +69,11 @@ public abstract class FileDataMiner {
                 }
                 arrayNode.add(objectNode);
             }
-            return arrayNode.toPrettyString();
+            return arrayNode.toString();
         } catch (JsonProcessingException e) {
             log.warn("Failed to parse json file");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return "";
     }

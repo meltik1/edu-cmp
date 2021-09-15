@@ -13,9 +13,9 @@ public class STAID implements Serializable {
 
     private Long attributeId;
 
-    private Long studentId;
+    private String studentId;
 
-    public STAID(Long attributeId, Long studentId) {
+    public STAID(Long attributeId, String studentId) {
         this.attributeId = attributeId;
         this.studentId = studentId;
     }
@@ -28,7 +28,7 @@ public class STAID implements Serializable {
         return attributeId;
     }
 
-    public Long getStudentId() {
+    public String getStudentId() {
         return studentId;
     }
 
@@ -36,7 +36,7 @@ public class STAID implements Serializable {
         this.attributeId = attributeId;
     }
 
-    public void setStudentId(Long studentId) {
+    public void setStudentId(String studentId) {
         this.studentId = studentId;
     }
 }

@@ -1,4 +1,4 @@
-package com.edu_netcracker.cmp.entities;
+package com.edu_netcracker.cmp.entities.users;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,13 +13,12 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Table(name = "students")
 @NoArgsConstructor
-public class Students {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+public class User {
 
+    @Id
     private String userName;
+
+    private Role role;
 
     private String password;
 }

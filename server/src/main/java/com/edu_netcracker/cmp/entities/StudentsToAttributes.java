@@ -1,5 +1,6 @@
 package com.edu_netcracker.cmp.entities;
 
+import com.edu_netcracker.cmp.entities.users.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,7 +21,7 @@ public class StudentsToAttributes {
     @ManyToOne
     @MapsId("studentId")
     @JoinColumn(name = "student_id")
-    Students student;
+    User student;
 
     @ManyToOne
     @MapsId("attributeId")

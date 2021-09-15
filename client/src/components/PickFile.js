@@ -8,6 +8,7 @@ import {Link} from "react-router-dom";
 import { useParams } from "react-router";
 import "../ServerApi.js"
 import Settings from "../backend.settings.json"
+import TokenStorageService from "../TokenStorage";
 
 export default function PickFile() {
 
@@ -20,7 +21,7 @@ export default function PickFile() {
         multiple: false,
         action :  Settings.backend.url + '/sessions/'+ sessionId + '/pick-file',
         headers: {
-            "Authorization": Settings.backend.auth
+            "Authorization": TokenStorageService.getAccessToken()
         },
         onChange(info) {
             const { status } = info.file;

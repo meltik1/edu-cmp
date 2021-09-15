@@ -3,8 +3,9 @@ package com.edu_netcracker.cmp.notificationEngine;
 import com.edu_netcracker.cmp.entities.*;
 import com.edu_netcracker.cmp.entities.jpa.AttributesJPA;
 import com.edu_netcracker.cmp.entities.jpa.STAJPA;
-import com.edu_netcracker.cmp.entities.jpa.SessionJPA;
-import com.edu_netcracker.cmp.entities.jpa.StudentsJpa;
+import com.edu_netcracker.cmp.entities.jpa.UsersJpa;
+import com.edu_netcracker.cmp.entities.users.Role;
+import com.edu_netcracker.cmp.entities.users.User;
 import com.edu_netcracker.cmp.notificationEngine.parserImpl.FileHandler;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -12,6 +13,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -25,16 +27,18 @@ public class EAVInfoTransformerImpl implements EAVInfoTransformer {
     private FileHandler handler;
 
     private STAJPA stajpa;
-    private StudentsJpa studentsJpa;
+    private UsersJpa usersJpa;
     private AttributesJPA attributesJPA;
+    @Autowired
+    private PasswordEncoder encoder;
 
 
     @Autowired
-    public EAVInfoTransformerImpl(ObjectMapper mapper, FileHandler handler, STAJPA stajpa, StudentsJpa studentsJpa, AttributesJPA attributesJPA) {
+    public EAVInfoTransformerImpl(ObjectMapper mapper, FileHandler handler, STAJPA stajpa, UsersJpa usersJpa, AttributesJPA attributesJPA) {
         this.mapper = mapper;
         this.handler = handler;
         this.stajpa = stajpa;
-        this.studentsJpa = studentsJpa;
+        this.usersJpa = usersJpa;
         this.attributesJPA = attributesJPA;
     }
 
@@ -94,13 +98,12 @@ public class EAVInfoTransformerImpl implements EAVInfoTransformer {
             return;
         }
 
-        Students student  = new Students();
-        student.setUserName((String) map.get("Email"));
-        student.setPassword("123");
+        User student  = new User();
+        student.setUserName(map.get("Email"));
+        student.setPassword(this.encoder.encode("123"));
+        student.setRole(Role.USER);
 
-
-
-        studentsJpa.save(student);
+        usersJpa.saveAndFlush(student);
 
         for (Map.Entry<String, String> it: map.entrySet()) {
             String key = it.getKey();

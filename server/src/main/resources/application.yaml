@@ -5,9 +5,14 @@ spring:
     password: 300800
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
   profiles:
     active: zuev
+
+jwt:
+  secret: proselyte
+  expiration: 604800
+  header: Authorization
 
 logging:
   file:
