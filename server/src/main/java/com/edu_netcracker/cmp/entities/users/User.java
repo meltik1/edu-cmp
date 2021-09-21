@@ -18,6 +18,8 @@ public class User {
     @Id
     private String userName;
 
+    private String FIO;
+
     private Role role;
 
     private String password;

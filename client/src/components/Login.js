@@ -19,6 +19,7 @@ export  default function  Login()  {
             Settings.backend.password = values.password
             console.log(s.data.token)
             TokenStorageService.setToken(s.data.token)
+            TokenStorageService.setIsAuthenticated(true)
             history.push("/sessions")
         }
         console.log('Success:', values);

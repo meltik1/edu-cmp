@@ -45,7 +45,7 @@ public class NotificationBot extends TelegramLongPollingBot {
 
             SendMessage message = new SendMessage();
             message.setChatId(String.valueOf(update.getMessage().getChatId()));
-            message.setText(name);
+            message.setText("Привет, ты успешно зарегитрирован в боте, в ближайшем будущем ожидай новых сообщений!");
             try {
                 execute(message); // Call method to send the message
             } catch (TelegramApiException e) {

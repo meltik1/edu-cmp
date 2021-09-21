@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Input, Modal, Table, Tag } from "antd";
 import { PlusOutlined } from '@ant-design/icons';
-import { Content } from "antd/es/layout/layout";
+import {Content, Header} from "antd/es/layout/layout";
 import "../App.css";
 import "../ServerApi.js"
 import { backend } from "../ServerApi";
@@ -11,6 +11,7 @@ import PickFile from "./PickFile";
 import Mapping from "./Mapping";
 import Template from "./Template";
 import Validation from "./Validation";
+import TokenStorage from "../TokenStorage";
 
 export default function GetSessions() {
     const sessionStatus = new Map([
@@ -64,6 +65,7 @@ export default function GetSessions() {
         },
 
     ]
+
 
     const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -124,9 +126,22 @@ export default function GetSessions() {
         setIsModalVisible(false);
     };
 
+    function logout() {
+        TokenStorage.clearToken()
+        TokenStorage.setIsAuthenticated(false)
+        history.push("/login")
+    }
+
+    function toUserList() {
+        history.push("/users")
+    }
+
     return (
+
         <Content style={{ padding: '40px 50px 0' }}>
             <div className={"site-layout-content-sessions"}>
+                <Button onClick ={logout} style={{marginBottom:20, marginLeft:800}} shape="round" type="primary">Выйти</Button>
+                <Button onClick ={toUserList} style={{marginBottom:20, marginLeft:300}} shape="round" type="primary">К списку пользователей</Button>
                 <Button style={{ marginBottom: 20 }}
                         type="primary"
                         shape="round"

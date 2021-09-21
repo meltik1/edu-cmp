@@ -19,11 +19,19 @@ import Report from "./components/Report";
 import Login from "./components/Login";
 import "./App.css";
 import logo from "./img/logo_dark_removebg_try.png";
+import TokenStorage from "./TokenStorage";
+import {useHistory} from "react-router";
+import {UserPage} from "./components/UsersPage";
+import UserList from "./components/UserList";
+import SendToUser from "./components/SendToUser";
 
 const {Header, Footer} = Layout;
 
 
+
+
 export default function App() {
+
     return (
         <Router>
             <div>
@@ -33,16 +41,17 @@ export default function App() {
                     </Header>
 
                     <Switch>
-                        <Route exact path="/">
+                        <Route  exact path="/">
                             <Redirect to="/login" />
                         </Route>
                         <Route path = "/login">
                             <Login/>
                         </Route>
-                        <Route path="/sessions">
-                            <GetSessions />
+                        <Route path="/sessions" render={ props => TokenStorage.getIsAuthenticated() ?
+                            (<GetSessions/>):(<Redirect to="/login" />)
+                        }>
                         </Route>
-                        <Route path="/:id/pick-file">
+                        <Route path="/:id/pick-file" >
                             <PickFile />
                         </Route>
                         <Route path="/:id/mapping">
@@ -56,6 +65,15 @@ export default function App() {
                         </Route>
                         <Route path="/:id/report">
                             <Report />
+                        </Route>
+                        <Route path="/user/:id">
+                            <UserPage/>
+                        </Route>
+                        <Route path="/users">
+                            <UserList/>
+                        </Route>
+                        <Route path="/sendToUser/:id">
+                            <SendToUser/>
                         </Route>
                     </Switch>
 

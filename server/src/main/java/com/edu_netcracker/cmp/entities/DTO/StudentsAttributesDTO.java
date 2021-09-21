@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
+import java.util.Date;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -12,6 +15,9 @@ import lombok.Setter;
 public class StudentsAttributesDTO {
 
     private String attributeName;
+    private Integer intValue;
 
-    private String value;
+    private String charValue;
+
+    private Date dateValue;
 }

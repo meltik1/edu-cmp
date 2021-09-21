@@ -10,6 +10,11 @@
     background: #ffffff;
 }
 
+.button {
+    display: flex;
+    justify-content: flex-end;
+}
+
 .logo {
     float: left;
     height: 50px;

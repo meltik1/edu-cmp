@@ -10,8 +10,16 @@ export const TokenStorageService = (function(){
     }
     function _setToken(tokenObj) {
         localStorage.setItem('access_token', tokenObj);
-        localStorage.setItem("isAuthenticated", true)
     }
+
+    function _setIsAuthenticated(flag) {
+        localStorage.setItem('auth', flag)
+    }
+    function _getIsAuthenticated() {
+        console.log(localStorage.getItem('auth'))
+        return localStorage.getItem('auth')
+    }
+
     function _getAccessToken() {
         return localStorage.getItem('access_token');
     }
@@ -22,12 +30,15 @@ export const TokenStorageService = (function(){
         localStorage.removeItem('access_toke');
         localStorage.removeItem('refresh_token');
     }
+
     return {
         getService : _getService,
         setToken : _setToken,
         getAccessToken : _getAccessToken,
         getRefreshToken : _getRefreshToken,
-        clearToken : _clearToken
+        clearToken : _clearToken,
+        setIsAuthenticated : _setIsAuthenticated,
+        getIsAuthenticated: _getIsAuthenticated,
     }
 })();
 export default TokenStorageService;

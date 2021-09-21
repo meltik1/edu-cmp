@@ -57,7 +57,7 @@ export default function Mapping() {
 
     }
 
-    const [attributes, setAttributes] = useState(['Email', 'Telegram']);
+    const [attributes, setAttributes] = useState(['Email', 'Telegram', 'ФИО']);
     const [tempAttribute, setTempAttribute] = useState("");
     const [columns, setColumns] = useState([]);
     for (let i = 0; i < maxNumber; i++) {

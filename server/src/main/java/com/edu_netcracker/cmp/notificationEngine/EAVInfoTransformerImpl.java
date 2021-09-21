@@ -32,6 +32,9 @@ public class EAVInfoTransformerImpl implements EAVInfoTransformer {
     @Autowired
     private PasswordEncoder encoder;
 
+    private String EMAIL = "Email";
+    private String FIO = "ФИО";
+
 
     @Autowired
     public EAVInfoTransformerImpl(ObjectMapper mapper, FileHandler handler, STAJPA stajpa, UsersJpa usersJpa, AttributesJPA attributesJPA) {
@@ -92,17 +95,25 @@ public class EAVInfoTransformerImpl implements EAVInfoTransformer {
         return false;
     }
 
+    private User createUserOrGetIfExisted(Map<String, String> map) {
+        User usersEmail = usersJpa.findUsersByUserName(map.get("Email"));
+        if (usersEmail == null) {
+            usersEmail = new User();
+            usersEmail.setUserName(map.get(EMAIL));
+            usersEmail.setPassword(encoder.encode("123"));
+            usersEmail.setFIO(map.get(FIO));
+            usersEmail.setRole(Role.USER);
+        }
+        return usersEmail;
+    }
+
     private void saveNewEAVSToDB(Map<String,String> map) {
         if (map.get("Email") == null || map.get(EMAIL_FIELD).equals("")) {
             log.error("User doesn't have email");
             return;
         }
 
-        User student  = new User();
-        student.setUserName(map.get("Email"));
-        student.setPassword(this.encoder.encode("123"));
-        student.setRole(Role.USER);
-
+        User student  = createUserOrGetIfExisted(map);
         usersJpa.saveAndFlush(student);
 
         for (Map.Entry<String, String> it: map.entrySet()) {
