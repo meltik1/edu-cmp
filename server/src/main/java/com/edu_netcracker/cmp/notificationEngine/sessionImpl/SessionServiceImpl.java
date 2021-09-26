@@ -69,28 +69,28 @@ public class SessionServiceImpl implements SessionsService {
     }
 
     @Override
-    public Session getSession(Long id) {
+    public Session getSession(String id) {
         return sessionJPA.findById(id).get();
     }
 
     @Override
-    public void deleteSession(Long id) {
-        Session session = sessionJPA.getOne(id);
+    public void deleteSession(String id) {
+        Session session = sessionJPA.findById(id).get();
         sessionJPA.delete(session);
     }
 
     @Override
-    public void parseFile(Long id, MultipartFile file) {
-       Session session =  sessionJPA.getOne(id);
+    public void parseFile(String id, MultipartFile file) {
+       Session session =  sessionJPA.findById(id).get();
        String json = handler.handle(file);
        session.setUsersInfoJSON(json);
        session.setStatus(SessionStatus.MAPPING);
-       sessionJPA.saveAndFlush(session);
+       sessionJPA.save(session);
     }
 
     @Override
-    public String getStudentsAttributes(Long id) {
-        Session session = sessionJPA.getOne(id);
+    public String getStudentsAttributes(String id) {
+        Session session = sessionJPA.findById(id).get();
         return session.getUsersInfoJSON();
     }
 
@@ -113,8 +113,8 @@ public class SessionServiceImpl implements SessionsService {
 
 
     @Override
-    public void sendMessages(Long id) throws JsonProcessingException {
-        Session session = sessionJPA.getOne(id);
+    public void sendMessages(String id) throws JsonProcessingException {
+        Session session = sessionJPA.findById(id).get();
 
         iTemplate.setTemplate(session.getTemplate());
 
@@ -175,18 +175,18 @@ public class SessionServiceImpl implements SessionsService {
             reportsOfAllStudents.add(studentIReport);
         }
             session.setReportJSON(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(reportsOfAllStudents));
-            sessionJPA.saveAndFlush(session);
+            sessionJPA.save(session);
         }
     }
 
-    public void transformDataToEAV(Long sessionId) throws JsonProcessingException {
-        Session session = sessionJPA.getOne(sessionId);
+    public void transformDataToEAV(String sessionId) throws JsonProcessingException {
+        Session session = sessionJPA.findById(sessionId).get();
         eavInfoTransformer.transformUserDataToEAV(session);
     }
 
     @Override
-    public String getReport(Long id) {
-        Session session = sessionJPA.getOne(id);
+    public String getReport(String id) {
+        Session session = sessionJPA.findById(id).get();
         String report =  session.getReportJSON();
         if (report != null) {
             session.setStatus(SessionStatus.REPORT);
@@ -196,12 +196,12 @@ public class SessionServiceImpl implements SessionsService {
     }
 
     @Override
-    public String getTemplate(Long id) {
-        return sessionJPA.getOne(id).getTemplate();
+    public String getTemplate(String id) {
+        return sessionJPA.findById(id).get().getTemplate();
     }
 
     @Override
-    public List<String> getMappedAttributes(Long id) {
+    public List<String> getMappedAttributes(String id) {
         Map<String, String> params = sessionJPA.findById(id).get().getColumnMappingMap();
         List<String> paramsList = new ArrayList<>(params.values());
 
@@ -210,23 +210,23 @@ public class SessionServiceImpl implements SessionsService {
     }
 
     @Override
-    public void saveTemplate(Long id, String template) {
-        Session session = sessionJPA.getOne(id);
+    public void saveTemplate(String id, String template) {
+        Session session = sessionJPA.findById(id).get();
         session.setTemplate(template);
         session.setStatus(SessionStatus.VALIDATION);
         sessionJPA.save(session);
     }
 
     @Override
-    public void saveTheme(Long id, String theme) {
-        Session session = sessionJPA.getOne(id);
+    public void saveTheme(String id, String theme) {
+        Session session = sessionJPA.findById(id).get();
         session.setTheme(theme);
         sessionJPA.save(session);
     }
 
     @Override
-    public String getTheme(Long id) {
-        Session session = sessionJPA.getOne(id);
+    public String getTheme(String id) {
+        Session session = sessionJPA.findById(id).get();
         return session.getTheme();
     }
 
@@ -255,8 +255,8 @@ public class SessionServiceImpl implements SessionsService {
     }
 
     @Override
-    public void saveMapping(Long sessionId, String json) throws JsonProcessingException {
-        Session session = sessionJPA.getOne(sessionId);
+    public void saveMapping(String sessionId, String json) throws JsonProcessingException {
+        Session session = sessionJPA.findById(sessionId).get();
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root = mapper.readTree(json);
         JsonNode columnsMappingJson = root.at("/mapping");
@@ -272,13 +272,13 @@ public class SessionServiceImpl implements SessionsService {
         session.setRangeJSON(rangeJson.toString());
         session.setColumnMappingMap(columnsMapping);
         session.setStatus(SessionStatus.TEMPLATE);
-        sessionJPA.saveAndFlush(session);
+        sessionJPA.save(session);
     }
 
     @Override
-    public String getValidationTemplate(Long id) {
+    public String getValidationTemplate(String id) {
         String result = "";
-        Session session = sessionJPA.getOne(id);
+        Session session = sessionJPA.findById(id).get();
         try {
             Map<String, String> params = session.getColumnMappingMap();
             String s = handler.sendAttributes(session.getUsersInfoJSON(), params);

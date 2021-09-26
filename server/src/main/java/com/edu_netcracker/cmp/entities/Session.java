@@ -3,19 +3,19 @@ package com.edu_netcracker.cmp.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 import java.util.Map;
 
-@Entity
+@Document
 @Getter
 @Setter
 public class Session {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     @Enumerated(EnumType.ORDINAL)
     private SessionStatus status;

@@ -12,32 +12,32 @@ public interface SessionsService {
 
      Session createSession(String name);
 
-     Session getSession(Long id);
+     Session getSession(String id);
 
-     void deleteSession(Long id);
+     void deleteSession(String id);
 
-     void parseFile(Long id, MultipartFile file);
+     void parseFile(String id, MultipartFile file);
 
-     String getStudentsAttributes(Long id);
+     String getStudentsAttributes(String id);
 
-     public void transformDataToEAV(Long sessionId) throws JsonProcessingException;
+     public void transformDataToEAV(String sessionId) throws JsonProcessingException;
 
-     List<String> getMappedAttributes(Long id);
+     List<String> getMappedAttributes(String id);
 
-     void sendMessages(Long id) throws JsonProcessingException;
+     void sendMessages(String id) throws JsonProcessingException;
 
-     String getReport(Long id);
+     String getReport(String id);
 
 
-     void saveMapping(Long sessionID, String json) throws JsonProcessingException;
+     void saveMapping(String sessionID, String json) throws JsonProcessingException;
 
-     String getValidationTemplate(Long id);
+     String getValidationTemplate(String id);
 
-     void saveTemplate(Long id, String template);
+     void saveTemplate(String id, String template);
 
-     String getTemplate(Long id);
+     String getTemplate(String id);
 
-     void saveTheme(Long parseLong, String theme);
+     void saveTheme(String parseLong, String theme);
 
-     String getTheme(Long id);
+     String getTheme(String id);
 }

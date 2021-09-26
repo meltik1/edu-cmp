@@ -30,34 +30,34 @@ public class SessionsControllers {
 
     @RequestMapping(value = "{id}" , method = RequestMethod.GET)
     public Session getSession(@PathVariable String id) {
-        return sessionsService.getSession(Long.parseLong(id));
+        return sessionsService.getSession(id);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public void deleteSession(@PathVariable String id) {
-        sessionsService.deleteSession(Long.parseLong(id));
+        sessionsService.deleteSession(id);
     }
 
     @RequestMapping(value = "{id}/pick-file", method = RequestMethod.POST)
     public void pickFile(@PathVariable String id, @RequestBody MultipartFile file) {
-        sessionsService.parseFile(Long.parseLong(id), file);
+        sessionsService.parseFile(id, file);
     }
 
     @RequestMapping(value = "{id}/map-columns", method = RequestMethod.GET)
     public String getMapColumns(@PathVariable String id) {
-        return sessionsService.getStudentsAttributes(Long.parseLong(id));
+        return sessionsService.getStudentsAttributes(id);
     }
 
     @RequestMapping(value = "{id}/save-to-db", method = RequestMethod.GET)
     public void saveStudentsInfoToDB(@PathVariable String id) throws JsonProcessingException {
-        sessionsService.transformDataToEAV(Long.parseLong(id));
+        sessionsService.transformDataToEAV(id);
     }
 
 
     @RequestMapping(value = "{id}/save-columns-mapping", method = RequestMethod.POST)
     public ResponseEntity<String> saveMapColumns(@PathVariable String id, @RequestBody String body) {
         try {
-            sessionsService.saveMapping(Long.parseLong(id), body);
+            sessionsService.saveMapping(id, body);
             return ResponseEntity.ok("ok");
         }
        catch (JsonProcessingException e) {
@@ -67,41 +67,41 @@ public class SessionsControllers {
 
     @RequestMapping(value = "{id}/get-template", method = RequestMethod.GET)
     public String getTemplate(@PathVariable String id) {
-        return sessionsService.getTemplate(Long.parseLong(id));
+        return sessionsService.getTemplate(id);
     }
 
     @RequestMapping(value = "{id}/get-theme", method = RequestMethod.GET)
     public String getTheme(@PathVariable String id) {
-        return sessionsService.getTheme(Long.parseLong(id));
+        return sessionsService.getTheme(id);
     }
 
     @RequestMapping(value = "{id}/save-template", method = RequestMethod.POST)
     public void saveTemplate(@PathVariable String id, @RequestBody String template) {
-        sessionsService.saveTemplate(Long.parseLong(id), template);
+        sessionsService.saveTemplate(id, template);
     }
 
     @RequestMapping(value = "{id}/save-template-theme", method = RequestMethod.POST)
     public void saveTheme(@PathVariable String id, @RequestBody String theme) {
-        sessionsService.saveTheme(Long.parseLong(id), theme);
+        sessionsService.saveTheme(id, theme);
     }
 
     @RequestMapping(value = "{id}/validation", method = RequestMethod.GET)
     public String validation(@PathVariable String id) {
-        return sessionsService.getValidationTemplate(Long.parseLong(id));
+        return sessionsService.getValidationTemplate(id);
     }
 
     @RequestMapping(value = "{id}/send", method = RequestMethod.GET)
     public void sendMessages(@PathVariable String id) throws JsonProcessingException {
-        sessionsService.sendMessages(Long.parseLong(id));
+        sessionsService.sendMessages(id);
     }
 
     @RequestMapping(value = "{id}/attributes", method = RequestMethod.GET)
     public List<String> getAttributes(@PathVariable String id) {
-        return sessionsService.getMappedAttributes(Long.parseLong(id));
+        return sessionsService.getMappedAttributes(id);
     }
 
     @RequestMapping(value = "{id}/report", method = RequestMethod.GET)
     public String report(@PathVariable String id) {
-        return sessionsService.getReport(Long.parseLong(id));
+        return sessionsService.getReport(id);
     }
 }
