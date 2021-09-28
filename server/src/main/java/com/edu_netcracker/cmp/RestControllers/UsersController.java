@@ -2,6 +2,7 @@ package com.edu_netcracker.cmp.RestControllers;
 
 import com.edu_netcracker.cmp.entities.Attributes;
 import com.edu_netcracker.cmp.entities.DTO.StudentsAttributesDTO;
+import com.edu_netcracker.cmp.entities.DTO.TemplateDto;
 import com.edu_netcracker.cmp.entities.DTO.UserDTO;
 import com.edu_netcracker.cmp.entities.StudentsToAttributes;
 import com.edu_netcracker.cmp.entities.jpa.STAJPA;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.w3c.dom.Attr;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
@@ -61,7 +63,7 @@ public class UsersController {
     }
 
     @PostMapping("sendToUser/{userId}")
-    public ResponseEntity<Void> sendToUser(@RequestBody String tempalte, @PathVariable String userId) {
+    public ResponseEntity<Void> sendToUser(@RequestBody TemplateDto tempalte, @PathVariable String userId) {
         userInfoService.sendDirectlyToUser(tempalte, userId);
         return  new ResponseEntity(HttpStatus.OK);
     }

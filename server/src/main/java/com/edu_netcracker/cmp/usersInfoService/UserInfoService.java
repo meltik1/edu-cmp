@@ -1,6 +1,7 @@
 package com.edu_netcracker.cmp.usersInfoService;
 
 import com.edu_netcracker.cmp.entities.Attributes;
+import com.edu_netcracker.cmp.entities.DTO.TemplateDto;
 
 import javax.management.Attribute;
 import java.text.ParseException;
@@ -15,5 +16,5 @@ public interface UserInfoService {
 
     void deleteAttribute(Attributes attribute, String userID);
 
-    void sendDirectlyToUser(String template, String userID);
+    void sendDirectlyToUser(TemplateDto templateDto, String userID);
 }

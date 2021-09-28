@@ -5,12 +5,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Getter
 @Setter
-public class StudentsToAttributes {
+@Table(name = "students_to_attributes")
+public class StudentsToAttributes  implements Serializable {
     public StudentsToAttributes() {
         this.staid = new STAID();
     }
@@ -18,14 +20,14 @@ public class StudentsToAttributes {
     @EmbeddedId
     private STAID staid;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @MapsId("studentId")
-    @JoinColumn(name = "student_id")
+    @JoinColumn(name = "student_id", referencedColumnName = "user_name", insertable = false, updatable = false)
     User student;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @MapsId("attributeId")
-    @JoinColumn(name = "attribute_name")
+    @JoinColumn(name = "attribute_name", referencedColumnName = "id", insertable = false, updatable = false)
     Attributes attributes;
 
     @Column(name = "int_value")

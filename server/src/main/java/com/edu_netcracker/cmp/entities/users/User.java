@@ -7,15 +7,17 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Entity
 @Setter
 @Getter
 @Table(name = "students")
 @NoArgsConstructor
-public class User {
+public class User implements Serializable {
 
     @Id
+    @Column(name = "user_name")
     private String userName;
 
     private String FIO;

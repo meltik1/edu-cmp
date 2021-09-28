@@ -103,7 +103,9 @@ public class EAVInfoTransformerImpl implements EAVInfoTransformer {
             usersEmail.setPassword(encoder.encode("123"));
             usersEmail.setFIO(map.get(FIO));
             usersEmail.setRole(Role.USER);
+            usersJpa.save(usersEmail);
         }
+
         return usersEmail;
     }
 
@@ -113,8 +115,8 @@ public class EAVInfoTransformerImpl implements EAVInfoTransformer {
             return;
         }
 
+
         User student  = createUserOrGetIfExisted(map);
-        usersJpa.saveAndFlush(student);
 
         for (Map.Entry<String, String> it: map.entrySet()) {
             String key = it.getKey();

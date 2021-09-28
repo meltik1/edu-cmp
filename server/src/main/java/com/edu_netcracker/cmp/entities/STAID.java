@@ -3,6 +3,7 @@ package com.edu_netcracker.cmp.entities;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
@@ -11,8 +12,10 @@ import java.io.Serializable;
 @Setter
 public class STAID implements Serializable {
 
+    @Column(name = "attribute_name")
     private Long attributeId;
 
+    @Column(name = "student_id")
     private String studentId;
 
     public STAID(Long attributeId, String studentId) {

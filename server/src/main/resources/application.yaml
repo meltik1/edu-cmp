@@ -5,7 +5,7 @@ spring:
     password: 300800
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
   profiles:
     active: zuev
 
@@ -34,10 +34,10 @@ mail:
     debug: true
     starttls.required: true
   from: testFrom@gmail.com
-  host: smtp.mailtrap.io
+  host: smtp.gmail.com
   port: 2525
-  username: 2200b34d528607
-  password: 8d9bf595d67abb
+  username: b
+  password: "a"
 ---
 spring:
   profiles: prod

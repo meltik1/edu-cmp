@@ -57,11 +57,13 @@ public class Security extends WebSecurityConfigurerAdapter {
 
     @PostConstruct
     private void initAdmin(){
-        User user = new User();
-        user.setUserName("admin");
-        user.setPassword(passwordEncoder().encode("admin"));
-        user.setRole(Role.ADMIN);
-        jpa.saveAndFlush(user);
+        if (jpa.findUsersByUserName("admin") == null) {
+            User user = new User();
+            user.setUserName("admin");
+            user.setPassword(passwordEncoder().encode("admin"));
+            user.setRole(Role.ADMIN);
+            jpa.save(user);
+        }
     }
 
     @Override

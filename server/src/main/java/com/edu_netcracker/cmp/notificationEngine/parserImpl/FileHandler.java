@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,7 @@ import java.util.Objects;
 @AllArgsConstructor
 public class FileHandler {
     private final String        XLSX = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-    private       FileDataMiner fileDataMiner = null;
+    private       FileDataMiner fileDataMiner = new XLSXDataMiner();
 
     public String handle(MultipartFile multipartFile) {
         try {

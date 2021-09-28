@@ -41,12 +41,12 @@ export default function SendToUser() {
     const history = useHistory();
 
     const headers = {
-        'Content-Type': 'text/html; charset=UTF-8'
+        'Content-Type': 'application/json'
     }
 
     const saveTemplate = async () => {
-
-        await backend.post(`user/sendToUser/${userId}`, text, {
+        const body = {"template" : text, "theme" : theme}
+        await backend.post(`user/sendToUser/${userId}`, body, {
             headers: headers
         })
             .catch(console.log)

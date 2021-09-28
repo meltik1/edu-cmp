@@ -2,6 +2,7 @@ package com.edu_netcracker.cmp.usersInfoService;
 
 import com.edu_netcracker.cmp.entities.Attributes;
 import com.edu_netcracker.cmp.entities.DTO.StudentsAttributesDTO;
+import com.edu_netcracker.cmp.entities.DTO.TemplateDto;
 import com.edu_netcracker.cmp.entities.StudentsToAttributes;
 import com.edu_netcracker.cmp.entities.jpa.AttributesJPA;
 import com.edu_netcracker.cmp.entities.jpa.STAJPA;
@@ -89,7 +90,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public void sendDirectlyToUser(String template, String userID) {
+    public void sendDirectlyToUser(TemplateDto templateDto, String userID) {
         Map<String, Object> usersAttributeObject = getUsersAttributes(userID);
 
         Map<String, String> usersAttributes = new HashMap<>();
@@ -97,7 +98,8 @@ public class UserInfoServiceImpl implements UserInfoService {
             usersAttributes.put(it.getKey(), (String) it.getValue());
         }
 
-        iTemplate.setTemplate(template);
+        iTemplate.setTemplate(templateDto.getTemplate());
+        iTemplate.setTheme(templateDto.getTheme());
         iTemplate.applyParams(usersAttributes);
         iUserMessageInfo.setMapOfContactId(getUsersDataSource(userID));
         for (NotificationService notificationService: notificationServices) {
