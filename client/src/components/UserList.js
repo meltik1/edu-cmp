@@ -10,6 +10,11 @@ import React, {useState, useEffect} from "react";
 
 export default function UserList() {
 
+    const goHome = () => {
+        history.push({
+            pathname: `/sessions`
+        })
+    }
 
     let maxNumber = 0;
     const [tableData, setTableData] = useState(
@@ -69,15 +74,32 @@ export default function UserList() {
             width: 20,
         })
 
-        for (let i = 0; i < names.length; i++) {
-            result.push(
-                {
-                    title: names[i],
-                    dataIndex: names[i],
-                    key: names[i],
+
+        result.push(
+            {
+                    title: 'имя пользователя',
+                    dataIndex: names[0],
+                    key: names[0],
                 }
             )
-        }
+        result.push(
+            {
+                title: 'ФИО',
+                dataIndex: names[1],
+                key: names[1],
+            }
+        )
+        result.push({
+            title: 'Отправить сообщение',
+            dataIndex: 'Отправить сообщение',
+            render: (_, record) => <a onClick={() => {history.push("sendToUser/" + record.userName)} }>Перейти</a>,
+        })
+
+        result.push({
+            title: 'К личной странице',
+            dataIndex: 'К личной транице',
+            render: (_, record) => <a onClick={() => {history.push("user/" + record.userName)} }>На страницу</a>,
+        })
 
         return result;
     }
@@ -92,6 +114,9 @@ export default function UserList() {
                         size={"small"}
                     />
                 </div>
+                <Button type={"primary"} onClick={goHome}>
+                    К сессиям
+                </Button>
             </Content>
         </div>
     )

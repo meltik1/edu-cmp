@@ -1,8 +1,9 @@
 package com.edu_netcracker.cmp.entities.users;
 
 public enum Permission {
-    DEVELOPERS_READ("developers:read"),
-    DEVELOPERS_WRITE("developers:write");
+    ADMIN("admin"),
+    HR("hr"),
+    USER("user");
 
     private final String permission;
 

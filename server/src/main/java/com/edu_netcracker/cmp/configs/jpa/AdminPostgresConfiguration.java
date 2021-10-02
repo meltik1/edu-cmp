@@ -54,6 +54,7 @@ public class AdminPostgresConfiguration {
     @Bean
     public PlatformTransactionManager transactionManager(@Qualifier("adminEntityManager") EntityManagerFactory emf) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
+
         transactionManager.setEntityManagerFactory(emf);
         return transactionManager;
     }

@@ -33,11 +33,11 @@ mail:
     starttls.enable: true
     debug: true
     starttls.required: true
-  from: testFrom@gmail.com
+  from: nikitazuev144@gmail.com
   host: smtp.gmail.com
-  port: 2525
-  username: b
-  password: "a"
+  port: 587
+  username: nikitazuev144@gmail.com
+  password: skripi71836
 ---
 spring:
   profiles: prod

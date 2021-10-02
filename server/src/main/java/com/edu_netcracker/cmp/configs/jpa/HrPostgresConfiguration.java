@@ -30,7 +30,7 @@ public class HrPostgresConfiguration {
     public DataSource mysqlDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUsername("postgres");
+        dataSource.setUsername("hr_user");
         dataSource.setPassword("300800");
         dataSource.setUrl(
                 "jdbc:postgresql://localhost:5432/postgres");
@@ -38,13 +38,15 @@ public class HrPostgresConfiguration {
         return dataSource;
     }
 
+
+
     @PersistenceContext(unitName = "hr")   // 4
     @Primary
     @Bean(name = "hrEntityManager")
     @Autowired
     public LocalContainerEntityManagerFactoryBean postgresEntityManagerFactory(EntityManagerFactoryBuilder builder) {
-        return builder.dataSource(mysqlDataSource()).persistenceUnit("primary").properties(jpaProperties())
-                .packages("au.com.myblog.domain").build();
+        return builder.dataSource(mysqlDataSource()).persistenceUnit("hr").properties(jpaProperties())
+                .packages("com.edu_netcracker.cmp.entities").build();
     }
 
     private Map<String, Object> jpaProperties() {

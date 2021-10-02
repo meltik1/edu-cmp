@@ -4,6 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.postgresql.util.PSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,16 +26,49 @@ public abstract class AbstractJpaDao< T extends Serializable, T2 extends Seriali
     @Autowired
     protected EntityManager entityManager;
 
+    @Qualifier("hrEntityManager")
+    @PersistenceContext(unitName = "admin")
+    @Autowired
+    protected EntityManager entityManagerHr;
+
+    @Qualifier("userEntityManager")
+    @PersistenceContext(unitName = "admin")
+    @Autowired
+    protected EntityManager entityManagerUser;
+
+    private EntityManager getUserEntityManager() {
+        UserDetails userDetails;
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            userDetails = (UserDetails) authentication.getPrincipal();
+        } catch (NullPointerException nullPointerException) {
+            return entityManager;
+        }
+        if (userDetails.getAuthorities().stream().anyMatch(x-> x.getAuthority().equals("admin"))) {
+            log.info("using admin connection");
+            return entityManager;
+        }
+        else if (userDetails.getAuthorities().stream().anyMatch(x-> x.getAuthority().equals("hr"))) {
+            log.info("using hr connection");
+            return entityManagerHr;
+        }
+        else  {
+            log.info("using user connection");
+            return entityManagerUser;
+        }
+    }
+
     public void setClazz( Class< T > clazzToSet ) {
 
         this.clazz = clazzToSet;
     }
     public T findOne(T2 id ){
-        return entityManager.find(clazz, id);
+
+        return getUserEntityManager().find(clazz, id);
     }
     public List< T > findAll(){
         try {
-            return entityManager.createQuery("from " + clazz.getName()).getResultList();
+            return getUserEntityManager().createQuery("from " + clazz.getName()).getResultList();
         }
         catch (NoResultException noResultException) {
             return null;
@@ -40,7 +76,7 @@ public abstract class AbstractJpaDao< T extends Serializable, T2 extends Seriali
     }
     public void save( T entity ){
         try {
-            entityManager.merge(entity);
+            getUserEntityManager().merge(entity);
         }
         catch (RuntimeException e){
             log.error(e.getMessage());
@@ -48,11 +84,11 @@ public abstract class AbstractJpaDao< T extends Serializable, T2 extends Seriali
     }
     public void update( T entity ){
 
-        entityManager.persist( entity );
+        getUserEntityManager().persist( entity );
     }
     public void delete( T entity ){
 
-        entityManager.remove( entity );
+        getUserEntityManager().remove(entity);
     }
     public void deleteById( T2 entityId ){
         T entity = findOne( entityId );

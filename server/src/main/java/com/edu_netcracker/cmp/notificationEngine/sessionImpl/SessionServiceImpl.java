@@ -162,8 +162,14 @@ public class SessionServiceImpl implements SessionsService {
                         }
                     } else if (service.getName().equals("Email")) {
                         if (email != null && !(email.equals(""))) {
-                            service.send(iUserMessageInfo, iTemplate);
-                            studentIReport.put("Email status", "ok");
+
+                            try {
+                                service.send(iUserMessageInfo, iTemplate);
+                                studentIReport.put("Email status", "ok");
+                            }
+                            catch (Exception exception) {
+                                studentIReport.put("Email status", "Ошибка отправки Email");
+                            }
                         } else {
                             studentIReport.put("Email status", "Пользоватеь не указал Email");
                         }

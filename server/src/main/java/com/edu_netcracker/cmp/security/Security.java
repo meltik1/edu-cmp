@@ -2,8 +2,10 @@ package com.edu_netcracker.cmp.security;
 
 
 import com.edu_netcracker.cmp.entities.jpa.UsersJpa;
+import com.edu_netcracker.cmp.entities.users.Permission;
 import com.edu_netcracker.cmp.entities.users.Role;
 import com.edu_netcracker.cmp.entities.users.User;
+import org.apache.xmlbeans.impl.xb.xsdschema.Attribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -47,8 +49,8 @@ public class Security extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("**/sessions/**").hasRole(Role.ADMIN.name())
-                .antMatchers("/user").hasAnyRole(Role.ADMIN.name(), Role.USER.name())
+                .antMatchers("/sessions**").hasAnyAuthority(Permission.ADMIN.getPermission(), Permission.HR.getPermission())
+                .antMatchers("/user").hasAnyAuthority(Permission.ADMIN.getPermission(), Permission.HR.getPermission(), Permission.USER.getPermission())
                 .antMatchers("/").permitAll()
                 .antMatchers("auth/login").permitAll()
                 .and()
@@ -57,13 +59,18 @@ public class Security extends WebSecurityConfigurerAdapter {
 
     @PostConstruct
     private void initAdmin(){
-        if (jpa.findUsersByUserName("admin") == null) {
-            User user = new User();
-            user.setUserName("admin");
-            user.setPassword(passwordEncoder().encode("admin"));
-            user.setRole(Role.ADMIN);
-            jpa.save(user);
-        }
+        User user = new User();
+        user.setUserName("admin");
+        user.setPassword(passwordEncoder().encode("admin"));
+        user.setRole(Role.ADMIN);
+        jpa.save(user);
+
+        User userHr = new User();
+        userHr.setUserName("hr");
+        userHr.setPassword(passwordEncoder().encode("123"));
+        userHr.setRole(Role.HR);
+        jpa.save(userHr);
+
     }
 
     @Override

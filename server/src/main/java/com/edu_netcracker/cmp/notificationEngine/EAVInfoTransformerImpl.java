@@ -109,11 +109,23 @@ public class EAVInfoTransformerImpl implements EAVInfoTransformer {
         return usersEmail;
     }
 
+    private StudentsToAttributes createEavOrGetExisted(User user, Attributes attributes) {
+        StudentsToAttributes studentToAttribute = stajpa.findOne(new STAID(attributes.getId(), user.getUserName()));
+        if (studentToAttribute == null) {
+            studentToAttribute = new StudentsToAttributes();
+            studentToAttribute.setStudent(user);
+            studentToAttribute.setAttributes(attributes);
+        }
+        return studentToAttribute;
+    }
+
     private void saveNewEAVSToDB(Map<String,String> map) {
         if (map.get("Email") == null || map.get(EMAIL_FIELD).equals("")) {
             log.error("User doesn't have email");
             return;
         }
+
+
 
 
         User student  = createUserOrGetIfExisted(map);
@@ -123,9 +135,7 @@ public class EAVInfoTransformerImpl implements EAVInfoTransformer {
             Object value = it.getValue();
             Attributes attribute = addNewAttributeOrGetIfExisted(key);
 
-            StudentsToAttributes studentToAttribute = new StudentsToAttributes();
-            studentToAttribute.setStudent(student);
-            studentToAttribute.setAttributes(attribute);
+            StudentsToAttributes studentToAttribute = createEavOrGetExisted(student, attribute);
             studentToAttribute.setCharValue((String) value);
 
 
@@ -140,6 +150,7 @@ public class EAVInfoTransformerImpl implements EAVInfoTransformer {
             attributes = new Attributes();
             attributes.setAttributeName(attributeName);
             attributesJPA.save(attributes);
+            attributes = attributesJPA.findAttributesByAttributeName(attributeName);
         }
 
         return attributes;

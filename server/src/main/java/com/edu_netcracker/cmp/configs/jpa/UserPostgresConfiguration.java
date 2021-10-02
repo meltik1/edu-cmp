@@ -35,7 +35,7 @@ public class UserPostgresConfiguration {
     public DataSource mysqlDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUsername("postgres");
+        dataSource.setUsername("ordinary_user");
         dataSource.setPassword("300800");
         dataSource.setUrl(
                 "jdbc:postgresql://localhost:5432/postgres");
@@ -49,7 +49,7 @@ public class UserPostgresConfiguration {
     @Autowired
     public LocalContainerEntityManagerFactoryBean postgresEntityManagerFactory(EntityManagerFactoryBuilder builder) {
         return builder.dataSource(mysqlDataSource()).persistenceUnit("user").properties(jpaProperties())
-                .packages("au.com.myblog.domain").build();
+                .packages("com.edu_netcracker.cmp.entities").build();
     }
 
     private Map<String, Object> jpaProperties() {

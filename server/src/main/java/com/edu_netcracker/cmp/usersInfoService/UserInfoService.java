@@ -1,5 +1,6 @@
 package com.edu_netcracker.cmp.usersInfoService;
 
+import com.edu_netcracker.cmp.RestControllers.UserCreationDto;
 import com.edu_netcracker.cmp.entities.Attributes;
 import com.edu_netcracker.cmp.entities.DTO.TemplateDto;
 
@@ -17,4 +18,6 @@ public interface UserInfoService {
     void deleteAttribute(Attributes attribute, String userID);
 
     void sendDirectlyToUser(TemplateDto templateDto, String userID);
+
+    void createUser(UserCreationDto userCreationDto);
 }

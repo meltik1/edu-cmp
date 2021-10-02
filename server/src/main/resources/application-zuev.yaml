@@ -16,9 +16,9 @@ mail:
     starttls.enable: true
     debug: true
     starttls.required: true
-  from: testFrom@gmail.com
-  host: smtp.mailtrap.io
-  port: 2525
-  username: 2200b34d528607
-  password: 8d9bf595d67abb
+  from: nikitazuev144@gmail.com
+  host: smtp.gmail.com
+  port: 587
+  username: nikitazuev144@gmail.com
+  password: skripi71836
 

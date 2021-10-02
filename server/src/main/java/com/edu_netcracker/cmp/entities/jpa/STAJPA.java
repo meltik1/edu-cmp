@@ -3,6 +3,7 @@ package com.edu_netcracker.cmp.entities.jpa;
 import com.edu_netcracker.cmp.entities.AbstractJpaDao;
 import com.edu_netcracker.cmp.entities.Attributes;
 import com.edu_netcracker.cmp.entities.DTO.StudentsAttributesDTO;
+import com.edu_netcracker.cmp.entities.STAID;
 import com.edu_netcracker.cmp.entities.StudentsToAttributes;
 import com.edu_netcracker.cmp.entities.users.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,7 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
 @Component
-public class STAJPA extends AbstractJpaDao<StudentsToAttributes, String> {
+public class STAJPA extends AbstractJpaDao<StudentsToAttributes, STAID> {
 
     public STAJPA() {
         super.setClazz(StudentsToAttributes.class);

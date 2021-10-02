@@ -1,5 +1,6 @@
 package com.edu_netcracker.cmp.usersInfoService;
 
+import com.edu_netcracker.cmp.RestControllers.UserCreationDto;
 import com.edu_netcracker.cmp.entities.Attributes;
 import com.edu_netcracker.cmp.entities.DTO.StudentsAttributesDTO;
 import com.edu_netcracker.cmp.entities.DTO.TemplateDto;
@@ -12,6 +13,8 @@ import com.edu_netcracker.cmp.notificationEngine.ITemplate;
 import com.edu_netcracker.cmp.notificationEngine.IUserMessageInfo;
 import com.edu_netcracker.cmp.notificationEngine.NotificationService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.text.DateFormat;
@@ -31,6 +34,9 @@ public class UserInfoServiceImpl implements UserInfoService {
     private AttributesJPA attributesJPA;
 
     private STAJPA stajpa;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     private List<NotificationService> notificationServices;
     private ITemplate iTemplate;
@@ -109,6 +115,16 @@ public class UserInfoServiceImpl implements UserInfoService {
         }
     }
 
+    @Override
+    public void createUser(UserCreationDto userCreationDto) {
+        User user = new User();
+        user.setUserName(userCreationDto.getUserName());
+        user.setPassword(passwordEncoder.encode(userCreationDto.getPassword()));
+        user.setRole(userCreationDto.getRole());
+        user.setFIO(userCreationDto.getFio());
+        usersJpa.save(user);
+    }
+
     private void addNewSTAOrModifyExited(String key, Object value, String userId) throws ParseException {
         User user = usersJpa.findUsersByUserName(userId);
         Attributes attributes = addAttributeOrGetIfExisted(key);
@@ -166,6 +182,7 @@ public class UserInfoServiceImpl implements UserInfoService {
             attributesByAttributeName = new Attributes();
             attributesByAttributeName.setAttributeName(attributeName);
             attributesJPA.save(attributesByAttributeName);
+            attributesByAttributeName = attributesJPA.findAttributesByAttributeName(attributeName);
         }
         return attributesByAttributeName;
     }
@@ -182,8 +199,8 @@ public class UserInfoServiceImpl implements UserInfoService {
             throw new IllegalArgumentException("Can't find user");
         }
         StudentsToAttributes studentsToAttributesByAttributesAndAndStudent = stajpa.findStudentsToAttributesByAttributesAndAndStudent(attribute, user);
-        if (studentsToAttributesByAttributesAndAndStudent == null) {
-            stajpa.delete(studentsToAttributesByAttributesAndAndStudent);
+        if (studentsToAttributesByAttributesAndAndStudent != null) {
+            stajpa.deleteById(studentsToAttributesByAttributesAndAndStudent.getStaid());
         }
 
     }

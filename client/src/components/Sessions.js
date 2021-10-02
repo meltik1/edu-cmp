@@ -140,7 +140,7 @@ export default function GetSessions() {
 
         <Content style={{ padding: '40px 50px 0' }}>
             <div className={"site-layout-content-sessions"}>
-                <Button onClick ={logout} style={{marginBottom:20, marginLeft:800}} shape="round" type="primary">Выйти</Button>
+                <Button onClick ={logout} style={{marginBottom:20, marginLeft:50, marginRight: 500}} shape="round" type="primary">Выйти</Button>
                 <Button onClick ={toUserList} style={{marginBottom:20, marginLeft:300}} shape="round" type="primary">К списку пользователей</Button>
                 <Button style={{ marginBottom: 20 }}
                         type="primary"
