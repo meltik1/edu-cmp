@@ -1,7 +1,7 @@
 package com.edu_netcracker.cmp.notificationEngine.telegramImpl;
 
 import com.edu_netcracker.cmp.entities.TGUsersInfo;
-import com.edu_netcracker.cmp.entities.jpa.TgUsersInfoJPA;
+import com.edu_netcracker.cmp.entities.jpa.TgUsersInfoRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,7 +16,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 public class NotificationBot extends TelegramLongPollingBot {
 
     @Autowired
-    TgUsersInfoJPA tgUsersInfoJPA;
+    TgUsersInfoRepository tgUsersInfoRepository;
 
 
     public void setToken(String token) {
@@ -39,7 +39,7 @@ public class NotificationBot extends TelegramLongPollingBot {
                 TGUsersInfo tgUsersInfo = new TGUsersInfo();
                 tgUsersInfo.setChatId(update.getMessage().getChatId());
                 tgUsersInfo.setUserName(update.getMessage().getFrom().getUserName());
-                tgUsersInfoJPA.save(tgUsersInfo);
+                tgUsersInfoRepository.save(tgUsersInfo);
             }
 
 

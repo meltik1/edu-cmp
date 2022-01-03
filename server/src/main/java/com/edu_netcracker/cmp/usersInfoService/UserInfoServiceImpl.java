@@ -5,9 +5,9 @@ import com.edu_netcracker.cmp.entities.Attributes;
 import com.edu_netcracker.cmp.entities.DTO.StudentsAttributesDTO;
 import com.edu_netcracker.cmp.entities.DTO.TemplateDto;
 import com.edu_netcracker.cmp.entities.StudentsToAttributes;
-import com.edu_netcracker.cmp.entities.jpa.AttributesJPA;
-import com.edu_netcracker.cmp.entities.jpa.STAJPA;
-import com.edu_netcracker.cmp.entities.jpa.UsersJpa;
+import com.edu_netcracker.cmp.entities.jpa.AttributesRepository;
+import com.edu_netcracker.cmp.entities.jpa.STARepository;
+import com.edu_netcracker.cmp.entities.jpa.UsersRepository;
 import com.edu_netcracker.cmp.entities.users.User;
 import com.edu_netcracker.cmp.notificationEngine.ITemplate;
 import com.edu_netcracker.cmp.notificationEngine.IUserMessageInfo;
@@ -29,11 +29,11 @@ import java.util.Map;
 @Slf4j
 public class UserInfoServiceImpl implements UserInfoService {
 
-    private UsersJpa usersJpa;
+    private UsersRepository usersRepository;
 
-    private AttributesJPA attributesJPA;
+    private AttributesRepository attributesRepository;
 
-    private STAJPA stajpa;
+    private STARepository STARepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -42,11 +42,11 @@ public class UserInfoServiceImpl implements UserInfoService {
     private ITemplate iTemplate;
     private IUserMessageInfo iUserMessageInfo;
 
-    public UserInfoServiceImpl(UsersJpa usersJpa, AttributesJPA attributesJPA, STAJPA stajpa, List<NotificationService> notificationServices, ITemplate iTemplate,
+    public UserInfoServiceImpl(UsersRepository usersRepository, AttributesRepository attributesRepository, STARepository STARepository, List<NotificationService> notificationServices, ITemplate iTemplate,
                                IUserMessageInfo iUserMessageInfo) {
-        this.usersJpa = usersJpa;
-        this.attributesJPA = attributesJPA;
-        this.stajpa = stajpa;
+        this.usersRepository = usersRepository;
+        this.attributesRepository = attributesRepository;
+        this.STARepository = STARepository;
         this.notificationServices = notificationServices;
         this.iTemplate = iTemplate;
         this.iUserMessageInfo = iUserMessageInfo;
@@ -66,7 +66,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public Map<String, Object> getUsersAttributes(String userId) {
-        List<StudentsAttributesDTO> studentAttributeValue = stajpa.findStudentAttributeValue(userId);
+        List<StudentsAttributesDTO> studentAttributeValue = STARepository.findStudentAttributeValue(userId);
         Map<String, Object> attributesValues = new HashMap<>();
         for (StudentsAttributesDTO studentsAttributesDTO: studentAttributeValue) {
             addFilledAttribute(attributesValues, studentsAttributesDTO);
@@ -75,7 +75,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     public Map<String, String> getUsersDataSource(String userId) {
-        List<StudentsAttributesDTO> dataSources = stajpa.findDataSources(userId);
+        List<StudentsAttributesDTO> dataSources = STARepository.findDataSources(userId);
         Map<String,String> datasources = new HashMap<>();
         for (StudentsAttributesDTO studentsAttributesDTO: dataSources) {
             datasources.put(studentsAttributesDTO.getAttributeName(), studentsAttributesDTO.getCharValue());
@@ -122,13 +122,13 @@ public class UserInfoServiceImpl implements UserInfoService {
         user.setPassword(passwordEncoder.encode(userCreationDto.getPassword()));
         user.setRole(userCreationDto.getRole());
         user.setFIO(userCreationDto.getFio());
-        usersJpa.save(user);
+        usersRepository.save(user);
     }
 
     private void addNewSTAOrModifyExited(String key, Object value, String userId) throws ParseException {
-        User user = usersJpa.findUsersByUserName(userId);
+        User user = usersRepository.findUsersByUserName(userId);
         Attributes attributes = addAttributeOrGetIfExisted(key);
-        StudentsToAttributes studentsToAttributesByAttributesAndAndStudent = stajpa.findStudentsToAttributesByAttributesAndAndStudent(attributes, user);
+        StudentsToAttributes studentsToAttributesByAttributesAndAndStudent = STARepository.findStudentsToAttributesByAttributesAndStudent(attributes, user);
         if (studentsToAttributesByAttributesAndAndStudent == null) {
             studentsToAttributesByAttributesAndAndStudent = new StudentsToAttributes();
             studentsToAttributesByAttributesAndAndStudent.setAttributes(attributes);
@@ -138,7 +138,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         else {
             addValue(studentsToAttributesByAttributesAndAndStudent, value);;
         }
-        stajpa.save(studentsToAttributesByAttributesAndAndStudent);
+        STARepository.save(studentsToAttributesByAttributesAndAndStudent);
     }
 
     private StudentsToAttributes addValue(StudentsToAttributes studentsToAttributes, Object value) throws ParseException {
@@ -177,12 +177,12 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     private Attributes addAttributeOrGetIfExisted(String attributeName) {
-        Attributes attributesByAttributeName = attributesJPA.findAttributesByAttributeName(attributeName);
+        Attributes attributesByAttributeName = attributesRepository.findAttributesByAttributeName(attributeName);
         if (attributesByAttributeName == null) {
             attributesByAttributeName = new Attributes();
             attributesByAttributeName.setAttributeName(attributeName);
-            attributesJPA.save(attributesByAttributeName);
-            attributesByAttributeName = attributesJPA.findAttributesByAttributeName(attributeName);
+            attributesRepository.save(attributesByAttributeName);
+            attributesByAttributeName = attributesRepository.findAttributesByAttributeName(attributeName);
         }
         return attributesByAttributeName;
     }
@@ -194,13 +194,13 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public void deleteAttribute(Attributes attribute, String userID) {
-        User user = usersJpa.findUsersByUserName(userID);
+        User user = usersRepository.findUsersByUserName(userID);
         if (user == null) {
             throw new IllegalArgumentException("Can't find user");
         }
-        StudentsToAttributes studentsToAttributesByAttributesAndAndStudent = stajpa.findStudentsToAttributesByAttributesAndAndStudent(attribute, user);
+        StudentsToAttributes studentsToAttributesByAttributesAndAndStudent = STARepository.findStudentsToAttributesByAttributesAndStudent(attribute, user);
         if (studentsToAttributesByAttributesAndAndStudent != null) {
-            stajpa.deleteById(studentsToAttributesByAttributesAndAndStudent.getStaid());
+            STARepository.deleteById(studentsToAttributesByAttributesAndAndStudent.getStaid());
         }
 
     }

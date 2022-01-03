@@ -1,6 +1,6 @@
 package com.edu_netcracker.cmp.RestControllers;
 
-import com.edu_netcracker.cmp.entities.jpa.UsersJpa;
+import com.edu_netcracker.cmp.entities.jpa.UsersRepository;
 import com.edu_netcracker.cmp.entities.users.User;
 import com.edu_netcracker.cmp.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +24,11 @@ import java.util.Map;
 public class AuthControllers {
 
     private final AuthenticationManager authenticationManager;
-    private UsersJpa userRepository;
+    private UsersRepository userRepository;
     private JwtTokenProvider jwtTokenProvider;
 
     @Autowired
-    public AuthControllers(AuthenticationManager authenticationManager, UsersJpa userRepository, JwtTokenProvider jwtTokenProvider) {
+    public AuthControllers(AuthenticationManager authenticationManager, UsersRepository userRepository, JwtTokenProvider jwtTokenProvider) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
         this.jwtTokenProvider = jwtTokenProvider;
