@@ -1,4 +1,4 @@
-package com.edu_netcracker.cmp.entities.jpa;
+package com.edu_netcracker.cmp.entities.repositories;
 
 import com.edu_netcracker.cmp.entities.TGUsersInfo;
 import org.springframework.data.jpa.repository.JpaRepository;

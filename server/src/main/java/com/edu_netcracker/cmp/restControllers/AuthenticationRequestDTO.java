@@ -1,4 +1,4 @@
-package com.edu_netcracker.cmp.RestControllers;
+package com.edu_netcracker.cmp.restControllers;
 
 import lombok.Data;
 

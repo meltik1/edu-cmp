@@ -1,7 +1,7 @@
 package com.edu_netcracker.cmp.security;
 
 import com.edu_netcracker.cmp.entities.users.User;
-import com.edu_netcracker.cmp.entities.jpa.UsersRepository;
+import com.edu_netcracker.cmp.entities.repositories.UsersRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

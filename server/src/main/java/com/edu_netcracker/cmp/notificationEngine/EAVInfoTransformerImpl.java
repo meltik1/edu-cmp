@@ -1,9 +1,9 @@
 package com.edu_netcracker.cmp.notificationEngine;
 
 import com.edu_netcracker.cmp.entities.*;
-import com.edu_netcracker.cmp.entities.jpa.AttributesRepository;
-import com.edu_netcracker.cmp.entities.jpa.STARepository;
-import com.edu_netcracker.cmp.entities.jpa.UsersRepository;
+import com.edu_netcracker.cmp.entities.repositories.AttributesRepository;
+import com.edu_netcracker.cmp.entities.repositories.STARepository;
+import com.edu_netcracker.cmp.entities.repositories.UsersRepository;
 import com.edu_netcracker.cmp.entities.users.Role;
 import com.edu_netcracker.cmp.entities.users.User;
 import com.edu_netcracker.cmp.notificationEngine.parserImpl.FileHandler;
@@ -35,6 +35,9 @@ public class EAVInfoTransformerImpl implements EAVInfoTransformer {
 
     private String EMAIL = "Email";
     private String FIO = "ФИО";
+
+
+    private List<String> dataSources = List.of("Email", "Telegram");
 
 
     @Autowired
@@ -151,6 +154,7 @@ public class EAVInfoTransformerImpl implements EAVInfoTransformer {
         if (attributes == null) {
             attributes = new Attributes();
             attributes.setAttributeName(attributeName);
+            if (dataSources.contains(attributeName)) attributes.setIsCommunicationSource(true);
             attributesRepository.save(attributes);
             attributes = attributesRepository.findAttributesByAttributeName(attributeName);
         }

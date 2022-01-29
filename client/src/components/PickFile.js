@@ -1,14 +1,13 @@
 import React from "react";
 import MySteps from "./MySteps";
-import {  Popconfirm, message, Button, Upload } from 'antd';
+import {  message, Button, Upload } from 'antd';
 import { Content } from "antd/es/layout/layout";
 import { ArrowLeftOutlined, ArrowRightOutlined, InboxOutlined } from '@ant-design/icons';
-import "./PickFile.css";
+import "../static/styles/PickFile.css";
 import {Link} from "react-router-dom";
 import { useParams } from "react-router";
-import "../ServerApi.js"
-import Settings from "../backend.settings.json"
-import TokenStorageService from "../TokenStorage";
+import Settings from "../services/backend.settings.json"
+import TokenStorageService from "../services/TokenStorage";
 
 export default function PickFile() {
 

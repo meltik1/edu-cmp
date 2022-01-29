@@ -1,4 +1,4 @@
-package com.edu_netcracker.cmp.RestControllers;
+package com.edu_netcracker.cmp.restControllers;
 
 import com.edu_netcracker.cmp.entities.users.Role;
 import lombok.Data;

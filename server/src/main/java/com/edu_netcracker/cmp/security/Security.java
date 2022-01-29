@@ -1,7 +1,7 @@
 package com.edu_netcracker.cmp.security;
 
 
-import com.edu_netcracker.cmp.entities.jpa.UsersRepository;
+import com.edu_netcracker.cmp.entities.repositories.UsersRepository;
 import com.edu_netcracker.cmp.entities.users.Permission;
 import com.edu_netcracker.cmp.entities.users.Role;
 import com.edu_netcracker.cmp.entities.users.User;

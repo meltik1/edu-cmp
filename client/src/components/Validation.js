@@ -2,16 +2,18 @@ import React, { useState } from "react";
 import MySteps from "./MySteps";
 import { Content } from "antd/es/layout/layout";
 import {Button, Divider} from "antd";
-import './Validation.css';
+import '../static/styles/Validation.css';
 import InitializeData from "./ReportSubComponents/InitializeData";
 import { useHistory, useParams } from "react-router";
-import { backend } from "../ServerApi";
+import SessionService from "../services/SessionService";
 
 export default function Validation() {
 
     const sessionId = useParams().id
     const [theme, setTheme] =  useState("");
     const [text, setText] =  useState("");
+    const sessionService = new SessionService()
+
 
     InitializeData(`sessions/${sessionId}/validation`, setText);
     InitializeData(`sessions/${sessionId}/get-theme`, setTheme);
@@ -25,8 +27,7 @@ export default function Validation() {
     }
 
     const goForward = async () => {
-        await backend.get(`/sessions/${sessionId}/send`)
-            .catch(console.log)
+        await sessionService.send(sessionId)
         history.push({
             pathname: `/${sessionId}/report`,
         })

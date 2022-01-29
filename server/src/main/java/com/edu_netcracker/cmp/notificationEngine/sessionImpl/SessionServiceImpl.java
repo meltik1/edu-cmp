@@ -2,8 +2,8 @@ package com.edu_netcracker.cmp.notificationEngine.sessionImpl;
 
 import com.edu_netcracker.cmp.entities.Session;
 import com.edu_netcracker.cmp.entities.SessionStatus;
-import com.edu_netcracker.cmp.entities.jpa.STARepository;
-import com.edu_netcracker.cmp.entities.jpa.SessionsRepository;
+import com.edu_netcracker.cmp.entities.repositories.STARepository;
+import com.edu_netcracker.cmp.entities.repositories.SessionsRepository;
 import com.edu_netcracker.cmp.notificationEngine.*;
 import com.edu_netcracker.cmp.notificationEngine.parserImpl.FileHandler;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -248,6 +248,9 @@ public class SessionServiceImpl implements SessionsService {
         for (int i = 0; i < end.size(); i++) {
             Integer startValue = Integer.parseInt(start.get(i));
             Integer endValue = Integer.parseInt(end.get(i));
+            if (startValue < 0 || endValue < 0) {
+                throw new IllegalArgumentException("Range is invalid");
+            }
 
             if (startValue < minStart || endValue < minEnd) {
                 throw new IllegalArgumentException("Range is invalid");

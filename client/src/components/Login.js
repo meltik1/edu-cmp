@@ -1,24 +1,25 @@
 import { Form, Input, Button, Checkbox } from 'antd';
-import {backend} from "../ServerApi";
 import {useHistory, useParams} from "react-router";
-import axios from "axios";
-import Settings from "../backend.settings.json"
-import TokenStorageService from "../TokenStorage";
+import TokenStorageService from "../services/TokenStorage";
+import LoginService from "../services/LoginService";
 
 export  default function  Login()  {
+    const history = useHistory()
+    const loginService = new LoginService();
+
     const onFinish = async (values) => {
         console.log(values.username, values.password)
-
-        const s = await axios.post(Settings.backend.url +"/auth/login", {"email": values.username, "password": values.password})
+        const s = await loginService.login(values.username, values.password)
         console.log(s)
         if (s.status != 200) {
             alert("Invalid login or password")
         }
         else {
-            Settings.backend.login = values.username
-            Settings.backend.password = values.password
-            console.log(s.data.token)
-            TokenStorageService.setToken(s.data.token)
+            localStorage.setItem("login", values.username)
+            localStorage.setItem("password", values.password)
+            console.log(s.data.access_token)
+            TokenStorageService.setToken(s.data.access_token)
+            TokenStorageService.setRefreshToken(s.data.refresh_token)
             TokenStorageService.setIsAuthenticated(true)
             history.push("/sessions")
         }
@@ -32,7 +33,7 @@ export  default function  Login()  {
         console.log('Failed:', errorInfo);
     };
 
-    const history = useHistory()
+
 
 
     return (

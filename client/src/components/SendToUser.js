@@ -3,9 +3,10 @@ import MySteps from "./MySteps";
 import { Content } from "antd/es/layout/layout";
 import { Col, Row, Input, List, Button } from "antd";
 import { useHistory, useParams } from "react-router"
-import "./Template.css";
+import "../static/styles/Template.css";
 import InitializeData from "./ReportSubComponents/InitializeData";
-import { backend } from "../ServerApi";
+import UserService from "../services/UserService";
+
 
 export default function SendToUser() {
 
@@ -44,12 +45,11 @@ export default function SendToUser() {
         'Content-Type': 'application/json'
     }
 
+    const userService = new UserService();
+
     const saveTemplate = async () => {
         const body = {"template" : text, "theme" : theme}
-        await backend.post(`user/sendToUser/${userId}`, body, {
-            headers: headers
-        })
-            .catch(console.log)
+        await userService.sendToUser(text, theme, userId);
         // await backend.post(`/sessions/${sessionId}/save-template-theme`, theme, {
         //     headers: headers
         // })

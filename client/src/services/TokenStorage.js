@@ -12,6 +12,10 @@ export const TokenStorageService = (function(){
         localStorage.setItem('access_token', tokenObj);
     }
 
+    function _setRefreshToken(tokenObj) {
+        localStorage.setItem('refresh_token', tokenObj);
+    }
+
     function _setIsAuthenticated(flag) {
         localStorage.setItem('auth', flag)
     }
@@ -34,6 +38,7 @@ export const TokenStorageService = (function(){
     return {
         getService : _getService,
         setToken : _setToken,
+        setRefreshToken : _setRefreshToken,
         getAccessToken : _getAccessToken,
         getRefreshToken : _getRefreshToken,
         clearToken : _clearToken,

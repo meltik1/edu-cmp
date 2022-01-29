@@ -1,13 +1,13 @@
 package com.edu_netcracker.cmp.usersInfoService;
 
-import com.edu_netcracker.cmp.RestControllers.UserCreationDto;
+import com.edu_netcracker.cmp.restControllers.UserCreationDto;
 import com.edu_netcracker.cmp.entities.Attributes;
 import com.edu_netcracker.cmp.entities.DTO.StudentsAttributesDTO;
 import com.edu_netcracker.cmp.entities.DTO.TemplateDto;
 import com.edu_netcracker.cmp.entities.StudentsToAttributes;
-import com.edu_netcracker.cmp.entities.jpa.AttributesRepository;
-import com.edu_netcracker.cmp.entities.jpa.STARepository;
-import com.edu_netcracker.cmp.entities.jpa.UsersRepository;
+import com.edu_netcracker.cmp.entities.repositories.AttributesRepository;
+import com.edu_netcracker.cmp.entities.repositories.STARepository;
+import com.edu_netcracker.cmp.entities.repositories.UsersRepository;
 import com.edu_netcracker.cmp.entities.users.User;
 import com.edu_netcracker.cmp.notificationEngine.ITemplate;
 import com.edu_netcracker.cmp.notificationEngine.IUserMessageInfo;

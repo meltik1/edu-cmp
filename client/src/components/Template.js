@@ -3,9 +3,9 @@ import MySteps from "./MySteps";
 import { Content } from "antd/es/layout/layout";
 import { Col, Row, Input, List, Button } from "antd";
 import { useHistory, useParams } from "react-router"
-import "./Template.css";
+import "../static/styles/Template.css";
 import InitializeData from "./ReportSubComponents/InitializeData";
-import { backend } from "../ServerApi";
+import SessionService from "../services/SessionService";
 
 export default function Template() {
 
@@ -39,20 +39,16 @@ export default function Template() {
 
     const history = useHistory();
 
-    const headers = {
-        'Content-Type': 'text/html; charset=UTF-8'
-    }
+    const sessionService = new SessionService()
+
 
     const saveTemplate = async () => {
 
-        await backend.post(`/sessions/${sessionId}/save-template`, text, {
-            headers: headers
-        })
+        await sessionService.saveTemplate(sessionId, text)
             .catch(console.log)
-        await backend.post(`/sessions/${sessionId}/save-template-theme`, theme, {
-            headers: headers
-        })
+        await sessionService.saveTheme(sessionId, text)
             .catch(console.log)
+
         history.push({
             pathname: `/${sessionId}/validation`
         })

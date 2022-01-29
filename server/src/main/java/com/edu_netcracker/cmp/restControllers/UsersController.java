@@ -1,10 +1,10 @@
-package com.edu_netcracker.cmp.RestControllers;
+package com.edu_netcracker.cmp.restControllers;
 
 import com.edu_netcracker.cmp.entities.Attributes;
 import com.edu_netcracker.cmp.entities.DTO.TemplateDto;
 import com.edu_netcracker.cmp.entities.DTO.UserDTO;
-import com.edu_netcracker.cmp.entities.jpa.AttributesRepository;
-import com.edu_netcracker.cmp.entities.jpa.UsersRepository;
+import com.edu_netcracker.cmp.entities.repositories.AttributesRepository;
+import com.edu_netcracker.cmp.entities.repositories.UsersRepository;
 import com.edu_netcracker.cmp.entities.users.User;
 import com.edu_netcracker.cmp.usersInfoService.UserInfoService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping("user")
+@RequestMapping("api/v1/user")
 @Slf4j
 public class UsersController {
 
@@ -38,14 +38,20 @@ public class UsersController {
         this.usersRepository = usersRepository;
     }
 
-    @GetMapping("get/{userId}")
-    public Map<String, Object> testGet(@PathVariable  String userId) {
+    @GetMapping("{userId}")
+    public ResponseEntity<UserDTO> getUser(@PathVariable  String userId) {
+        User user = usersRepository.getOne(userId);
+        return new ResponseEntity<UserDTO>(user.toUserDTO(), HttpStatus.OK);
+    }
+
+    @GetMapping("getAttributes/{userId}")
+    public  ResponseEntity<Map<String, Object>> getUserAttributes(@PathVariable  String userId) {
         Map<String, Object> usersAttributes = userInfoService.getUsersAttributes(userId);
-        return usersAttributes;
+        return new ResponseEntity<>(usersAttributes, HttpStatus.OK);
     }
 
     @PostMapping("saveForUser/{userId}")
-    public ResponseEntity<Void> testSave(@RequestBody Map<String, Object> attributes, @PathVariable String userId) {
+    public ResponseEntity<Void> saveUserAttribute(@RequestBody Map<String, Object> attributes, @PathVariable String userId) {
         UserDetails userDetails;
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         userDetails = (UserDetails) authentication.getPrincipal();
@@ -57,7 +63,7 @@ public class UsersController {
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
-    @PostMapping("/delete/{userId}")
+    @PostMapping("deleteAttribute/{userId}")
     public ResponseEntity<Void> deleteAttribute(@RequestBody String attributeName, @PathVariable String userId){
         UserDetails userDetails;
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -79,7 +85,7 @@ public class UsersController {
         return new ResponseEntity<>(usersDTO, HttpStatus.OK);
     }
 
-    @PostMapping("createUser")
+    @PostMapping("create")
     public ResponseEntity<Void> createUser(@RequestBody UserCreationDto creationDto) {
         UserDetails userDetails;
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

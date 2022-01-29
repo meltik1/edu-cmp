@@ -8,6 +8,11 @@ spring:
       ddl-auto: create
   profiles:
     active: zuev
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+
+
 
 jwt:
   secret: proselyte
@@ -38,6 +43,16 @@ mail:
   port: 587
   username: nikitazuev144@gmail.com
   password: moscino71836
+
+server:
+  ssl:
+    key-store-type: PKCS12
+    key-alias: tomcat
+    key-store-password: '5710919'
+    key-store: 'server/src/main/resources/keystore.p12'
+    enabled: true
+  http2:
+    enabled: true
 ---
 spring:
   profiles: prod
@@ -52,5 +67,13 @@ bot:
 mail:
   username: 8b4842764319d9
   password: 924aa1a2eb588e
+
+---
+spring.config.activate.on-profile=test
+spring.datasource.driver-class-name=org.h2.Driver
+spring.datasource.url=jdbc:h2:mem:db;DB_CLOSE_DELAY=-1
+spring.datasource.username=sa
+spring.datasource.password=sa
+
 
 

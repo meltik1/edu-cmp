@@ -1,10 +1,9 @@
 package com.edu_netcracker.cmp.usersInfoService;
 
-import com.edu_netcracker.cmp.RestControllers.UserCreationDto;
+import com.edu_netcracker.cmp.restControllers.UserCreationDto;
 import com.edu_netcracker.cmp.entities.Attributes;
 import com.edu_netcracker.cmp.entities.DTO.TemplateDto;
 
-import javax.management.Attribute;
 import java.text.ParseException;
 import java.util.Map;
 

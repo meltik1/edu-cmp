@@ -10,20 +10,18 @@ import {
 import {Button, Layout} from "antd";
 import 'antd/dist/antd.css';
 
-import GetSessions from "./components/Sessions";
-import PickFile from "./components/PickFile";
-import Mapping from "./components/Mapping";
-import Template from "./components/Template";
-import Validation from "./components/Validation";
-import Report from "./components/Report";
-import Login from "./components/Login";
-import "./App.css";
-import logo from "./img/logo_dark_removebg_try.png";
-import TokenStorage from "./TokenStorage";
-import {useHistory} from "react-router";
-import {UserPage} from "./components/UsersPage";
-import UserList from "./components/UserList";
-import SendToUser from "./components/SendToUser";
+import GetSessions from "../components/Sessions";
+import PickFile from "../components/PickFile";
+import Mapping from "../components/Mapping";
+import Template from "../components/Template";
+import Validation from "../components/Validation";
+import Report from "../components/Report";
+import Login from "../components/Login";
+import "../static/styles/App.css";
+import TokenStorage from "../services/TokenStorage";
+import {UserPage} from "../components/UsersPage";
+import UserList from "../components/UserList";
+import SendToUser from "../components/SendToUser";
 
 const {Header, Footer} = Layout;
 

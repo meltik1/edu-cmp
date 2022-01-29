@@ -1,7 +1,6 @@
-package com.edu_netcracker.cmp.entities.jpa;
+package com.edu_netcracker.cmp.entities.repositories;
 
 import com.edu_netcracker.cmp.entities.Session;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
