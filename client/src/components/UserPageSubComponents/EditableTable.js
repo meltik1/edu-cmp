@@ -3,12 +3,12 @@ import React from "react";
 import UserService from "../../services/UserService";
 import EditableRow from "./EditableRow";
 import EditableCell from "./EditableCell";
-const EditableContext = React.createContext(null);
 
 class EditableTable extends React.Component {
+
+
     constructor(props) {
         super(props);
-        debugger
         this.columns = props.columns
         this.userId = props.userId
         this.userService = new UserService()
@@ -38,17 +38,22 @@ class EditableTable extends React.Component {
             }
         )
         console.log("length " + props.dataSource.length)
+        this.dataSource = props.dataSource
+        this.count = props.dataSource.length
         this.state = {
-            dataSource: props.dataSource,
-            count: props.dataSource.length
+            dataSource: this.dataSource,
+            count: this.count
         };
+
     }
+
 
 
     handleDelete = async (record) => {
         let body =   record.attributes
         await this.userService.deleteUserAttribute(this.userId, body)
         const dataSource = [...this.state.dataSource];
+
         this.setState({
             dataSource: dataSource.filter((item) => item.key !== record.key),
         });
@@ -86,7 +91,18 @@ class EditableTable extends React.Component {
     };
 
     render() {
+        console.log("rerender called")
+        console.log("Rerender props ``" + this.props.dataSource)
+        this.state.dataSource = this.props.dataSource
+        this.state.length = this.props.dataSource.length
         const { dataSource } = this.state;
+        console.log(dataSource)
+        const {dt} = {
+            dataSource: this.props.dataSource,
+            length: this.props.dataSource.length
+        }
+
+        console.log(dt)
         const components = {
             body: {
                 row: EditableRow,

@@ -22,17 +22,20 @@ export  function UserPage() {
     const [data, setData] = useState();
     const [columns, setColumns] = useState([]);
     const userService = new UserService();
+    const [state, updateState] = useState();
+    const forceUpdate = React.useCallback(() => updateState({}), []);
 
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = userService.getUserAttributes(userId)
+            const result = await userService.getUserAttributes(userId)
             console.log(result.data)
             setData(result.data);
         };
 
         fetchData();
-    }, []);
+    }, [userId]);
+
 
     if (data !== undefined && !tableData.generated) {
 
@@ -59,13 +62,12 @@ export  function UserPage() {
             mapped.push(x)
         }
         console.log("mapped" + mapped)
+        let tableDataNew = {}
+        tableDataNew.generated = true
+        tableDataNew.dataset = mapped
         setTableData(
-            {
-                generated: true,
-                dataset: mapped
-            }
+            tableDataNew
         )
-
     }
 
     const history = useHistory();
@@ -101,6 +103,7 @@ export  function UserPage() {
 
         return result;
     }
+
     return (
         <div>
             <Content style={{ padding: '40px 50px 0' }}>

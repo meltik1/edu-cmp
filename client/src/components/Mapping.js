@@ -28,7 +28,8 @@ export default function Mapping() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = sessionService.getColumns(sessionId)
+            debugger
+            const result =  await  sessionService.getColumns(sessionId)
             setData(result.data);
         };
 

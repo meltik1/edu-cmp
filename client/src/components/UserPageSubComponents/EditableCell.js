@@ -2,13 +2,13 @@ import React, {useContext, useEffect, useRef, useState} from "react";
 import {Form, Input} from "antd";
 const EditableContext = React.createContext(null);
 
-export default function EditableCell(title,
+export default function EditableCell({title,
                                      editable,
                                      children,
                                      dataIndex,
                                      record,
                                      handleSave,
-                                     ...restProps) {
+                                     ...restProps}) {
     const [editing, setEditing] = useState(false);
     const inputRef = useRef(null);
     const form = useContext(EditableContext);

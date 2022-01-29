@@ -30,7 +30,7 @@ class UserService extends BaseService {
     }
 
     async getUserAttributes(userId) {
-        return await this.repository.get(`/user/get/${userId}`)
+        return await this.repository.get(`/user/getAttributes/${userId}`)
     }
 
     async deleteUserAttribute(userId, body) {

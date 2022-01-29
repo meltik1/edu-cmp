@@ -9,6 +9,7 @@ import {
 
 import {Button, Layout} from "antd";
 import 'antd/dist/antd.css';
+import { Menu, Breadcrumb } from 'antd';
 
 import GetSessions from "../components/Sessions";
 import PickFile from "../components/PickFile";
@@ -29,15 +30,25 @@ const {Header, Footer} = Layout;
 
 
 export default function App() {
+    function logout() {
+        TokenStorage.clearToken()
+        TokenStorage.setIsAuthenticated(false)
+        console.log(TokenStorage.getAccessToken())
+        console.log(TokenStorage.getIsAuthenticated())
+    }
 
     return (
         <Router>
             <div>
                 <Layout className="layout">
                     <Header>
-
+                        <div className="logo" />
+                        <Menu theme="dark" mode="horizontal">
+                            <Menu.Item key="1" onClick={logout}><a href={"/login"}>Выйти</a></Menu.Item>
+                            <Menu.Item key="2" ><a href={"/users"}>К пользователям</a></Menu.Item>
+                            <Menu.Item key="3" ><a href={"/sessions"}>К сессиям</a></Menu.Item>
+                        </Menu>
                     </Header>
-
                     <Switch>
                         <Route  exact path="/">
                             <Redirect to="/login" />

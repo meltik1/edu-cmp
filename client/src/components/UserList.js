@@ -27,7 +27,7 @@ export default function UserList() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = userService.getAllUsers()
+            const result =  await userService.getAllUsers()
             setData(result.data);
         };
 
