@@ -2,12 +2,12 @@ import React, {useState, useEffect} from "react";
 import MySteps from "./MySteps";
 import { Content } from "antd/es/layout/layout";
 import {Table, Button, List, Input} from "antd";
-import "./Mapping.css";
+import "../static/styles/Mapping.css";
 import RangeSelector from "./RangeSelector";
 import {useHistory, useParams} from "react-router";
 import {Link} from "react-router-dom";
 import {ArrowLeftOutlined, ArrowRightOutlined} from "@ant-design/icons";
-import {backend} from "../ServerApi";
+import SessionService from "../services/SessionService";
 
 export default function Mapping() {
 
@@ -17,6 +17,7 @@ export default function Mapping() {
     let maxNumber = 0;
 
     const [data, setData] = useState();
+    const sessionService = new SessionService()
     const [tableData, setTableData] = useState(
         {
             generated: false,
@@ -27,7 +28,8 @@ export default function Mapping() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await backend.get(`/sessions/${sessionId}/map-columns`)
+            debugger
+            const result =  await  sessionService.getColumns(sessionId)
             setData(result.data);
         };
 
@@ -138,6 +140,7 @@ export default function Mapping() {
         for (let i = 0; i < columns.length; i++) {
             response.mapping[i] = columns[i];
         }
+
         ranges.map((range) => {
             let start = range.begin;
             let end = range.end;
@@ -149,15 +152,7 @@ export default function Mapping() {
 
         const responseJSON = JSON.stringify(response);
 
-        await backend.post(
-            `sessions/${sessionId}/save-columns-mapping`,
-            responseJSON,
-            {
-                headers: {
-                    "Content-Type":"application/json"
-                }
-            })
-            .catch(console.log);
+        await sessionService.saveMapping(sessionId, responseJSON)
 
         history.push({
             pathname: "template",

@@ -6,7 +6,7 @@ import { useHistory, useParams } from "react-router";
 import SelectAtrributes from "./ReportSubComponents/SelectAtrributes";
 import BuildReport from "./ReportSubComponents/BuildReport";
 import InitializeData from "./ReportSubComponents/InitializeData";
-import {backend} from "../ServerApi";
+import UserService from "../services/UserService";
 
 export default function Report() {
 
@@ -19,11 +19,10 @@ export default function Report() {
     InitializeData(`sessions/${sessionId}/report`, setReportInfo);
 
     const history = useHistory();
-
+    const userService = new UserService()
 
     const confirm =  async () => {
-        await backend.get(`/sessions/${sessionId}/save-to-db`
-        )
+        await userService.saveUsersToDataBase(sessionId);
     }
 
     const goBack = () => {

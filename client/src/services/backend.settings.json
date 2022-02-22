@@ -1,0 +1,7 @@
+{
+  "backend": {
+    "url": "http://localhost:80/api/v1",
+    "login" : "",
+    "password": ""
+  }
+}

@@ -2,8 +2,8 @@ package com.edu_netcracker.cmp.notificationEngine.sessionImpl;
 
 import com.edu_netcracker.cmp.entities.Session;
 import com.edu_netcracker.cmp.entities.SessionStatus;
-import com.edu_netcracker.cmp.entities.jpa.STAJPA;
-import com.edu_netcracker.cmp.entities.jpa.SessionJPA;
+import com.edu_netcracker.cmp.entities.repositories.STARepository;
+import com.edu_netcracker.cmp.entities.repositories.SessionsRepository;
 import com.edu_netcracker.cmp.notificationEngine.*;
 import com.edu_netcracker.cmp.notificationEngine.parserImpl.FileHandler;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -29,9 +29,9 @@ public class SessionServiceImpl implements SessionsService {
 
     private IUserMessageInfo iUserMessageInfo;
 
-    private SessionJPA sessionJPA;
+    private SessionsRepository sessionsRepository;
 
-    private STAJPA stajpa;
+    private STARepository STARepository;
 
     private EAVInfoTransformer eavInfoTransformer;
 
@@ -40,12 +40,12 @@ public class SessionServiceImpl implements SessionsService {
     private FileHandler handler;
 
     @Autowired
-    public SessionServiceImpl(NotificationService notificationService, ITemplate iTemplate, IUserMessageInfo iUserMessageInfo, SessionJPA sessionJPA, STAJPA stajpa, EAVInfoTransformer eavInfoTransformer, List<NotificationService> notificationServicesRealisation, FileHandler handler) {
+    public SessionServiceImpl(NotificationService notificationService, ITemplate iTemplate, IUserMessageInfo iUserMessageInfo, SessionsRepository sessionsRepository, STARepository STARepository, EAVInfoTransformer eavInfoTransformer, List<NotificationService> notificationServicesRealisation, FileHandler handler) {
         this.notificationService = notificationService;
         this.iTemplate = iTemplate;
         this.iUserMessageInfo = iUserMessageInfo;
-        this.sessionJPA = sessionJPA;
-        this.stajpa = stajpa;
+        this.sessionsRepository = sessionsRepository;
+        this.STARepository = STARepository;
         this.eavInfoTransformer = eavInfoTransformer;
         this.notificationServicesRealisation = notificationServicesRealisation;
         this.handler = handler;
@@ -54,7 +54,7 @@ public class SessionServiceImpl implements SessionsService {
 
     @Override
     public List<Session> getAllSessions() {
-        return sessionJPA.findAll();
+        return sessionsRepository.findAll();
     }
 
     @Override
@@ -64,33 +64,33 @@ public class SessionServiceImpl implements SessionsService {
         session.setName(name);
         session.setStatus(SessionStatus.FILESELECTION);
         session.setDate(this.getDate());
-        sessionJPA.save(session);
+        sessionsRepository.save(session);
         return session;
     }
 
     @Override
     public Session getSession(String id) {
-        return sessionJPA.findById(id).get();
+        return sessionsRepository.findById(id).get();
     }
 
     @Override
     public void deleteSession(String id) {
-        Session session = sessionJPA.findById(id).get();
-        sessionJPA.delete(session);
+        Session session = sessionsRepository.findById(id).get();
+        sessionsRepository.delete(session);
     }
 
     @Override
     public void parseFile(String id, MultipartFile file) {
-       Session session =  sessionJPA.findById(id).get();
+       Session session =  sessionsRepository.findById(id).get();
        String json = handler.handle(file);
        session.setUsersInfoJSON(json);
        session.setStatus(SessionStatus.MAPPING);
-       sessionJPA.save(session);
+       sessionsRepository.save(session);
     }
 
     @Override
     public String getStudentsAttributes(String id) {
-        Session session = sessionJPA.findById(id).get();
+        Session session = sessionsRepository.findById(id).get();
         return session.getUsersInfoJSON();
     }
 
@@ -114,7 +114,7 @@ public class SessionServiceImpl implements SessionsService {
 
     @Override
     public void sendMessages(String id) throws JsonProcessingException {
-        Session session = sessionJPA.findById(id).get();
+        Session session = sessionsRepository.findById(id).get();
 
         iTemplate.setTemplate(session.getTemplate());
 
@@ -181,34 +181,34 @@ public class SessionServiceImpl implements SessionsService {
             reportsOfAllStudents.add(studentIReport);
         }
             session.setReportJSON(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(reportsOfAllStudents));
-            sessionJPA.save(session);
+            sessionsRepository.save(session);
         }
     }
 
     public void transformDataToEAV(String sessionId) throws JsonProcessingException {
-        Session session = sessionJPA.findById(sessionId).get();
+        Session session = sessionsRepository.findById(sessionId).get();
         eavInfoTransformer.transformUserDataToEAV(session);
     }
 
     @Override
     public String getReport(String id) {
-        Session session = sessionJPA.findById(id).get();
+        Session session = sessionsRepository.findById(id).get();
         String report =  session.getReportJSON();
         if (report != null) {
             session.setStatus(SessionStatus.REPORT);
-            sessionJPA.save(session);
+            sessionsRepository.save(session);
         }
         return report;
     }
 
     @Override
     public String getTemplate(String id) {
-        return sessionJPA.findById(id).get().getTemplate();
+        return sessionsRepository.findById(id).get().getTemplate();
     }
 
     @Override
     public List<String> getMappedAttributes(String id) {
-        Map<String, String> params = sessionJPA.findById(id).get().getColumnMappingMap();
+        Map<String, String> params = sessionsRepository.findById(id).get().getColumnMappingMap();
         List<String> paramsList = new ArrayList<>(params.values());
 
         return paramsList;
@@ -217,22 +217,22 @@ public class SessionServiceImpl implements SessionsService {
 
     @Override
     public void saveTemplate(String id, String template) {
-        Session session = sessionJPA.findById(id).get();
+        Session session = sessionsRepository.findById(id).get();
         session.setTemplate(template);
         session.setStatus(SessionStatus.VALIDATION);
-        sessionJPA.save(session);
+        sessionsRepository.save(session);
     }
 
     @Override
     public void saveTheme(String id, String theme) {
-        Session session = sessionJPA.findById(id).get();
+        Session session = sessionsRepository.findById(id).get();
         session.setTheme(theme);
-        sessionJPA.save(session);
+        sessionsRepository.save(session);
     }
 
     @Override
     public String getTheme(String id) {
-        Session session = sessionJPA.findById(id).get();
+        Session session = sessionsRepository.findById(id).get();
         return session.getTheme();
     }
 
@@ -248,6 +248,9 @@ public class SessionServiceImpl implements SessionsService {
         for (int i = 0; i < end.size(); i++) {
             Integer startValue = Integer.parseInt(start.get(i));
             Integer endValue = Integer.parseInt(end.get(i));
+            if (startValue < 0 || endValue < 0) {
+                throw new IllegalArgumentException("Range is invalid");
+            }
 
             if (startValue < minStart || endValue < minEnd) {
                 throw new IllegalArgumentException("Range is invalid");
@@ -262,7 +265,7 @@ public class SessionServiceImpl implements SessionsService {
 
     @Override
     public void saveMapping(String sessionId, String json) throws JsonProcessingException {
-        Session session = sessionJPA.findById(sessionId).get();
+        Session session = sessionsRepository.findById(sessionId).get();
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root = mapper.readTree(json);
         JsonNode columnsMappingJson = root.at("/mapping");
@@ -278,13 +281,13 @@ public class SessionServiceImpl implements SessionsService {
         session.setRangeJSON(rangeJson.toString());
         session.setColumnMappingMap(columnsMapping);
         session.setStatus(SessionStatus.TEMPLATE);
-        sessionJPA.save(session);
+        sessionsRepository.save(session);
     }
 
     @Override
     public String getValidationTemplate(String id) {
         String result = "";
-        Session session = sessionJPA.findById(id).get();
+        Session session = sessionsRepository.findById(id).get();
         try {
             Map<String, String> params = session.getColumnMappingMap();
             String s = handler.sendAttributes(session.getUsersInfoJSON(), params);

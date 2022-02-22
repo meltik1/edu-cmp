@@ -2,16 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Button, Input, Modal, Table, Tag } from "antd";
 import { PlusOutlined } from '@ant-design/icons';
 import {Content, Header} from "antd/es/layout/layout";
-import "../App.css";
-import "../ServerApi.js"
-import { backend } from "../ServerApi";
-import {Link, Route, Switch} from "react-router-dom";
+import "../static/styles/App.css";
 import { useHistory } from "react-router";
-import PickFile from "./PickFile";
-import Mapping from "./Mapping";
-import Template from "./Template";
-import Validation from "./Validation";
-import TokenStorage from "../TokenStorage";
+import TokenStorage from "../services/TokenStorage";
+import SessionService from "../services/SessionService";
 
 export default function GetSessions() {
     const sessionStatus = new Map([
@@ -66,6 +60,7 @@ export default function GetSessions() {
 
     ]
 
+    const sessionService = new SessionService();
 
     const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -80,13 +75,13 @@ export default function GetSessions() {
     };
 
     const createSession = () => {
-        backend.post('sessions/create?name="' + input +'"')
+        sessionService.createSession(input)
             .then(getAllSessions)
             .catch(console.log)
     }
 
     const getAllSessions = () => {
-        backend.get('sessions')
+        sessionService.getAllSessions()
             .then((res) => {
                 const results = res.data.map(row => ({
                     key: row.id,
@@ -140,8 +135,6 @@ export default function GetSessions() {
 
         <Content style={{ padding: '40px 50px 0' }}>
             <div className={"site-layout-content-sessions"}>
-                <Button onClick ={logout} style={{marginBottom:20, marginLeft:50, marginRight: 500}} shape="round" type="primary">Выйти</Button>
-                <Button onClick ={toUserList} style={{marginBottom:20, marginLeft:300}} shape="round" type="primary">К списку пользователей</Button>
                 <Button style={{ marginBottom: 20 }}
                         type="primary"
                         shape="round"

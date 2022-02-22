@@ -1,14 +1,12 @@
-import {backend} from "../ServerApi";
-import MySteps from "./MySteps";
 import {Content} from "antd/es/layout/layout";
 import {Button, Table} from "antd";
-import RangeSelector from "./RangeSelector";
 import {useHistory, useParams} from "react-router";
-import {Link} from "react-router-dom";
-import {ArrowLeftOutlined, ArrowRightOutlined} from "@ant-design/icons";
 import React, {useState, useEffect} from "react";
+import UserService from "../services/UserService";
 
 export default function UserList() {
+
+    const userService = new UserService();
 
     const goHome = () => {
         history.push({
@@ -29,7 +27,7 @@ export default function UserList() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await backend.get(`/user/getAll`)
+            const result =  await userService.getAllUsers()
             setData(result.data);
         };
 

@@ -1,9 +1,9 @@
 package com.edu_netcracker.cmp.notificationEngine;
 
 import com.edu_netcracker.cmp.entities.*;
-import com.edu_netcracker.cmp.entities.jpa.AttributesJPA;
-import com.edu_netcracker.cmp.entities.jpa.STAJPA;
-import com.edu_netcracker.cmp.entities.jpa.UsersJpa;
+import com.edu_netcracker.cmp.entities.repositories.AttributesRepository;
+import com.edu_netcracker.cmp.entities.repositories.STARepository;
+import com.edu_netcracker.cmp.entities.repositories.UsersRepository;
 import com.edu_netcracker.cmp.entities.users.Role;
 import com.edu_netcracker.cmp.entities.users.User;
 import com.edu_netcracker.cmp.notificationEngine.parserImpl.FileHandler;
@@ -26,9 +26,10 @@ public class EAVInfoTransformerImpl implements EAVInfoTransformer {
 
     private FileHandler handler;
 
-    private STAJPA stajpa;
-    private UsersJpa usersJpa;
-    private AttributesJPA attributesJPA;
+    private STARepository staRepository;
+    private UsersRepository usersRepository;
+    private AttributesRepository attributesRepository;
+
     @Autowired
     private PasswordEncoder encoder;
 
@@ -36,13 +37,16 @@ public class EAVInfoTransformerImpl implements EAVInfoTransformer {
     private String FIO = "ФИО";
 
 
+    private List<String> dataSources = List.of("Email", "Telegram");
+
+
     @Autowired
-    public EAVInfoTransformerImpl(ObjectMapper mapper, FileHandler handler, STAJPA stajpa, UsersJpa usersJpa, AttributesJPA attributesJPA) {
+    public EAVInfoTransformerImpl(ObjectMapper mapper, FileHandler handler, STARepository staRepository, UsersRepository usersRepository, AttributesRepository attributesRepository) {
         this.mapper = mapper;
         this.handler = handler;
-        this.stajpa = stajpa;
-        this.usersJpa = usersJpa;
-        this.attributesJPA = attributesJPA;
+        this.staRepository = staRepository;
+        this.usersRepository = usersRepository;
+        this.attributesRepository = attributesRepository;
     }
 
     private String EMAIL_FIELD = "Email";
@@ -96,21 +100,22 @@ public class EAVInfoTransformerImpl implements EAVInfoTransformer {
     }
 
     private User createUserOrGetIfExisted(Map<String, String> map) {
-        User usersEmail = usersJpa.findUsersByUserName(map.get("Email"));
+        User usersEmail = usersRepository.findUsersByUserName(map.get("Email"));
         if (usersEmail == null) {
             usersEmail = new User();
             usersEmail.setUserName(map.get(EMAIL));
             usersEmail.setPassword(encoder.encode("123"));
             usersEmail.setFIO(map.get(FIO));
             usersEmail.setRole(Role.USER);
-            usersJpa.save(usersEmail);
+            usersRepository.save(usersEmail);
         }
 
         return usersEmail;
     }
 
     private StudentsToAttributes createEavOrGetExisted(User user, Attributes attributes) {
-        StudentsToAttributes studentToAttribute = stajpa.findOne(new STAID(attributes.getId(), user.getUserName()));
+        //StudentsToAttributes studentToAttribute = staRepository.findOne(new STAID(attributes.getId(), user.getUserName()));
+        StudentsToAttributes studentToAttribute = staRepository.findById(new STAID(attributes.getId(), user.getUserName())).orElse(null);
         if (studentToAttribute == null) {
             studentToAttribute = new StudentsToAttributes();
             studentToAttribute.setStudent(user);
@@ -139,18 +144,19 @@ public class EAVInfoTransformerImpl implements EAVInfoTransformer {
             studentToAttribute.setCharValue((String) value);
 
 
-            stajpa.save(studentToAttribute);
+            staRepository.save(studentToAttribute);
         }
     }
 
     private Attributes addNewAttributeOrGetIfExisted(String attributeName) {
-        Attributes attributes = attributesJPA.findAttributesByAttributeName(attributeName);
+        Attributes attributes = attributesRepository.findAttributesByAttributeName(attributeName);
 
         if (attributes == null) {
             attributes = new Attributes();
             attributes.setAttributeName(attributeName);
-            attributesJPA.save(attributes);
-            attributes = attributesJPA.findAttributesByAttributeName(attributeName);
+            if (dataSources.contains(attributeName)) attributes.setIsCommunicationSource(true);
+            attributesRepository.save(attributes);
+            attributes = attributesRepository.findAttributesByAttributeName(attributeName);
         }
 
         return attributes;
