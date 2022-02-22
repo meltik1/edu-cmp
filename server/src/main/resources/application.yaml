@@ -31,18 +31,7 @@ security:
 bot:
   token: ${BOT_TOKEN:1531954543:AAHgZt4bem3JygKOQ69JSD-oM51odOA2POg}
 
-mail:
-  protocol: smtp
-  smtp:
-    auth: true
-    starttls.enable: true
-    debug: true
-    starttls.required: true
-  from: nikitazuev144@gmail.com
-  host: smtp.gmail.com
-  port: 587
-  username: nikitazuev144@gmail.com
-  password: moscino71836
+
 
 #server:
 #  ssl:
@@ -53,27 +42,8 @@ mail:
 #    enabled: false
 #  http2:
 #    enabled: true
----
-spring:
-  profiles: prod
-  datasource:
-    url: jdbc:postgresql://localhost:5432/edu_notification_engine
-    username: postgres
-    password: ${POSTGRES_DATABASE_PASSWORD}
-server:
-  port: 8888
-bot:
-  token: 1553238646:AAE81yqhXVq_9XjYVEmkEay75U7Ej1ULd-U
-mail:
-  username: 8b4842764319d9
-  password: 924aa1a2eb588e
 
----
-spring.config.activate.on-profile=test
-spring.datasource.driver-class-name=org.h2.Driver
-spring.datasource.url=jdbc:h2:mem:db;DB_CLOSE_DELAY=-1
-spring.datasource.username=sa
-spring.datasource.password=sa
+
 
 
 
