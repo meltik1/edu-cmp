@@ -46,7 +46,7 @@ export default function Template() {
 
         await sessionService.saveTemplate(sessionId, text)
             .catch(console.log)
-        await sessionService.saveTheme(sessionId, text)
+        await sessionService.saveTheme(sessionId, theme)
             .catch(console.log)
 
         history.push({

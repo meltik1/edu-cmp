@@ -22,8 +22,6 @@ export  function UserPage() {
     const [data, setData] = useState();
     const [columns, setColumns] = useState([]);
     const userService = new UserService();
-    const [state, updateState] = useState();
-    const forceUpdate = React.useCallback(() => updateState({}), []);
 
 
     useEffect(() => {
@@ -34,21 +32,11 @@ export  function UserPage() {
         };
 
         fetchData();
-    }, [userId]);
+    }, []);
 
 
     if (data !== undefined && !tableData.generated) {
 
-        // parse data
-        // const mapped = data.map((x, index) => {
-        //     maxNumber = Object.keys(x).length;
-        //     setColumns(Object.keys(x));
-        //     let newX = x;
-        //     newX.key = index + 1;
-        //     newX.number = index + 1;
-        //
-        //     return newX;
-        // });
         const  mapped = []
         let i = 0
         for (const property in data) {

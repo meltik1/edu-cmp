@@ -18,7 +18,7 @@ export default function SendToUser() {
     const listHeader = ['Макросы'];
     let macros = attributes;
 
-    InitializeData(`/user/get/${userId}` , setAttributes);
+    InitializeData(`/user/getAttributes/${userId}` , setAttributes);
 
     const goForward = () => {
         saveTemplate();

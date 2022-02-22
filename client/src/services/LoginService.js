@@ -5,7 +5,6 @@ import Settings from "./backend.settings.json";
 
 class LoginService extends BaseService {
     async login(username, password) {
-        debugger
         let s = await axios.post(Settings.backend.url + '/auth/login', {
             "email" : username,
             "password": password

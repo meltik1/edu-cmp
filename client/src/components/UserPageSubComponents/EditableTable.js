@@ -93,7 +93,7 @@ class EditableTable extends React.Component {
     render() {
         console.log("rerender called")
         console.log("Rerender props ``" + this.props.dataSource)
-        this.state.dataSource = this.props.dataSource
+        this.state.dataSource = { ...this.props.dataSource, ...this.state.dataSource}
         this.state.length = this.props.dataSource.length
         const { dataSource } = this.state;
         console.log(dataSource)

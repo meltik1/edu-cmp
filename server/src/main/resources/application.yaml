@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: jdbc:postgresql://localhost:5430/postgres
     username: postgres
     password: 300800
   jpa:
@@ -29,7 +29,7 @@ security:
   trusted-application-code: 95c9e20e-831c-11eb-8dcd-0242ac130003
 
 bot:
-  token: 1531954543:AAHgZt4bem3JygKOQ69JSD-oM51odOA2POg
+  token: ${BOT_TOKEN:1531954543:AAHgZt4bem3JygKOQ69JSD-oM51odOA2POg}
 
 mail:
   protocol: smtp
@@ -44,15 +44,15 @@ mail:
   username: nikitazuev144@gmail.com
   password: moscino71836
 
-server:
-  ssl:
-    key-store-type: PKCS12
-    key-alias: tomcat
-    key-store-password: '5710919'
-    key-store: 'server/src/main/resources/keystore.p12'
-    enabled: true
-  http2:
-    enabled: true
+#server:
+#  ssl:
+#    key-store-type: PKCS12
+#    key-alias: tomcat
+#    key-store-password: '5710919'
+#    key-store: 'server/src/main/resources/keystore.p12'
+#    enabled: false
+#  http2:
+#    enabled: true
 ---
 spring:
   profiles: prod

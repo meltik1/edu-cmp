@@ -50,7 +50,7 @@ public class UsersController {
         return new ResponseEntity<>(usersAttributes, HttpStatus.OK);
     }
 
-    @PostMapping("saveForUser/{userId}")
+    @PatchMapping("saveForUser/{userId}")
     public ResponseEntity<Void> saveUserAttribute(@RequestBody Map<String, Object> attributes, @PathVariable String userId) {
         UserDetails userDetails;
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
